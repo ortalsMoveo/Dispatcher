@@ -1,10 +1,10 @@
 import { IconStyle } from './IconStyle';
 
-export type icon = {
+export interface Icon {
     iconPath: string;
 }
 
-const Icon = ({iconPath}: icon) => {
+const Icon = ({iconPath}: Icon) => {
     return(
         <IconStyle src={iconPath}/>
     );

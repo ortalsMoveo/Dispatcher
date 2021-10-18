@@ -9,9 +9,7 @@ export const TagStyle = styled.label`
     color: #5A5A89;
     padding: 3px 10px;
     font-family: Poppins;
-    font-style: normal;
     font-weight: 500;
     font-size: 12px;    
-    line-height: 14px;
 `
 

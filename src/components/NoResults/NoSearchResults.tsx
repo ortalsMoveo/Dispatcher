@@ -1,15 +1,15 @@
 import { SearchResults, LogoSearch} from "./Style";
 
-export type SearchResults = {
+interface SearchResults{
     logoPath: string;
-    title: string;
+    text: string;
 }
 
-const NoSearchResults = ({logoPath, title}: SearchResults) => {
+const NoSearchResults = ({logoPath, text}: SearchResults) => {
     return(
         <SearchResults>
             <LogoSearch src={logoPath}/>
-            <p>{title}</p>
+            <p>{text}</p>
         </SearchResults>
     );
 }

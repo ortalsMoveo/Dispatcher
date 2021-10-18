@@ -1,19 +1,18 @@
-import React, { FC } from 'react';
 import {ButtonStyle, IconStyle} from './ButtonStyle';
 
+export type ButtonType = "primary" | "secondary" | "text";
 
-
-export type ButtonTemplate = {
-    buttonName: "primary" | "secondary" | "text";
-    title: string;
+export interface ButtonProps {
+    buttonType: ButtonType;
+    buttonText: string;
     icon?: string;
-    width: string;
+    isFullWidth?: boolean;
 }
 
-const Button = ({buttonName, title, icon, width}: ButtonTemplate)  => {
+const Button = ({buttonType, buttonText, icon, isFullWidth}: ButtonProps)  => {
     return(
-        <ButtonStyle name={buttonName} width={width}>
-            {title} 
+        <ButtonStyle name={buttonType} >
+            {buttonText} 
             <IconStyle src={icon}/>
         </ButtonStyle>
     );   

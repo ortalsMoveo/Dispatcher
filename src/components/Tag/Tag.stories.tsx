@@ -6,9 +6,9 @@ export default {
     title: "Components/Tag",
   } as Meta;
 
-  const title = "#Covid-19";
+  const text = "#Covid-19";
 // Here we define the content we want to render
-const Template: Story = () => <Tag title={title}/>;
+const Template: Story = () => <Tag textTag={text}/>;
 
 // Here we define variants
 export const Primary = Template.bind({});

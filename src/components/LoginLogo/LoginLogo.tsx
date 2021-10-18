@@ -1,6 +1,6 @@
 import { LogoContainer, Logo  } from './Style';
 
-export type Logo = {
+interface Logo {
     logoPath: string;
 }
 

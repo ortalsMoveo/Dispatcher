@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, {ButtonTemplate} from './Button';
+import Button, {ButtonProps} from './Button';
 import { Meta, Story } from "@storybook/react";
 
 
@@ -8,30 +8,28 @@ export default {
     title: "Components/Button",
   } as Meta;
 
-const primaryButton: ButtonTemplate = {
-  title: 'NAVIGATE TO DISPATCH',
-  buttonName: 'primary',
-  width: '',
-  icon: '../../Icons/Arrow - Right.svg'
+const primaryButton: ButtonProps = {
+  buttonType: 'primary',
+  buttonText: 'NAVIGATE TO DISPATCH',
+  icon: '../../Icons/Arrow - Right.svg',
+  isFullWidth: true
 }
-const secondaryButton: ButtonTemplate = {
-  title: 'SECONDARY',
-  buttonName: 'secondary',
-  width: ''
+const secondaryButton: ButtonProps = {
+  buttonText: 'SECONDARY',
+  buttonType: 'secondary',
 }
-const textButton: ButtonTemplate = {
-  title: 'TEXT BUTTON',
-  buttonName: 'text',
-  width: ''
+const textButton: ButtonProps = {
+  buttonText: 'TEXT BUTTON',
+  buttonType: 'text',
 }
 
 // Here we define the content we want to render
 const Template: Story = () => 
   <Button 
-    title={primaryButton.title} 
-    buttonName={primaryButton.buttonName} 
-    width={primaryButton.width}
+    buttonText={primaryButton.buttonText} 
+    buttonType={primaryButton.buttonType} 
     icon={primaryButton.icon}
+    isFullWidth={primaryButton.isFullWidth}
   />;
 
 // Here we define variants

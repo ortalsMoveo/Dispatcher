@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
 import { TagStyle } from './Style';
 
-export type Tag = {
-    title: string;
+interface Tag {
+    textTag: string;
 } 
 
-const Tag = ({ title }: Tag) => {
+const Tag = ({ textTag }: Tag) => {
     return(
-        <TagStyle>{title}</TagStyle>
+        <TagStyle>{textTag}</TagStyle>
     );
 }
 
