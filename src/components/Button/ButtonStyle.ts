@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {blue,} from '../../globalStyle';
 
-export const ButtonStyle  = styled.button`
+export const ButtonStyle  = styled.button<{fullWidth: boolean}>`
 border-radius: 20px;
 padding: 8px 16px;
 font: Roboto;
@@ -15,6 +15,7 @@ background: ${props =>
     (props.name === 'primary') ? blue : 
     ( (props.name === 'secondary') ? '#D9DBE9': 'white' ) 
 };
+width: ${props => props.fullWidth ? '100%' : 'fit-content'};
 `
 
 export const IconStyle = styled.img`

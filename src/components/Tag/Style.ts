@@ -10,6 +10,9 @@ export const TagStyle = styled.label`
     padding: 3px 10px;
     font-family: Poppins;
     font-weight: 500;
-    font-size: 12px;    
+    font-size: 12px;  
+    height:20px;  
+    width:fit-content;
+    box-sizing:border-box;
 `
 

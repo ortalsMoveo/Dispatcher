@@ -6,12 +6,12 @@ export interface ButtonProps {
     buttonType: ButtonType;
     buttonText: string;
     icon?: string;
-    isFullWidth?: boolean;
+    fullWidth?: boolean;
 }
 
-const Button = ({buttonType, buttonText, icon, isFullWidth}: ButtonProps)  => {
+const Button = ({buttonType, buttonText, icon, fullWidth=false}: ButtonProps)  => {
     return(
-        <ButtonStyle name={buttonType} >
+        <ButtonStyle name={buttonType} fullWidth={fullWidth}>
             {buttonText} 
             <IconStyle src={icon}/>
         </ButtonStyle>
