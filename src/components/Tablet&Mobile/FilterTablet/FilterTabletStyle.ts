@@ -4,6 +4,7 @@ export const Container = styled.div`
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
+    
 `;
 
 export const FilterContent = styled.div`
@@ -27,11 +28,12 @@ export const FilterSearch = styled.span`
 `;
 
 export const ButtonPosition = styled.div`
-    display: flex;
-    justify-content: center;
+    margin: auto 0px;
     background: #F8F8FF;
+    order: inherit;
     padding: 20px;
-    margin: 10px 0px;
+    display: flex;
+    justify-content: center ;
 `;
 
 export const SeparateLine = styled.div`

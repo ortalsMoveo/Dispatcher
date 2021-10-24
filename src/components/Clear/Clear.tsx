@@ -1,8 +1,12 @@
 import { ClearButton } from './Style';
 
-const Clear = () => {
+export interface ClearProps {
+    smallScreen: boolean;
+}
+
+const Clear = ({smallScreen}: ClearProps) => {
     return(
-        <ClearButton>CLEAR</ClearButton>
+        <ClearButton backgroundColor={smallScreen}>CLEAR</ClearButton>
     );
 }
 

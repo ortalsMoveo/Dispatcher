@@ -10,5 +10,6 @@ export const SearchResults = styled.div`
 `;
 
 export const LogoSearch = styled.img`
-width: 10%;
+    width: 133px;
+    
 `;

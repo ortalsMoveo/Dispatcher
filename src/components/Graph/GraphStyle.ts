@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const GraphContainer = styled.div`
-    width: 30%;
+    width: 35%;
     max-width: 400px;
     height: 18rem;
     background: #FFFFFF;
@@ -10,6 +10,9 @@ export const GraphContainer = styled.div`
     box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
     padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 `;
 
@@ -29,11 +32,12 @@ export const LineRow  = styled.div`
     border: 2px solid #5A5A89;
     width: 6%;
     border-radius: 10px;
-    margin: 0;
-    padding 0;
+    margin: 0px;
+    padding: 0px;
 
 `;
 
 export const DataContainer = styled.div`
-    padding
+    margin: auto;
+    
 `;
