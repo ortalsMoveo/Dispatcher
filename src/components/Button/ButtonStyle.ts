@@ -6,7 +6,7 @@ border-radius: 20px;
 padding: 8px 16px;
 font: Roboto;
 border: none;
-: hover{
+:hover{
     ${props => (props.name === "text") ? `background: rgba(217, 219, 233, 0.3)`: null};
     opacity: 0.8;
 }

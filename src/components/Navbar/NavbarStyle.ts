@@ -5,18 +5,26 @@ export const NavbarContainer = styled.div`
     background: #262146;
     display: flex;
     justify-content: space-between;
+    height: 74px;
+
 `;
 
 export const Nav = styled.div`
     display: flex;
-    justify-content: flex-start;
+    padding: 3px 10px;
+    width:900px;
+    gap: 10px;
 `;
 
 export const IconsContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    padding: 14px;
+    margin: 10px;
+    height: 26px;
+    gap: 15px;
+`;
 
-
-
-
+export const Logo = styled.img`
+    /* width: 51px;
+    height: 50px; */
 `;

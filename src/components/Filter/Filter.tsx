@@ -19,12 +19,12 @@ const Filter = ({filterText, listItems, iconPath}: FilterProps) => {
                 {filterText}<Icon iconPath={iconPath} />
             </DropDownHeader>
             {dropDownClicked ? (
-                <DropDownListContainer>
-                    {listItems ? listItems.map((item) => (
-                        <ListItems>{item}</ListItems>
+            <DropDownListContainer>
+                {listItems ? listItems.map((item) => (
+                    <ListItems>{item}</ListItems>
 
-                    )): null}
-                </DropDownListContainer>
+                )): null}
+            </DropDownListContainer>
             ) : null}
         </DropDownContainer>
     );

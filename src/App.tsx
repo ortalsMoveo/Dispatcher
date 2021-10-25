@@ -1,10 +1,11 @@
-import React from 'react';
 import './App.css';
 import MainPage from './fetchers/MainPage/MainPage';
 
+const device = 'Tablet';
+
 function App() {
   return (
-    <MainPage />
+    <MainPage device={device}/>
   );
 }
 

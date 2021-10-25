@@ -5,6 +5,9 @@ export const Category = styled.div`
     padding: 5px;
     display: flex;
     justify-content: space-between;
+    :hover {
+        background: rgba(90, 90, 137, 0.05);
+    }
 `;
 
 export const Name = styled.span`

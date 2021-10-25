@@ -9,8 +9,9 @@ export const SearchResults = styled.div`
     border-radius: 10px;
     color: #5A5A89;
     padding: 10px;
-    margin: 10px 0px;
-    display:none;
+    margin: 15px 0px;
+    height: 132px;
+    z-index: 1;
 `;
 
 export const RecentSearchesContainer = styled.div`
@@ -30,5 +31,5 @@ export const RecentHead = styled.div`
 export const RecentItem = styled.div`
     display: flex;
     justify-content: space-between;
-    padding 5px;
+    padding: 5px;
 `

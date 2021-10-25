@@ -8,8 +8,9 @@ export const CardContainer = styled.div`
     border: 1px solid #D9DBE9;
     display: flex;
     font-family: Roboto;
-    width: 60%;
-    max-width: 800px;
+    max-width: 750px;
+    margin: 0px 15px;
+    
 `;
 
 export const CardContent = styled.div`
@@ -33,9 +34,12 @@ export const TagList = styled.div`
 
 `;
 export const ImgCard = styled.img`
-    width: 30%;
-    max-width: 250px;
-    height: fit-content;
+    max-height: 100%;
+    width: 244px;
+    min-width: 10%;
+    object-fit: cover;
+    vertical-align: bottom;
+    border-radius: 20px 0px 0px 20px;
 `;
 
 

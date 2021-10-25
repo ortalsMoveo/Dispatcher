@@ -3,25 +3,38 @@ import {Container,
     SeparateLine,
     FilterSearch,
     ButtonPosition, 
-    FilterContent} from './FilterTabletStyle';
+    FilterContent,
+    IconStyle,
+} from './FilterTabletStyle';
 import FilterCategory,{Category} from '../../FilterCategory/FilterCategory';
 import Button, {ButtonProps} from '../../Button/Button';
 
 interface Filter {
+    title: string;
+    icon?: string;
     list: Category[];
-    button: ButtonProps
+    button: ButtonProps;
+    subFilter: boolean;
 }
 
-const FilterTablet = ({list, button }: Filter) => {
+const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
     return(
         <Container>
             <FilterContent>
-                <FilterTitle>FILTER</FilterTitle>
-                <SeparateLine></SeparateLine>
-                <FilterSearch>
-                    <span>Search in</span>
-                    <span>Evrything</span>  
-                </FilterSearch>
+                <FilterTitle>
+                    <IconStyle src={icon}/>
+                    {title}
+                </FilterTitle>
+                {!subFilter ? 
+                    <span>
+                        <SeparateLine></SeparateLine>
+                        <FilterSearch>
+                            <span>Search in</span>
+                            <span>Evrything</span>  
+                        </FilterSearch>
+                    </span>
+                
+                : null}
                 <SeparateLine></SeparateLine>
                 {list?
                     list.map((item) => (

@@ -3,11 +3,14 @@ import {
     SearchInput, 
     Container,
     SeparateLine, 
-    SearchBox
+    SearchBox,
+    FilterContainer
 } from "./Style";
 import Icon from '../Icon/Icon';
 import Filter,{FilterProps} from '../Filter/Filter';
 import RecentSearches from "./RecentSearches/RecentSearches";
+import React,{useState} from 'react';
+import { ClearProps } from '../Clear/Clear';
 
 export type Search = {
     icon: string;
@@ -16,25 +19,42 @@ export type Search = {
 export interface SearchProps {
     icon: string;
     recentSearches: string[];
-    filter: FilterProps;
+    filter?: FilterProps;
 }
+const clearButton: ClearProps={
+    smallScreen: false,
+  }
 
 const Search = ({icon, recentSearches, filter}: SearchProps) => {
+    const [recentResults, setRecentResults] = useState(false);
+
     return(
         <Container >
             <SearchBox>
                 <SearchContainer>
                     <Icon iconPath={icon}/>
-                    <SearchInput placeholder="Search"></SearchInput>
+                    <SearchInput placeholder="Search" onClick={() => setRecentResults(!recentResults)}></SearchInput>
                 </SearchContainer>
-                <SeparateLine></SeparateLine>
-                <Filter 
-                    filterText={filter.filterText}
-                    listItems={filter.listItems}
-                    iconPath={filter.iconPath} 
-                />
+                <FilterContainer>
+                    {filter? 
+                    <SeparateLine></SeparateLine>
+                        : null
+                    }
+                    {filter? 
+                        <Filter 
+                            filterText={filter.filterText}
+                            listItems={filter.listItems}
+                            iconPath={filter.iconPath} 
+                        /> : null
+                }
+                </FilterContainer>
             </SearchBox>
-            <RecentSearches recentSearches={recentSearches} />
+            {(recentResults) ? 
+                <RecentSearches 
+                    recentSearches={recentSearches} 
+                    clearButton={clearButton}
+                /> : null
+            }
         </Container>
     ); 
 }

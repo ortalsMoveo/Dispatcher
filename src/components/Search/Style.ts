@@ -4,24 +4,27 @@ import {white} from '../../globalStyle';
 export const Container = styled.div`
     background: ${white};
     border-radius: 10px;
-    width: 40%;
-    max-width: 400px;
+    /* max-width: 423px; */
     display: flex;
     flex-direction: column;
-    height: 2.5rem;
     padding: 5px;
     margin: 5px;
-`;
     
-export const SearchBox = styled.div`
+    `;
+    
+    export const SearchBox = styled.div`
+    height: 50px;
     display: flex;
-    justify-content: space evenly;
+    justify-content: space-between;
+    padding: 0px;
+    width: 423px;
+    
 `;
 export const SearchContainer = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    margin: 3%;
+    margin: auto 8px;
     width: 60%;
     max-width: 230px;
 `;
@@ -32,14 +35,18 @@ export const SearchInput = styled.input`
     border: none;
     color: rgba(90, 90, 137, 0.5);
     font-family: Roboto;
+    border: none;
 
     `;
 
+export const FilterContainer = styled.div`
+    display: flex;
+    margin: auto 10px;
 
+`;
 export const SeparateLine = styled.div`
-opacity: 0.5;
-border: 0.1px solid #D9DBE9;
-width: 0;
-
+    opacity: 0.5;
+    border: 0.1px solid #D9DBE9;
+    height: 50px;
 `;
 

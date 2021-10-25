@@ -1,4 +1,4 @@
-import { NavbarContainer, IconsContainer, Nav} from './NavbarStyle';
+import { NavbarContainer, IconsContainer, Nav, Logo} from './NavbarStyle';
 import Search,{SearchProps} from '../Search/Search';
 import Icon from '../Icon/Icon';
 
@@ -10,7 +10,7 @@ const Navbar = ({search}: NavbarProps) => {
     return(
         <NavbarContainer>
             <Nav>
-                <img src='../../Group 1086418.svg' style={{width: "10%"}}/>
+                <Logo src='../../Group 1086418.svg'></Logo>
                 <Search 
                     icon='../../Icons/search.svg'
                     recentSearches={search.recentSearches}

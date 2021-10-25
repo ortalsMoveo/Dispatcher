@@ -1,0 +1,30 @@
+[
+    {
+        "icon": "../../Icons/search.svg",
+        "recentSearches": ["crypto", "soccer", "soccer"],
+        "filter": {
+            "filterText": "Country",
+            "listItems": ["Mako", "Ynet", "Walla", "BBC"],
+            "iconPath": "../../Icons/dropdown.svg"
+        }
+    },
+    {
+        "icon": "../../Icons/search.svg",
+        "recentSearches": ["crypto", "soccer", "soccer"],
+        "filter": {
+            "filterText": "Category",
+            "listItems": ["Mako", "Ynet", "Walla", "BBC"],
+            "iconPath": "../../Icons/dropdown.svg"
+        }
+    },
+    {
+        "icon": "../../Icons/search.svg",
+        "recentSearches": ["crypto", "soccer", "soccer"],
+        "filter": {
+            "filterText": "Sources",
+            "listItems": ["Mako", "Ynet", "Walla", "BBC"],
+            "iconPath": "../../Icons/dropdown.svg"
+        }
+    }
+    
+]

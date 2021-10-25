@@ -20,9 +20,7 @@ export const Container = styled.div`
     color: #5A5A89;
     font-family: Roboto;
     font-size: 14px;
-    border: none;
+    border-width:0px;
+    border:none;    
     padding: 10px;
 `;
-
-// export const SideIcon = styled.div`
-// `;

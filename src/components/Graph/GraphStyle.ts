@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const GraphContainer = styled.div`
-    width: 35%;
     max-width: 400px;
     height: 18rem;
     background: #FFFFFF;
@@ -9,7 +8,7 @@ export const GraphContainer = styled.div`
     box-sizing: border-box;
     box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
-    padding: 2%;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

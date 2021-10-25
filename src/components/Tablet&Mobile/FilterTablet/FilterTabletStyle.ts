@@ -4,7 +4,12 @@ export const Container = styled.div`
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
-    
+    height: 799px;
+    justify-content    :space-between ;
+    font-family: Roboto;
+
+
+
 `;
 
 export const FilterContent = styled.div`
@@ -16,6 +21,7 @@ export const FilterTitle = styled.div`
     font-weight: 500;
     font-size: 16px;
     padding: 10px;
+    display: flex;
 `;
 export const FilterSearch = styled.span`
     display: flex;
@@ -28,7 +34,6 @@ export const FilterSearch = styled.span`
 `;
 
 export const ButtonPosition = styled.div`
-    margin: auto 0px;
     background: #F8F8FF;
     order: inherit;
     padding: 20px;
@@ -41,3 +46,6 @@ export const SeparateLine = styled.div`
     border: 1px solid #D9DBE9;
     height: 0px;
 `;
+export const IconStyle = styled.img`
+    padding: 0px 4px;    
+`

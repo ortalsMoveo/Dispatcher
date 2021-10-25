@@ -2,7 +2,7 @@ import {Category, Name, Option} from './FilterCategoryStyle';
 
 export interface Category {
     categoryName: string;
-    categoryOption: string;
+    categoryOption?: string;
 }
 
 const FilterCategory = ({categoryName, categoryOption}: Category) => {
