@@ -1,8 +1,33 @@
 import styled from  'styled-components';
 
+const style = {
+    background: '#303032',
+    opacity: '0.7'
+}
+
 export const Container = styled.div`
     background: #E5E5E5;
 `;
+
+export const Tablet = styled.div`
+    display: flex;
+    width: 770px;
+`;
+
+export const Content = styled.div`
+    padding:  0px 21px;
+`;
+
+export const Main = styled.div<{showFilter: boolean}>`
+    ${props => props.showFilter ? style : null}
+    width: 402px;
+`; 
+
+export const FilterSidebar = styled.div`
+    background: #FFFFFF;
+    z-index: 1;
+    width: 368px;
+`; 
 
 export const PageContent = styled.div`
     width: 80%;
@@ -31,8 +56,9 @@ export const CardsContent = styled.div`
 
 export const CardsListTablet = styled.div`
    display: flex;
-    flex-direction: column;
-    gap: 20px;
+   flex-direction: column;
+   gap: 20px;
+   width: 728px;
 
 `;
 

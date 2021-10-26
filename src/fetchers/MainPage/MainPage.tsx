@@ -6,7 +6,11 @@ import {Container,
   FilterContainer,
   CardsList,
   GraphList,
-  CardsListTablet} from './MainPageStyle';
+  CardsListTablet,
+  Main,
+  FilterSidebar,
+Tablet,
+Content} from './MainPageStyle';
 
 import Navbar from "../../components/Navbar/Navbar";
 import Filter from "../../components/Filter/Filter";
@@ -16,7 +20,7 @@ import Graph from '../../components/Graph/Graph';
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
 import TabletFilter from '../../components/Tablet&Mobile/FilterComponent/Filter';
-
+import FilterTablet from '../../components/Tablet&Mobile/FilterTablet/FilterTablet';
 const primaryButton: ButtonProps = {
   buttonType: 'primary',
   buttonText: 'NAVIGATE TO DISPATCH',
@@ -47,8 +51,25 @@ const icon = '../../Icons/filter.svg'
 interface MainPage {
   device: string;
 }
+const subFilterList = [
+  {categoryName: "Sources", categoryOption: "All"},
+  {categoryName: "Language", categoryOption: "All"}, 
+  {categoryName: "Dates", categoryOption: "All"}, 
+];
+const filterTablet: ButtonProps = {
+  buttonType: 'primary',
+  buttonText: 'VIEW RESULTS',
+  fullWidth: false
+}
+const FilterTabletData = {
+  title: "FILTER",
+  list: subFilterList,
+  button: filterTablet,
+  subFilter: false
+}
 
 const MainPage = ({device}: MainPage) => {
+  const filterTabletOn = false;
   let desktop = null;
   let tablet = null;
 
@@ -103,9 +124,11 @@ const MainPage = ({device}: MainPage) => {
   }
   else{
     tablet = (
-      <div>
-         <Navbar search={navbarPropsTablet}/>
-            <TabletFilter sortbyIcon={downArrow} icon={icon}/>
+      <Tablet>
+        <Main showFilter={filterTabletOn}>
+          <Navbar search={navbarPropsTablet}/>
+          <TabletFilter sortbyIcon={downArrow} icon={icon}/>
+          <Content>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
               {DataCards.map((card) => (
@@ -121,7 +144,18 @@ const MainPage = ({device}: MainPage) => {
                   />
               ))}
             </CardsListTablet>
-      </div>
+          </Content>
+        </Main>
+        {filterTabletOn ? 
+          <FilterSidebar>
+                    <FilterTablet 
+                      title={FilterTabletData.title}
+                      list={FilterTabletData.list}
+                      button={FilterTabletData.button}
+                      subFilter={FilterTabletData.subFilter}  />
+          </FilterSidebar> : null
+        }
+      </Tablet>
     )
   }
   return(
