@@ -1,16 +1,14 @@
 import styled from 'styled-components';
-import {white} from '../../globalStyle';
+import {white, gray} from '../../globalStyle';
 
 export const Container = styled.div`
     background: ${white};
     border-radius: 10px;
-    /* max-width: 423px; */
     display: flex;
     flex-direction: column;
     padding: 5px;
     margin: 5px;
-    
-    `;
+`;
     
     export const SearchBox = styled.div`
     height: 50px;
@@ -46,7 +44,7 @@ export const FilterContainer = styled.div`
 `;
 export const SeparateLine = styled.div`
     opacity: 0.5;
-    border: 0.1px solid #D9DBE9;
+    border: 0.1px solid ${gray};
     height: 50px;
 `;
 

@@ -1,4 +1,4 @@
-import Search from './Search';
+import Search,{SearchProps} from './Search';
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -9,8 +9,10 @@ export default {
 const downArrow = '../../Icons/back.svg' 
 const icon = '../../Icons/exit.svg' 
 // Here we define the content we want to render
-const Template: Story = () => <Search searchIcon={downArrow} icon={icon}/>;
+const Template: Story<SearchProps> = (args) => <Search {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
-
+Primary.args ={
+  icon: icon
+}

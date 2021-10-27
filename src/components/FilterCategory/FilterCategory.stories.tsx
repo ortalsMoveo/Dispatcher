@@ -1,4 +1,4 @@
-import FilterCategory from './FilterCategory';
+import FilterCategory,{Category} from './FilterCategory';
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -12,11 +12,12 @@ export default {
     categoryOption: 'All'
   }
 // Here we define the content we want to render
-const Template: Story = () => <FilterCategory   
-   categoryName={filterCategory.categoryName}
-   categoryOption={filterCategory.categoryOption}
+const Template: Story<Category> = (args) => <FilterCategory  {...args} 
 />;
 
 // Here we define variants
 export const Primary = Template.bind({});
-
+Primary.args = {
+  categoryName: filterCategory.categoryName, 
+  categoryOption: filterCategory.categoryOption
+}

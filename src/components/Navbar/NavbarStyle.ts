@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import {darkBlue} from '../../globalStyle';
 
 export const NavbarContainer = styled.div`
-    background: #262146;
+    background: ${darkBlue};
     display: flex;
     justify-content: space-between;
     height: 74px;
-
 `;
 
 export const Nav = styled.div`
     display: flex;
     padding: 3px 10px;
-    width:900px;
+    width: 40%;
+    max-width:900px;
     gap: 10px;
 `;
 

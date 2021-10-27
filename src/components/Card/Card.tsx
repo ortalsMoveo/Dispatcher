@@ -11,6 +11,7 @@ import { CardContainer,
 import Button from '../Button/Button';
 import Tag from '../Tag/Tag';
 import {ButtonProps} from '../Button/Button';
+import ArrowIcon from '../../assets/Arrow - Right.svg';
 
 export type CardText = {
     date: string;
@@ -18,14 +19,20 @@ export type CardText = {
     sourcePath: string;
     text: string;
 }
+const primaryButton: ButtonProps = {
+    buttonType: 'primary',
+    buttonText: 'NAVIGATE TO DISPATCH',
+    icon: ArrowIcon,
+    fullWidth: true
+  }
 
 interface CardProp {
     imagePath: string;
     tags: string[];
-    buttonProps: ButtonProps;
     cardData: CardText;
 }
-const Card = ({imagePath, tags, buttonProps, cardData}: CardProp) => {
+
+const Card = ({imagePath, tags, cardData}: CardProp) => {
     return(
         <CardContainer>
             <ImgCard src={imagePath}/>
@@ -34,24 +41,20 @@ const Card = ({imagePath, tags, buttonProps, cardData}: CardProp) => {
                    <HeadLines>{cardData.date}</HeadLines> 
                    <TagList>
                         {tags.map((item) => (
-                            <Tag textTag={item}/>
-
+                            <Tag key={item} textTag={item}/>
                         ))}
                    </TagList>
-
                 </HeadContentCard>
                 <CardTitle>{cardData.title}</CardTitle>
                 <HeadLines>{cardData.sourcePath}</HeadLines> 
-
                 <CardText>{cardData.text}</CardText>
                 <ButtonContainer>
                     <Button 
-                        buttonType={buttonProps.buttonType} 
-                        buttonText={buttonProps.buttonText}
-                        icon={buttonProps.icon} 
+                        buttonType={primaryButton.buttonType} 
+                        buttonText={primaryButton.buttonText}
+                        icon={primaryButton.icon} 
                         />
                 </ButtonContainer>
-
             </CardContent>
         </CardContainer>
     );

@@ -1,16 +1,14 @@
 import styled from 'styled-components';
+import {white, gray, darkBlueColor, lightBlue} from '../../globalStyle';
 
 export const CardContainer = styled.div`
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
-    background: #FFFFFF;
+    background: ${white};
     border-radius: 20px;
-    border: 1px solid #D9DBE9;
+    border: 1px solid ${gray};
     display: flex;
     font-family: Roboto;
     max-width: 750px;
     margin: 0px 15px;
-    
 `;
 
 export const CardContent = styled.div`
@@ -35,8 +33,8 @@ export const TagList = styled.div`
 `;
 export const ImgCard = styled.img`
     max-height: 100%;
-    width: 244px;
-    min-width: 10%;
+    width: 30%;
+    max-width: 244px;
     object-fit: cover;
     vertical-align: bottom;
     border-radius: 20px 0px 0px 20px;
@@ -50,13 +48,13 @@ export const HeadLines = styled.p`
 `;
 
 export const CardTitle = styled.h2`
-    color: #14142B;
+    color: ${darkBlueColor};
     font-weight: bold;
     font-size: 18px;
 `;
 
 export const CardText = styled.p`
-    color: #5A5A89;
+    color: ${lightBlue};
     font-size: 14px;
 `;
 

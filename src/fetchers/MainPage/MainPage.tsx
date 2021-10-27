@@ -2,101 +2,84 @@ import {Container,
   PageContent,
   Title,
   SeparateLine,
-  CardsContent,
+  ContentLists,
   FilterContainer,
   CardsList,
-  GraphList,
+  GraphsList,
   CardsListTablet} from './MainPageStyle';
-
+import { useState } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import Filter from "../../components/Filter/Filter";
 import Card from "../../components/Card/Card";
-import {ButtonProps} from '../../components/Button/Button';
 import Graph from '../../components/Graph/Graph';
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
 import TabletFilter from '../../components/Tablet&Mobile/FilterComponent/Filter';
+import { HeadLinesFilters, EverythingFilters,FILTER_OPTIONS } from '../../FiltersData';
 
-const primaryButton: ButtonProps = {
-  buttonType: 'primary',
-  buttonText: 'NAVIGATE TO DISPATCH',
-  icon: '../../Icons/Arrow - Right.svg',
-  fullWidth: false
-}
 
 const data =["#Covid-19", "Israel", "+2"];
 
-const filter = {
-    filterText: "Top Headlines",
-    listItems: ['Mako', 'Ynet', 'Walla', 'BBC'],
-    iconPath: '../../Icons/dropdown.svg',
-  }
-
 const navbarProps = {
-  icon: '../../Icons/search.svg',
-  recentSearches: ["crypto", "soccer", "soccer"],
-  filter: filter
-}
-const navbarPropsTablet = {
-  icon: '../../Icons/search.svg',
   recentSearches: ["crypto", "soccer", "soccer"],
 }
-const downArrow = '../../Icons/dropdown.svg' 
-const icon = '../../Icons/filter.svg' 
 
 interface MainPage {
   device: string;
 }
 
 const MainPage = ({device}: MainPage) => {
+  const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+
   let desktop = null;
   let tablet = null;
+  let filterList = null;
 
+  if(filterType === FILTER_OPTIONS.TOP){
+    filterList = HeadLinesFilters;
+  } 
+  else{
+    filterList = EverythingFilters;
+  }
   if(device === 'Desktop'){
     desktop = (
       <div>
         <Navbar search={navbarProps}/>
             <PageContent>
               <FilterContainer>
-                <Filter 
-                    filterText={filter.filterText}
-                    listItems={filter.listItems}
-                    iconPath={filter.iconPath} 
-                />
-                <Filter 
-                    filterText={filter.filterText}
-                    listItems={filter.listItems}
-                    iconPath={filter.iconPath} 
-                />
+                {filterList.map(item => (
                   <Filter 
-                    filterText={filter.filterText}
-                    listItems={filter.listItems}
-                    iconPath={filter.iconPath} 
-                />
+                    filterText={item.name}
+                    listItems={item.list}
+                  />
+                ))}
               </FilterContainer>
               <SeparateLine></SeparateLine>
               <Title>Top Headlines in Israel</Title>
-              <CardsContent>
+              <ContentLists>
                 <CardsList>
                   {DataCards.map((card) => (
                     <Card 
                       imagePath={card.urlToImage} 
-                      tags={data} buttonProps={primaryButton} 
+                      tags={data} 
                       cardData={{
-                        date: card.publishedAt,
-                        title: card.title,
-                        sourcePath: card.source.name,
-                        text: card.description
+                      date: card.publishedAt,
+                      title: card.title,
+                      sourcePath: card.source.name,
+                      text: card.description
                       }}
                       />
                   ))}
                 </CardsList>
-                <GraphList>
+                <GraphsList>
                   {Graphs.map((item) => (
-                    <Graph title={item.title} data={item.data} noDataToDisplay={item.noDataToDisplay} />
+                    <Graph 
+                      title={item.title} 
+                      data={item.data} 
+                      noDataToDisplay={item.noDataToDisplay} />
                   ))}
-                </GraphList>
-              </CardsContent>
+                </GraphsList>
+              </ContentLists>
             </PageContent>
       </div>
     )
@@ -104,19 +87,20 @@ const MainPage = ({device}: MainPage) => {
   else{
     tablet = (
       <div>
-         <Navbar search={navbarPropsTablet}/>
-            <TabletFilter sortbyIcon={downArrow} icon={icon}/>
+         <Navbar search={navbarProps}/>
+            <TabletFilter/>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
               {DataCards.map((card) => (
                 <Card 
+                  key={card.title}
                   imagePath={card.urlToImage} 
-                  tags={data} buttonProps={primaryButton} 
+                  tags={data} 
                   cardData={{
-                    date: card.publishedAt,
-                    title: card.title,
-                    sourcePath: card.source.name,
-                    text: card.description
+                  date: card.publishedAt,
+                  title: card.title,
+                  sourcePath: card.source.name,
+                  text: card.description
                   }}
                   />
               ))}

@@ -1,31 +1,33 @@
 import { DropDownContainer, DropDownHeader, DropDownListContainer, ListItems } from "./Style";
 import Icon from '../Icon/Icon';
-import React ,{useState} from 'react';
+import {useState} from 'react';
+import DropIcon from '../../assets/dropdown.svg';
+import DateIcon from '../../assets/date.svg';
 
 export interface FilterProps {
     filterText: string;
     listItems: string[];
-    iconPath: string;
+    date?: boolean;
 }
 
-const Filter = ({filterText, listItems, iconPath}: FilterProps) => {
-    const [dropDownClicked, setDropDownClicked] = useState(false);
+const Filter = ({filterText, listItems, date=false}: FilterProps) => {
+    const [open, setOpen] = useState(false);
 
     return(
         <DropDownContainer>
             <DropDownHeader 
-                onClick={() => setDropDownClicked(!dropDownClicked)}
+                onClick={() => setOpen(!open)}
             >
-                {filterText}<Icon iconPath={iconPath} />
+                {filterText}<Icon iconPath={date?DateIcon:DropIcon} />
             </DropDownHeader>
-            {dropDownClicked ? (
+            {open && (
             <DropDownListContainer>
-                {listItems ? listItems.map((item) => (
+                {listItems && listItems.map((item) => (
                     <ListItems>{item}</ListItems>
 
-                )): null}
+                ))}
             </DropDownListContainer>
-            ) : null}
+            )}
         </DropDownContainer>
     );
 }

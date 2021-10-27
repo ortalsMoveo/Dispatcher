@@ -1,4 +1,4 @@
-import Search from './Search';
+import Search, {SearchProps} from './Search';
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -14,10 +14,10 @@ const filter = {
   iconPath: '../../Icons/dropdown.svg',
 }
 // Here we define the content we want to render
-const Template: Story = () => <Search icon='../../Icons/search.svg'
-recentSearches={recentReaches} 
-filter={filter}/>;
+const Template: Story<SearchProps> = (args) => <Search {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
-
+Primary.args = {
+  recentSearches: recentReaches,
+}

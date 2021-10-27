@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import {white, lightBlue} from '../../globalStyle';
 
 export const Category = styled.div`
-    background: #FFFFFF;
+    background: ${white};
     padding: 5px;
     display: flex;
     justify-content: space-between;
@@ -12,7 +13,7 @@ export const Category = styled.div`
 
 export const Name = styled.span`
     padding: 5px; 
-    color: #5A5A89;   
+    color: ${lightBlue};   
 `;
 
 export const Option = styled.span`

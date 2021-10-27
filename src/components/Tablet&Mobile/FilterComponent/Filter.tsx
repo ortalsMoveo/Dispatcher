@@ -1,18 +1,16 @@
 import {Container, Sort} from './FilterStyle';
 import Icon from '../../Icon/Icon';
+import FilterIcon from '../../../assets/filter.svg';
+import DropIcon from '../../../assets/dropdown.svg';
 
-interface Filter {
-    sortbyIcon: string;
-    icon: string
-}
-const Filter = ({sortbyIcon, icon}: Filter) => {
+const Filter = () => {
     return(
         <Container>
             <Sort>
                 Sort By
-                <Icon iconPath={sortbyIcon}/>
+                <Icon iconPath={DropIcon}/>
             </Sort>
-            <Icon iconPath={icon}/>
+            <Icon iconPath={FilterIcon}/>
         </Container>
     );
 }

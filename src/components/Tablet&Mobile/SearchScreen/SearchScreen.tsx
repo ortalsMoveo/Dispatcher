@@ -8,13 +8,13 @@ interface SearchScreenProps  {
     recentSearches: string[];
 }
 const clearButton: ClearProps={
-    smallScreen: false,
+    gotBackground: false,
   }
 
 const SearchScreen = ({searchProps, recentSearches}: SearchScreenProps) => {
     return (
         <Container>
-            <Search searchIcon={searchProps.searchIcon} icon={searchProps.icon}/>
+            <Search icon={searchProps.icon}/>
              <RecentSearches recentSearches={recentSearches} clearButton={clearButton}/>
         </Container>
     );

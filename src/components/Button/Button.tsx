@@ -1,4 +1,5 @@
 import {ButtonStyle, IconStyle} from './ButtonStyle';
+import Arrow from '../../assets/Arrow - Right.svg';
 
 export type ButtonType = "primary" | "secondary" | "text";
 

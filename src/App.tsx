@@ -1,7 +1,7 @@
 import './App.css';
 import MainPage from './fetchers/MainPage/MainPage';
 
-const device = 'Tablet';
+const device = 'Desktop';
 
 function App() {
   return (

@@ -1,18 +1,20 @@
 import { Container, SearchContainer, Input } from "./SearchStyle";
 import Icon from '../../Icon/Icon';
+import backIcon from '../../../assets/back.svg';
+import exitIcon from '../../../assets/exit.svg';
+import { SearchResults } from "../../NoResults/NoSearchResults";
 
 export interface SearchProps {
-    searchIcon: string;
     icon?: string;
 }
-const Search = ({searchIcon, icon}: SearchProps) => {
+const Search = ({icon}: SearchProps) => {
     return(
         <Container>
             <SearchContainer>
-                <Icon iconPath={searchIcon}/>
+                <Icon iconPath={backIcon}/>
                 <Input placeholder="Search"/>
             </SearchContainer>
-            {icon? <Icon iconPath={icon} />: null}
+            {icon && <Icon iconPath={exitIcon} />}
         </Container>
     );
 }

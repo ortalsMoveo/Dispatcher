@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import {white} from '../../globalStyle';
+import {lightBlue, white} from '../../globalStyle';
 
 
 export const DropDownContainer = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Roboto');
 
   font-family: Roboto;
-  color: #5A5A89;
+  color: ${lightBlue};
   border: none;
 `;    
     
@@ -30,7 +30,7 @@ export const DropDownListContainer = styled.div`
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background-color: #5A5A89;
+    background-color: ${lightBlue};
   }
     height: 126px;
     overflow: scroll;
@@ -45,6 +45,6 @@ export const ListItems = styled.li`
   }
   padding : 7px;
   list-style: none;
-  color: #5A5A89;
+  color: ${lightBlue};
 `
 ;

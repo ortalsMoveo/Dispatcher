@@ -6,11 +6,14 @@ export default {
     title: "Components/SmallScreens/Filter",
   } as Meta;
 
-const downArrow = '../../Icons/dropdown.svg' 
-const icon = '../../Icons/filter.svg' 
+const downArrow = '../../assets/dropdown.svg';
+const icon = '../../assets/filter.svg' 
 // Here we define the content we want to render
-const Template: Story = () => <Filter sortbyIcon={downArrow} icon={icon}/>;
+const Template: Story = (args) => <Filter {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
-
+Primary.args = {
+  sortbyIcon: downArrow,
+  icon: icon
+}

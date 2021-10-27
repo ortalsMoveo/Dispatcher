@@ -12,9 +12,9 @@ const Template: Story<ClearProps> = (args) => <Clear {...args}/>;
 // Here we define variants
 export const Primary = Template.bind({});
 Primary.args = {
-  smallScreen: false
+  gotBackground: false
 }
 export const Secondary = Template.bind({});
 Secondary.args = {
-  smallScreen: true
+  gotBackground: true
 }

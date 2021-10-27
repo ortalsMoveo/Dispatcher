@@ -1,4 +1,4 @@
-import Filter from './Filter';
+import Filter,{FilterProps} from './Filter';
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -10,14 +10,16 @@ export default {
   const filter = {
     filterText: "Sources",
     listItems: ['Mako', 'Ynet', 'Walla', 'BBC'],
-    iconPath: '../../Icons/dropdown.svg',
+    date: false
   }
 // Here we define the content we want to render
-const Template: Story = () => <Filter   
-  filterText={filter.filterText}
-  listItems={filter.listItems} 
-  iconPath={filter.iconPath} />;
+const Template: Story<FilterProps> = (args) => <Filter {...args}/>;
 
 // Here we define variants
 export const Primary = Template.bind({});
 
+Primary.args = {
+    filterText: filter.filterText,
+    listItems: filter.listItems, 
+    date: filter.date
+}

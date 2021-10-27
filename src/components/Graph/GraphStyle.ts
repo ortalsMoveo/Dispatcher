@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import {white, darkBlueColor,lightBlue } from '../../globalStyle';
 
 export const GraphContainer = styled.div`
     max-width: 400px;
     height: 18rem;
-    background: #FFFFFF;
+    background: ${white};
     border: 1px solid #D9DBE9;
     box-sizing: border-box;
     box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.05);
@@ -15,20 +16,16 @@ export const GraphContainer = styled.div`
 
 `;
 
-export const Header = styled.div`
-
-`;
-
 export const Title = styled.h2`
     font-family: Roboto;
     font-weight: bold;
     font-size: 24px;
-    color: #14142B;
+    color: ${darkBlueColor};
 `;
 
 export const LineRow  = styled.div`
-    background: #5A5A89;
-    border: 2px solid #5A5A89;
+    background: ${lightBlue};
+    border: 2px solid ${lightBlue};
     width: 6%;
     border-radius: 10px;
     margin: 0px;
@@ -38,5 +35,4 @@ export const LineRow  = styled.div`
 
 export const DataContainer = styled.div`
     margin: auto;
-    
 `;

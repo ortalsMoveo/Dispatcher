@@ -1,7 +1,9 @@
 import styled from  'styled-components';
+import {darkBlue, gray, Gray90, BlueBuzz} from '../../globalStyle';
+
 
 export const Container = styled.div`
-    background: #E5E5E5;
+    background: ${Gray90};
 `;
 
 export const PageContent = styled.div`
@@ -18,13 +20,13 @@ export const FilterContainer = styled.div`
 `;
 
 export const Title = styled.h3`
-    color: #262146;
+    color: ${darkBlue};
     font-family: Roboto;
     font-weight: 500;
     font-size: 24px;
 `;
 
-export const CardsContent = styled.div`
+export const ContentLists = styled.div`
     display: flex;
     gap: 20px;
 `;
@@ -44,7 +46,7 @@ export const CardsList = styled.div`
         border-radius: 10px;
     }
     ::-webkit-scrollbar {
-        background: #A0A3BD;
+        background: ${BlueBuzz};
         height: 50px;
     }   
     height: 1000px;
@@ -53,7 +55,7 @@ export const CardsList = styled.div`
     gap: 20px;
 `;
 
-export const GraphList = styled.div`
+export const GraphsList = styled.div`
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -62,5 +64,5 @@ export const GraphList = styled.div`
 `;
 export const SeparateLine = styled.div`
     opacity: 0.5;
-    border: 1px solid #D9DBE9;
+    border: 1px solid ${gray};
 `;

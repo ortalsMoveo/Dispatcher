@@ -25,7 +25,7 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
                     <IconStyle src={icon}/>
                     {title}
                 </FilterTitle>
-                {!subFilter ? 
+                {!subFilter && 
                     <span>
                         <SeparateLine></SeparateLine>
                         <FilterSearch>
@@ -33,21 +33,18 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
                             <span>Evrything</span>  
                         </FilterSearch>
                     </span>
-                
-                : null}
+                }
                 <SeparateLine></SeparateLine>
-                {list?
-                    list.map((item) => (
-                        <div>
-                            <FilterCategory 
-                                key={item.categoryName}
-                                categoryName={item.categoryName}
-                                categoryOption={item.categoryOption}
-                            />
-                            <SeparateLine></SeparateLine>
-                        </div>
-                    ))
-                : null}
+                {list?.map((item) => (
+                    <div>
+                        <FilterCategory 
+                            key={item.categoryName}
+                            categoryName={item.categoryName}
+                            categoryOption={item.categoryOption}
+                        />
+                        <SeparateLine></SeparateLine>
+                    </div>
+                ))}
             </FilterContent>
             <ButtonPosition>
                 <Button 

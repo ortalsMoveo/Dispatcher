@@ -1,7 +1,6 @@
 import NoSearchResults,{SearchResults} from '../NoResults/NoSearchResults';
 import {
     GraphContainer,
-    Header,
     Title,
     LineRow, 
     DataContainer
@@ -18,16 +17,14 @@ export interface GraphProps {
 const Graph = ({title, data, noDataToDisplay}: GraphProps) => {
     return(
         <GraphContainer>
-            <Header>
-                <Title>{title}</Title>
-                <LineRow></LineRow>
-            </Header>
+            <Title>{title}</Title>
+            <LineRow></LineRow>
             <DataContainer>
-                {noDataToDisplay ? 
+                {noDataToDisplay && 
                     <NoSearchResults 
                         logoPath={noDataToDisplay.logoPath} 
                         text={noDataToDisplay.text}
-                /> : null}
+                /> }
             </DataContainer>
         </GraphContainer>
     );
