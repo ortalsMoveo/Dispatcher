@@ -1,4 +1,4 @@
-import Clear from './Clear';
+import Clear,{ClearProps} from './Clear';
 import { Meta, Story } from "@storybook/react";
 
 export default {
@@ -7,8 +7,14 @@ export default {
   } as Meta;
 
 // Here we define the content we want to render
-const Template: Story = () => <Clear/>;
+const Template: Story<ClearProps> = (args) => <Clear {...args}/>;
 
 // Here we define variants
 export const Primary = Template.bind({});
-
+Primary.args = {
+  gotBackground: false
+}
+export const Secondary = Template.bind({});
+Secondary.args = {
+  gotBackground: true
+}

@@ -1,8 +1,8 @@
 import { SearchResults, LogoSearch} from "./Style";
 
-interface SearchResults{
+export interface SearchResults{
     logoPath: string;
-    text: string;
+    text?: string;
 }
 
 const NoSearchResults = ({logoPath, text}: SearchResults) => {

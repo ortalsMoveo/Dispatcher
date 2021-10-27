@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import {lightBlue, gray, white } from '../../globalStyle';
 
-export const ClearButton = styled.button`
-    color: #5A5A89;
+export const ClearButton = styled.button<{backgroundColor: boolean}>`
+    color: ${lightBlue};
     :hover {
-        background: #D9DBE9;
+        background: ${gray};
     }
-    background: #FFFFFF;
+    background: ${props => props.backgroundColor ? `${gray}` : `${white}`};
     padding: 4px 6px;
     border: none;
     font-weight: bold;

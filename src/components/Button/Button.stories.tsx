@@ -12,7 +12,7 @@ const primaryButton: ButtonProps = {
   buttonType: 'primary',
   buttonText: 'NAVIGATE TO DISPATCH',
   icon: '../../Icons/Arrow - Right.svg',
-  isFullWidth: true
+  fullWidth: false
 }
 const secondaryButton: ButtonProps = {
   buttonText: 'SECONDARY',
@@ -24,14 +24,29 @@ const textButton: ButtonProps = {
 }
 
 // Here we define the content we want to render
-const Template: Story = () => 
-  <Button 
-    buttonText={primaryButton.buttonText} 
-    buttonType={primaryButton.buttonType} 
-    icon={primaryButton.icon}
-    isFullWidth={primaryButton.isFullWidth}
+const Template: Story<ButtonProps> = (args) => 
+  <Button {...args}
   />;
+  
+  // Here we define variants
+  
+  export const Primary = Template.bind({});
+  Primary.args = { 
+    buttonText: primaryButton.buttonText,
+    buttonType: primaryButton.buttonType,
+    icon: primaryButton.icon, 
+    fullWidth: primaryButton.fullWidth
+ };
 
-// Here we define variants
-export const Primary = Template.bind({});
+ export const Secondary = Template.bind({});
+ Secondary.args = { 
+    buttonText: secondaryButton.buttonText,
+    buttonType: secondaryButton.buttonType,
+ };
+
+ export const Tertiary = Template.bind({});
+  Tertiary.args = { 
+    buttonText: textButton.buttonText,
+    buttonType: textButton.buttonType,
+ };
 
