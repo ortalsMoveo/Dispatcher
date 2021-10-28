@@ -145,32 +145,7 @@ const MainPage = ({device}: MainPage) => {
       </Tablet>
     )
   }
-
-//   <Tablet>
-//         <Main showFilter={filterTabletOn}>
-//           <Navbar search={navbarPropsTablet}/>
-//           <TabletFilter sortbyIcon={downArrow} icon={icon}/>
-//           <Content>
-//             <Title>Top Headlines in Israel</Title>
-//             <CardsListTablet>
-//               {DataCards.map((card) => (
-// @@ -121,7 +144,18 @@ const MainPage = ({device}: MainPage) => {
-//                   />
-//               ))}
-//             </CardsListTablet>
-//       </div>
-//           </Content>
-//         </Main>
-//         {filterTabletOn ? 
-//           <FilterSidebar>
-//                     <FilterTablet 
-//                       title={FilterTabletData.title}
-//                       list={FilterTabletData.list}
-//                       button={FilterTabletData.button}
-//                       subFilter={FilterTabletData.subFilter}  />
-//           </FilterSidebar> : null
-//         }
-//       </Tablet>
+  
   return(
         <Container>
             {desktop}
