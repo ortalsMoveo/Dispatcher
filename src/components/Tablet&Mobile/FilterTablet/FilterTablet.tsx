@@ -5,6 +5,7 @@ import {Container,
     ButtonPosition, 
     FilterContent,
     IconStyle,
+    AllSearches
 } from './FilterTabletStyle';
 import FilterCategory,{Category} from '../../FilterCategory/FilterCategory';
 import Button, {ButtonProps} from '../../Button/Button';
@@ -29,8 +30,8 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
                     <span>
                         <SeparateLine></SeparateLine>
                         <FilterSearch>
-                            <span>Search in</span>
-                            <span>Evrything</span>  
+                            <AllSearches>Search in</AllSearches>
+                            <AllSearches>Evrything</AllSearches>   
                         </FilterSearch>
                     </span>
                 }

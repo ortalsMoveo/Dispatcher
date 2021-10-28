@@ -6,7 +6,11 @@ import {Container,
   FilterContainer,
   CardsList,
   GraphsList,
-  CardsListTablet} from './MainPageStyle';
+  CardsListTablet,
+  FilterSidebar,
+  TabletPageContent,
+  Tablet,
+  Content} from './MainPageStyle';
 import { useState } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import Filter from "../../components/Filter/Filter";
@@ -16,12 +20,29 @@ import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
 import TabletFilter from '../../components/Tablet&Mobile/FilterComponent/Filter';
 import { HeadLinesFilters, EverythingFilters,FILTER_OPTIONS } from '../../FiltersData';
-
-
+import FilterTablet from '../../components/Tablet&Mobile/FilterTablet/FilterTablet';
+import {ButtonProps} from '../../components/Button/Button';
 const data =["#Covid-19", "Israel", "+2"];
 
 const navbarProps = {
   recentSearches: ["crypto", "soccer", "soccer"],
+}
+
+const subFilterList = [
+  {categoryName: "Sources", categoryOption: "All"},
+  {categoryName: "Language", categoryOption: "All"}, 
+  {categoryName: "Dates", categoryOption: "All"}, 
+];
+const filterTablet: ButtonProps = {
+  buttonType: 'primary',
+  buttonText: 'VIEW RESULTS',
+  fullWidth: false
+}
+const FilterTabletData = {
+  title: "FILTER",
+  list: subFilterList,
+  button: filterTablet,
+  subFilter: false
 }
 
 interface MainPage {
@@ -29,7 +50,8 @@ interface MainPage {
 }
 
 const MainPage = ({device}: MainPage) => {
-  const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+  const [filterType, setFilterType] = useState(FILTER_OPTIONS.EVERYTHING);
+  const [filterTabletOn, setFilterTabletOn] = useState(true);
 
   let desktop = null;
   let tablet = null;
@@ -51,6 +73,7 @@ const MainPage = ({device}: MainPage) => {
                   <Filter 
                     filterText={item.name}
                     listItems={item.list}
+                    date={item.date}
                   />
                 ))}
               </FilterContainer>
@@ -86,9 +109,11 @@ const MainPage = ({device}: MainPage) => {
   }
   else{
     tablet = (
-      <div>
-         <Navbar search={navbarProps}/>
-            <TabletFilter/>
+      <Tablet>
+        <TabletPageContent showFilter={filterTabletOn}>
+          <Navbar search={navbarProps}/>
+          <TabletFilter/>
+          <Content>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
               {DataCards.map((card) => (
@@ -105,9 +130,47 @@ const MainPage = ({device}: MainPage) => {
                   />
               ))}
             </CardsListTablet>
-      </div>
+          </Content>
+        </TabletPageContent>
+        <FilterSidebar>
+          {filterTabletOn && 
+            <FilterTablet 
+              title={FilterTabletData.title}
+              list={FilterTabletData.list}
+              button={FilterTabletData.button}
+              subFilter={FilterTabletData.subFilter}  
+            /> 
+          }
+        </FilterSidebar>
+      </Tablet>
     )
   }
+
+//   <Tablet>
+//         <Main showFilter={filterTabletOn}>
+//           <Navbar search={navbarPropsTablet}/>
+//           <TabletFilter sortbyIcon={downArrow} icon={icon}/>
+//           <Content>
+//             <Title>Top Headlines in Israel</Title>
+//             <CardsListTablet>
+//               {DataCards.map((card) => (
+// @@ -121,7 +144,18 @@ const MainPage = ({device}: MainPage) => {
+//                   />
+//               ))}
+//             </CardsListTablet>
+//       </div>
+//           </Content>
+//         </Main>
+//         {filterTabletOn ? 
+//           <FilterSidebar>
+//                     <FilterTablet 
+//                       title={FilterTabletData.title}
+//                       list={FilterTabletData.list}
+//                       button={FilterTabletData.button}
+//                       subFilter={FilterTabletData.subFilter}  />
+//           </FilterSidebar> : null
+//         }
+//       </Tablet>
   return(
         <Container>
             {desktop}

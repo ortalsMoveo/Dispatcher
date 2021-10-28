@@ -12,7 +12,7 @@ import RecentSearches from "./RecentSearches/RecentSearches";
 import {useState} from 'react';
 import { ClearProps } from '../Clear/Clear';
 import SearchIcon from '../../assets/search.svg';
-import { filtersTypes } from '../../FiltersData';
+import { FILTER_OPTIONS, filterOptions } from '../../FiltersData';
 
 export interface SearchProps {
     recentSearches: string[];
@@ -34,8 +34,8 @@ const Search = ( {recentSearches}: SearchProps) => {
                 <FilterContainer>
                     {<SeparateLine></SeparateLine>}
                     <Filter 
-                        filterText={filtersTypes[0]}
-                        listItems={filtersTypes}
+                        filterText={FILTER_OPTIONS.TOP}
+                        listItems={filterOptions}
                     /> 
                 </FilterContainer>
             </SearchBox>

@@ -1,7 +1,11 @@
 import styled from  'styled-components';
-import {darkBlue, gray, Gray90, BlueBuzz} from '../../globalStyle';
+import {darkBlue, gray, Gray90, BlueBuzz, white, DarkGray} from '../../globalStyle';
 
-
+const style = {
+    background: `${DarkGray}`,
+    opacity: '0.7',
+    width: '402px'
+}
 export const Container = styled.div`
     background: ${Gray90};
 `;
@@ -9,6 +13,23 @@ export const Container = styled.div`
 export const PageContent = styled.div`
     width: 80%;
     margin: 0% 10%;   
+`;
+export const Tablet = styled.div`
+    display: flex;
+    width: 770px;
+`;
+export const Content = styled.div`
+    padding:  0px 21px;
+`;
+
+export const TabletPageContent = styled.div<{showFilter: boolean}>`
+    ${props => props.showFilter ? style : null}
+`;
+
+export const FilterSidebar = styled.div`
+    background: ${white};
+    z-index: 1;
+    width: 368px;
 `;
 export const FilterContainer = styled.div`
     padding: 10px;
@@ -35,7 +56,7 @@ export const CardsListTablet = styled.div`
    display: flex;
     flex-direction: column;
     gap: 20px;
-
+    width: 728px;
 `;
 
 export const CardsList = styled.div`

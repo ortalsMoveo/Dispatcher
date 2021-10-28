@@ -8,3 +8,4 @@ export const white = '#FFFFFF';
 export const Gray90 = '#E5E5E5';
 export const darkBlueColor = '#14142B';
 export const BlueBuzz = '#A0A3BD';
+export const DarkGray = '#303032';
