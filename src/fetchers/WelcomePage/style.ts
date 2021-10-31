@@ -8,7 +8,7 @@ export const Container = styled.div`
     background: ${GhostWhite};
     @media(max-width: 768px){
         flex-direction: column;
-        height: 699px;
+        height: 1024px;
     };
     @media(max-width: 376px){
         flex-direction: column;
@@ -25,7 +25,7 @@ export const PageContent = styled.div`
         width: 90%;
         padding: 10px 20px;
         text-align: center;
-        height: 374px;
+        height: 699px;
     };
     @media(max-width: 376px){
         width: 90%;
@@ -62,12 +62,12 @@ export const TextPage = styled.div`
     @media(max-width: 768px){
         font-size: 32px;
         margin: 20px;
-        padding-bottom: 100px;
+        padding-bottom: 350px;
     }
     @media(max-width: 376px){
         font-size: 22px;
         margin: 0px;
-        padding-bottom: 100px;
+        padding-bottom: 185px;
     };
 `;
 

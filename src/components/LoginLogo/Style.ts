@@ -11,7 +11,7 @@ export const LogoContainer = styled.div`
         width: 100%;
         height: 325px;
     };
-    @media(max-width: 325px){
+    @media(max-width: 375px){
         width: 100%;
         height: 250px;
     };
