@@ -4,21 +4,20 @@ export enum FILTER_OPTIONS {
 }
 export const filterOptions = ["Top Headlines", "EveryThing"];
 
+
+
 export const HeadLinesFilters = [
     {
         name: "Country",
         list: [],
-        date: false
     },
     {
         name: "Category",
         list: [],
-        date: false
     },
     {
         name: "Sources",
         list: ['Mako', 'Ynet', 'Walla', 'BBC'],
-        date: false
     }
 ];
 
@@ -26,7 +25,6 @@ export const EverythingFilters = [
     {
         name: "Sort by",
         list: [],
-        date: false
     },
     {
         name: "Dates",
@@ -36,11 +34,15 @@ export const EverythingFilters = [
     {
         name: "Sources",
         list: [],
-        date: false
     },
     {
         name: "Language",
         list: [],
-        date: false
     }
 ]
+
+export const subFilterList = [
+    {categoryName: "Sources", categoryOption: "All"},
+    {categoryName: "Language", categoryOption: "All"}, 
+    {categoryName: "Dates", categoryOption: "All"}, 
+  ];

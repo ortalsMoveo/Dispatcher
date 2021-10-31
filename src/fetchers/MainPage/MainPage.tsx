@@ -19,7 +19,7 @@ import Graph from '../../components/Graph/Graph';
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
 import TabletFilter from '../../components/Tablet&Mobile/FilterComponent/Filter';
-import { HeadLinesFilters, EverythingFilters,FILTER_OPTIONS } from '../../FiltersData';
+import { HeadLinesFilters, EverythingFilters,FILTER_OPTIONS, subFilterList } from '../../FiltersData';
 import FilterTablet from '../../components/Tablet&Mobile/FilterTablet/FilterTablet';
 import {ButtonProps} from '../../components/Button/Button';
 const data =["#Covid-19", "Israel", "+2"];
@@ -28,11 +28,6 @@ const navbarProps = {
   recentSearches: ["crypto", "soccer", "soccer"],
 }
 
-const subFilterList = [
-  {categoryName: "Sources", categoryOption: "All"},
-  {categoryName: "Language", categoryOption: "All"}, 
-  {categoryName: "Dates", categoryOption: "All"}, 
-];
 const filterTablet: ButtonProps = {
   buttonType: 'primary',
   buttonText: 'VIEW RESULTS',
@@ -73,7 +68,6 @@ const MainPage = ({device}: MainPage) => {
                   <Filter 
                     filterText={item.name}
                     listItems={item.list}
-                    date={item.date}
                   />
                 ))}
               </FilterContainer>
