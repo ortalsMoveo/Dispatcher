@@ -26,7 +26,6 @@ const icon = '../../Icons/Arrow - Right.svg';
 const primaryButton: ButtonProps = {
     buttonType: 'primary',
     buttonText: 'VIEW RESULTS',
-    icon: false,
     fullWidth: false
   }
 // Here we define the content we want to render
