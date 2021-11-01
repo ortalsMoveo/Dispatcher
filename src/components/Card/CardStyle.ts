@@ -8,7 +8,6 @@ export const CardContainer = styled.div`
     display: flex;
     font-family: Roboto;
     max-width: 750px;
-    margin: 0px 15px;
 `;
 
 export const CardContent = styled.div`

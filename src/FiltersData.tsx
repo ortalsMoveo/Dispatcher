@@ -1,46 +1,52 @@
+import { FilterProps } from "./components/Filter/Filter";
+
 export enum FILTER_OPTIONS {
     TOP="Top Headlines",
     EVERYTHING="Everything"
 }
+export const filterOptions = ["Top Headlines", "EveryThing"];
 
-export const HeadLinesFilters = [
+
+
+
+export const HeadLinesFilters:FilterProps[] = [
     {
-        name: "Country",
-        list: [],
-        
+        filterText: "Country",
+        listItems: [],
     },
     {
-        name: "Category",
-        list: [],
-        
-        
+        filterText: "Category",
+        listItems: [],
     },
     {
-        name: "Sources",
-        list: ['Mako', 'Ynet', 'Walla', 'BBC'],
-        
+        filterText: "Sources",
+        listItems: ['Mako', 'Ynet', 'Walla', 'BBC'],
     }
 ];
 
-export const EverythingFilters = [
+export const EverythingFilters: FilterProps[] = [
     {
-        name: "Sort by",
-        list: [],
-        
+        filterText: "Sort by",
+        listItems: [],
     },
     {
-        name: "Dates",
-        list: [],
+        filterText: "Dates",
+        listItems: [],
         date: true
     },
     {
-        name: "Sources",
-        list: [],
-
+        filterText: "Sources",
+        listItems: [],
     },
     {
-        name: "Language",
-        list: [],
-        
+        filterText: "Language",
+        listItems: [],
     }
 ]
+
+export const subFilterList = [
+    {categoryName: "Sources", categoryOption: "All"},
+    {categoryName: "Language", categoryOption: "All"}, 
+    {categoryName: "Dates", categoryOption: "All"}, 
+];
+

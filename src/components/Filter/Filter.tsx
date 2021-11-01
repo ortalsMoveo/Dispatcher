@@ -12,13 +12,17 @@ export interface FilterProps {
 
 const Filter = ({filterText, listItems, date=false}: FilterProps) => {
     const [open, setOpen] = useState(false);
+    let icon =  DropIcon;
+    if(date){
+        icon = DateIcon;
+    }
 
     return(
         <DropDownContainer>
             <DropDownHeader 
                 onClick={() => setOpen(!open)}
             >
-                {filterText}<Icon iconPath={date?DateIcon:DropIcon} />
+                {filterText}<Icon iconPath={icon} />
             </DropDownHeader>
             {open && (
             <DropDownListContainer>

@@ -3,22 +3,21 @@ import {Container,
   Title,
   SeparateLine,
   ContentLists,
-  FilterContainer,
-  CardsList,
-  GraphsList,
-  CardsListTablet} from './MainPageStyle';
+  CardsListTablet,
+  FilterSidebar,
+  TabletPageContent,
+  Tablet,
+  Content} from './MainPageStyle';
 import { useState } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
-import Filter from "../../components/Filter/Filter";
-import Card from "../../components/Card/Card";
-import Graph from '../../components/Graph/Graph';
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
 import TabletFilter from '../../components/Tablet&Mobile/FilterComponent/Filter';
-import { HeadLinesFilters, EverythingFilters,FILTER_OPTIONS } from '../../FiltersData';
-
-
-const data =["#Covid-19", "Israel", "+2"];
+import { FILTER_OPTIONS } from '../../FiltersData';
+import FilterContainer from '../../components/FilterContainer/FilterContainer';
+import CardsList from '../../components/Lists/CardsList';
+import GraphsList from '../../components/Lists/GraphList';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 const navbarProps = {
   recentSearches: ["crypto", "soccer", "soccer"],
@@ -30,55 +29,21 @@ interface MainPage {
 
 const MainPage = ({device}: MainPage) => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+  const [filterTabletOn, setFilterTabletOn] = useState(true);
 
   let desktop = null;
   let tablet = null;
-  let filterList = null;
-
-  if(filterType === FILTER_OPTIONS.TOP){
-    filterList = HeadLinesFilters;
-  } 
-  else{
-    filterList = EverythingFilters;
-  }
   if(device === 'Desktop'){
     desktop = (
       <div>
         <Navbar search={navbarProps}/>
             <PageContent>
-              <FilterContainer>
-                {filterList.map(item => (
-                  <Filter 
-                    filterText={item.name}
-                    listItems={item.list}
-                  />
-                ))}
-              </FilterContainer>
+              <FilterContainer filterType={filterType}/>
               <SeparateLine></SeparateLine>
               <Title>Top Headlines in Israel</Title>
               <ContentLists>
-                <CardsList>
-                  {DataCards.map((card) => (
-                    <Card 
-                      imagePath={card.urlToImage} 
-                      tags={data} 
-                      cardData={{
-                      date: card.publishedAt,
-                      title: card.title,
-                      sourcePath: card.source.name,
-                      text: card.description
-                      }}
-                      />
-                  ))}
-                </CardsList>
-                <GraphsList>
-                  {Graphs.map((item) => (
-                    <Graph 
-                      title={item.title} 
-                      data={item.data} 
-                      noDataToDisplay={item.noDataToDisplay} />
-                  ))}
-                </GraphsList>
+                <CardsList cardsList={DataCards}/>
+                <GraphsList graphList={Graphs} />
               </ContentLists>
             </PageContent>
       </div>
@@ -86,28 +51,24 @@ const MainPage = ({device}: MainPage) => {
   }
   else{
     tablet = (
-      <div>
-         <Navbar search={navbarProps}/>
-            <TabletFilter/>
+      <Tablet>
+        <TabletPageContent showFilter={filterTabletOn}>
+          <Navbar search={navbarProps}/>
+          <TabletFilter/>
+          <Content>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
-              {DataCards.map((card) => (
-                <Card 
-                  key={card.title}
-                  imagePath={card.urlToImage} 
-                  tags={data} 
-                  cardData={{
-                  date: card.publishedAt,
-                  title: card.title,
-                  sourcePath: card.source.name,
-                  text: card.description
-                  }}
-                  />
-              ))}
+              <CardsList cardsList={DataCards} />
             </CardsListTablet>
-      </div>
+          </Content>
+        </TabletPageContent>
+        <FilterSidebar>
+          <Sidebar />
+        </FilterSidebar>
+      </Tablet>
     )
   }
+  
   return(
         <Container>
             {desktop}

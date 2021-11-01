@@ -20,7 +20,6 @@ export type CardText = {
     text: string;
 }
 const primaryButton: ButtonProps = {
-    buttonType: 'primary',
     buttonText: 'NAVIGATE TO DISPATCH',
     icon: true,
     fullWidth: true
@@ -50,7 +49,6 @@ const Card = ({imagePath, tags, cardData}: CardProp) => {
                 <CardText>{cardData.text}</CardText>
                 <ButtonContainer>
                     <Button 
-                        buttonType={primaryButton.buttonType} 
                         buttonText={primaryButton.buttonText}
                         icon={primaryButton.icon} 
                     />

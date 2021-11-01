@@ -5,11 +5,12 @@ import {Container,
     ButtonPosition, 
     FilterContent,
     IconStyle,
+    AllSearches
 } from './FilterTabletStyle';
 import FilterCategory,{Category} from '../../FilterCategory/FilterCategory';
 import Button, {ButtonProps} from '../../Button/Button';
 
-interface Filter {
+export interface FilterProps {
     title: string;
     icon?: string;
     list: Category[];
@@ -17,7 +18,7 @@ interface Filter {
     subFilter: boolean;
 }
 
-const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
+const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
     return(
         <Container>
             <FilterContent>
@@ -29,8 +30,8 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
                     <span>
                         <SeparateLine></SeparateLine>
                         <FilterSearch>
-                            <span>Search in</span>
-                            <span>Evrything</span>  
+                            <AllSearches>Search in</AllSearches>
+                            <AllSearches>Evrything</AllSearches>   
                         </FilterSearch>
                     </span>
                 }
@@ -48,7 +49,6 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
             </FilterContent>
             <ButtonPosition>
                 <Button 
-                    buttonType={button.buttonType} 
                     buttonText={button.buttonText}
                     icon={false}
                 />

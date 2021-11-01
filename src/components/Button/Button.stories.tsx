@@ -9,7 +9,6 @@ export default {
   } as Meta;
 
 const primaryButton: ButtonProps = {
-  buttonType: 'primary',
   buttonText: 'NAVIGATE TO DISPATCH',
   icon: true,
   fullWidth: false
@@ -35,7 +34,6 @@ const Template: Story<ButtonProps> = (args) =>
   export const Primary = Template.bind({});
   Primary.args = { 
     buttonText: primaryButton.buttonText,
-    buttonType: primaryButton.buttonType,
     icon: primaryButton.icon, 
     fullWidth: primaryButton.fullWidth
  };
