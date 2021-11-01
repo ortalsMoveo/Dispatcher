@@ -3,7 +3,6 @@ export enum FILTER_OPTIONS {
     EVERYTHING="Everything"
 }
 
-export const filtersTypes = ["Top Headlines", "Everything"];
 export const HeadLinesFilters = [
     {
         name: "Country",

@@ -6,11 +6,11 @@ export type ButtonType = "primary" | "secondary" | "text";
 export interface ButtonProps {
     buttonType: ButtonType;
     buttonText: string;
-    icon: boolean ;
+    icon?: boolean ;
     fullWidth?: boolean;
 }
 
-const Button = ({buttonType, buttonText, icon, fullWidth=false}: ButtonProps)  => {
+const Button = ({buttonType, buttonText, icon=false, fullWidth=false}: ButtonProps)  => {
     return(
         <ButtonStyle name={buttonType} fullWidth={fullWidth}>
             {buttonText} 
