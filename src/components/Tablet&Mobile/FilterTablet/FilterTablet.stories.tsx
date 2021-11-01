@@ -1,4 +1,4 @@
-import FilterTablet from './FilterTablet';
+import FilterTablet,{FilterProps} from './FilterTablet';
 import { Meta, Story } from "@storybook/react";
 import {ButtonProps} from '../../Button/Button';
 
@@ -24,19 +24,18 @@ const listItems = [cat1, cat2, cat3];
 const subFilterList = [{categoryName: "CBS"}, {categoryName: "NBC"}, {categoryName: "Sport 1"}, {categoryName: "Ynet"}, {categoryName: "Walla"}];
 const icon = '../../Icons/Arrow - Right.svg';
 const primaryButton: ButtonProps = {
-    buttonType: 'primary',
     buttonText: 'VIEW RESULTS',
-    fullWidth: false
   }
 // Here we define the content we want to render
-const Template: Story = () => <FilterTablet
-    title="SOURCES"
-    icon='../../Icons/Arrow - Right.svg'
-    list={subFilterList}  
-    button={primaryButton}
-    subFilter={true}
-/>;
+const Template: Story<FilterProps> = (args) => <FilterTablet {...args}/>;
 
 // Here we define variants
 export const Primary = Template.bind({});
+Primary.args ={
+    title: "SOURCES",
+    icon: '../../Icons/Arrow - Right.svg',
+    list: subFilterList,
+    button: primaryButton,
+    subFilter: true
 
+}

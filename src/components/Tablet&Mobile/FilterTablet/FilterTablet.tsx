@@ -10,7 +10,7 @@ import {Container,
 import FilterCategory,{Category} from '../../FilterCategory/FilterCategory';
 import Button, {ButtonProps} from '../../Button/Button';
 
-interface Filter {
+export interface FilterProps {
     title: string;
     icon?: string;
     list: Category[];
@@ -18,7 +18,7 @@ interface Filter {
     subFilter: boolean;
 }
 
-const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
+const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
     return(
         <Container>
             <FilterContent>
@@ -49,7 +49,6 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
             </FilterContent>
             <ButtonPosition>
                 <Button 
-                    buttonType={button.buttonType} 
                     buttonText={button.buttonText}
                 />
             </ButtonPosition>

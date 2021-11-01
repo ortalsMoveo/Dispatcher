@@ -31,14 +31,6 @@ export const FilterSidebar = styled.div`
     z-index: 1;
     width: 368px;
 `;
-export const FilterContainer = styled.div`
-    padding: 10px;
-    margin: 10px;
-    height: 50px;
-    display: flex;
-    gap: 20px;
-    width: 175px;
-`;
 
 export const Title = styled.h3`
     color: ${darkBlue};
@@ -59,30 +51,7 @@ export const CardsListTablet = styled.div`
     width: 728px;
 `;
 
-export const CardsList = styled.div`
-    overflow: scroll;
-    overflow-x: hidden;
-    ::-webkit-scrollbar {
-        width: 10px;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar {
-        background: ${BlueBuzz};
-        height: 50px;
-    }   
-    height: 1000px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-`;
 
-export const GraphsList = styled.div`
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-`;
 export const SeparateLine = styled.div`
     opacity: 0.5;
     border: 1px solid ${gray};

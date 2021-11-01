@@ -4,13 +4,13 @@ import Arrow from '../../assets/Arrow - Right.svg';
 export type ButtonType = "primary" | "secondary" | "text";
 
 export interface ButtonProps {
-    buttonType: ButtonType;
+    buttonType?: ButtonType;
     buttonText: string;
     icon?: string;
     fullWidth?: boolean;
 }
 
-const Button = ({buttonType, buttonText, icon, fullWidth=false}: ButtonProps)  => {
+const Button = ({buttonType='primary', buttonText, icon, fullWidth=false}: ButtonProps)  => {
     return(
         <ButtonStyle name={buttonType} fullWidth={fullWidth}>
             {buttonText} 
