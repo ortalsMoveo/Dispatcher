@@ -12,7 +12,7 @@ import RecentSearches from "./RecentSearches/RecentSearches";
 import {useState} from 'react';
 import { ClearProps } from '../Clear/Clear';
 import SearchIcon from '../../assets/search.svg';
-import { FILTER_OPTIONS, filterOptions } from '../../FiltersData';
+import { FILTER_OPTIONS } from '../../FiltersData';
 
 export interface SearchProps {
     recentSearches: string[];
@@ -20,6 +20,7 @@ export interface SearchProps {
 const clearButton: ClearProps={
     gotBackground: false,
 }
+const filterOptions = ["Top Headlines", "Everything"];
 
 const Search = ( {recentSearches}: SearchProps) => {
     const [recentResults, setRecentResults] = useState(false);

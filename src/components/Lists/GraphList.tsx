@@ -9,7 +9,7 @@ interface GraphsListProps {
 const GraphList = ({graphList}: GraphsListProps) => {
     return(
         <GraphsContainer>
-            {graphList.map((item) => (
+            {graphList?.map((item) => (
                 <Graph 
                     key={item.title}
                     title={item.title} 

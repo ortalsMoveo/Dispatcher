@@ -16,8 +16,9 @@ const FilterContainer = ({filterType}:Props) => {
     }
     return(
         <Container>
-            {list.map(item => (
+            {list?.map(item => (
                 <Filter 
+                    key={item.filterText}
                     filterText={item.filterText}
                     listItems={item.listItems}
                     date={item.date}

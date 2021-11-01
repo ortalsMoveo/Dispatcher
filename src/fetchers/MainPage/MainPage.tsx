@@ -33,7 +33,6 @@ const MainPage = ({device}: MainPage) => {
 
   let desktop = null;
   let tablet = null;
-  console.log(DataCards)
   if(device === 'Desktop'){
     desktop = (
       <div>
