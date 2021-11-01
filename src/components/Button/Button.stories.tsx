@@ -10,16 +10,18 @@ export default {
 
 const primaryButton: ButtonProps = {
   buttonText: 'NAVIGATE TO DISPATCH',
-  icon: '../../Icons/Arrow - Right.svg',
+  icon: true,
   fullWidth: false
 }
 const secondaryButton: ButtonProps = {
   buttonText: 'SECONDARY',
   buttonType: 'secondary',
+  icon: false
 }
 const textButton: ButtonProps = {
   buttonText: 'TEXT BUTTON',
   buttonType: 'text',
+  icon: false
 }
 
 // Here we define the content we want to render
