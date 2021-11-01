@@ -50,6 +50,7 @@ const FilterTablet = ({title, icon,subFilter, list, button}: Filter) => {
                 <Button 
                     buttonType={button.buttonType} 
                     buttonText={button.buttonText}
+                    icon={false}
                 />
             </ButtonPosition>
 

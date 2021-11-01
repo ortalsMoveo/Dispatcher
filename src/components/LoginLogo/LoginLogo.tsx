@@ -1,13 +1,10 @@
 import { LogoContainer, Logo  } from './Style';
+import LogoImg from '../../assets/Group 1086418.svg';
 
-interface Logo {
-    logoPath: string;
-}
-
-const LogoLogin = ({logoPath}: Logo) => {
+const LogoLogin = () => {
     return(
         <LogoContainer>
-            <Logo src={logoPath}/>
+            <Logo src={LogoImg}/>
         </LogoContainer>
     );
 }
