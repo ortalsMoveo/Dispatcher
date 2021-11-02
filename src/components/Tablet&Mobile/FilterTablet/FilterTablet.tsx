@@ -37,9 +37,8 @@ const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
                 }
                 <SeparateLine></SeparateLine>
                 {list?.map((item) => (
-                    <div>
+                    <div key={item.categoryName}>
                         <FilterCategory 
-                            key={item.categoryName}
                             categoryName={item.categoryName}
                             categoryOption={item.categoryOption}
                         />
@@ -50,7 +49,6 @@ const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
             <ButtonPosition>
                 <Button 
                     buttonText={button.buttonText}
-                    icon={false}
                 />
             </ButtonPosition>
 

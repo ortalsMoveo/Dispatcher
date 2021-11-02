@@ -1,6 +1,7 @@
-import Navbar,{NavbarProps} from './Navbar';
+import Navbar from './Navbar';
 import { Meta, Story } from "@storybook/react";
-
+import React from 'react';
+import { FILTER_OPTIONS } from '../../FiltersData';
 export default {
     component: Navbar,
     title: "Components/Navbar",
@@ -17,9 +18,15 @@ const navbarProps = {
   filter: filter
 
 }
+const stateHandler =() => {
+  return FILTER_OPTIONS.EVERYTHING;
+}
 
 // Here we define the content we want to render
-const Template: Story = () => <Navbar search={navbarProps}
+const Template: Story = () => <Navbar 
+recentSearches={navbarProps.recentSearches}
+filterType={FILTER_OPTIONS.EVERYTHING}
+setFilterState={stateHandler}
   
   />;
 

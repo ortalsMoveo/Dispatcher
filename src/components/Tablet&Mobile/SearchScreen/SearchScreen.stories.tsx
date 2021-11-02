@@ -1,7 +1,7 @@
 import SearchScreen from './SearchScreen';
 import { Meta, Story } from "@storybook/react";
-import RecentSearches,{Searches} from '../../Search/RecentSearches/RecentSearches';
-
+import RecentSearches,{RecentSearchesProps} from '../../Search/RecentSearches/RecentSearches';
+import React from 'react';
 
 export default {
     component: SearchScreen,

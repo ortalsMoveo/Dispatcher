@@ -6,9 +6,8 @@ import {Container,
   CardsListTablet,
   FilterSidebar,
   TabletPageContent,
-  Tablet,
   Content} from './MainPageStyle';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
@@ -18,25 +17,26 @@ import FilterContainer from '../../components/FilterContainer/FilterContainer';
 import CardsList from '../../components/Lists/CardsList';
 import GraphsList from '../../components/Lists/GraphList';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import useWindowDimensions from '../../customHooks/useWindowDimensions';
+import {Desktop} from '../../Devices';
 
-const navbarProps = {
-  recentSearches: ["crypto", "soccer", "soccer"],
-}
+const recentSearches = ["crypto", "soccer", "soccer"];
 
-interface MainPage {
-  device: string;
-}
 
-const MainPage = ({device}: MainPage) => {
+const MainPage: React.FC = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
-  const [filterTabletOn, setFilterTabletOn] = useState(true);
 
-  let desktop = null;
-  let tablet = null;
-  if(device === 'Desktop'){
-    desktop = (
-      <div>
-        <Navbar search={navbarProps}/>
+  const [filterTabletOn, setFilterTabletOn] = useState(true);
+  const { width } = useWindowDimensions();
+  
+  //fetch data from server
+  // const [dataCards, setDataCards] = useState([])
+  // const [dataGraphs, setDataGraphs] = useState([]);
+
+  const renderDesktop = () => {
+    return(
+      <Container>
+        <Navbar recentSearches={recentSearches} filterType={filterType} setFilterState={setFilterType}/>
             <PageContent>
               <FilterContainer filterType={filterType}/>
               <SeparateLine></SeparateLine>
@@ -46,14 +46,15 @@ const MainPage = ({device}: MainPage) => {
                 <GraphsList graphList={Graphs} />
               </ContentLists>
             </PageContent>
-      </div>
-    )
-  }
-  else{
-    tablet = (
-      <Tablet>
+      </Container>
+    );
+  };
+
+  const renderTablet = () => {
+    return(
+      <Container>
         <TabletPageContent showFilter={filterTabletOn}>
-          <Navbar search={navbarProps}/>
+          {/* <Navbar search={navbarProps}/> */}
           <TabletFilter/>
           <Content>
             <Title>Top Headlines in Israel</Title>
@@ -65,16 +66,16 @@ const MainPage = ({device}: MainPage) => {
         <FilterSidebar>
           <Sidebar />
         </FilterSidebar>
-      </Tablet>
-    )
-  }
-  
-  return(
-        <Container>
-            {desktop}
-            {tablet}
-        </Container>
+      </Container>
     );
+  };
+
+
+
+  if(width > Desktop.minWidth){
+    return renderDesktop();
+  }
+  return renderTablet();
 }
 
 export default MainPage;

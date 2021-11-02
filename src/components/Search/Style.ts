@@ -40,6 +40,9 @@ export const SearchInput = styled.input`
 export const FilterContainer = styled.div`
     display: flex;
     margin: auto 10px;
+    @media(max-width: 769px){
+        display: none;
+    }
 
 `;
 export const SeparateLine = styled.div`
