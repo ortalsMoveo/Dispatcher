@@ -1,4 +1,4 @@
-import RecentSearches,{RecentSearchesProps} from '../../Search/RecentSearches/RecentSearches';
+import RecentSearches from '../../Search/RecentSearches/RecentSearches';
 import Search,{SearchProps} from '../Search/Search';
 import {Container} from './SearchScreenStyle';
 import React from 'react';

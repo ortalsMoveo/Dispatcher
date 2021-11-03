@@ -9,6 +9,7 @@ import {Container,
 } from './FilterTabletStyle';
 import FilterCategory,{Category} from '../../FilterCategory/FilterCategory';
 import Button, {ButtonProps} from '../../Button/Button';
+import React from 'react';
 
 export interface FilterProps {
     title: string;
@@ -49,7 +50,7 @@ const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
             <ButtonPosition>
                 <Button 
                     buttonText={button.buttonText}
-                    onClickFunc={() => console.log(button.buttonText)}
+                    onClick={() => console.log(button.buttonText)}
                 />
             </ButtonPosition>
 

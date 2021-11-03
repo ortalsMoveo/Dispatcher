@@ -4,7 +4,6 @@ import {SearchResults,
     RecentItem} from './RecentSearchesStyle';
 import Clear,{ClearProps} from '../../Clear/Clear';
 import exitIcon from '../../../assets/exit.svg';
-import Icon from '../../Icon/Icon';
 import React from 'react';
 
 export interface RecentSearchesProps {
@@ -26,8 +25,8 @@ const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) 
                 return(
                     <RecentItem key={i}>
                         {item}
-                        <Icon 
-                            iconPath={exitIcon} 
+                        <img 
+                            src={exitIcon} 
                             onClick={() => console.log('Clear search')}
                             alt="exitIcon"
                         />

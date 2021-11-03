@@ -6,10 +6,9 @@ import {
     SearchBox,
     FilterContainer
 } from "./Style";
-import Icon from '../Icon/Icon';
-import Filter,{FilterProps} from '../Filter/Filter';
+import Filter from '../Filter/Filter';
 import RecentSearches from "./RecentSearches/RecentSearches";
-import React,{useState, Dispatch, useEffect} from 'react';
+import React,{useState, Dispatch} from 'react';
 import SearchIcon from '../../assets/search.svg';
 import { FILTER_OPTIONS } from '../../FiltersData';
 
@@ -32,7 +31,7 @@ const Search = ( {recentSearches, filterType, setFilterState}: SearchProps) => {
         <Container >
             <SearchBox>
                 <SearchContainer>
-                    <Icon iconPath={SearchIcon}/>
+                    <img src={SearchIcon}/>
                     <SearchInput placeholder="Search" onClick={() => setRecentResults(!recentResults)}></SearchInput>
                 </SearchContainer>
                 <FilterContainer>

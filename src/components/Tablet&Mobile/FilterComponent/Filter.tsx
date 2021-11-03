@@ -1,21 +1,20 @@
 import {Container, Sort} from './FilterStyle';
-import Icon from '../../Icon/Icon';
 import FilterIcon from '../../../assets/filter.svg';
 import DropIcon from '../../../assets/dropdown.svg';
 import React,{Dispatch} from 'react'
 
 export interface FilterProps {
-    currState: boolean
+    currState?: boolean
     setfilterState: Dispatch<boolean>;
 }
-const Filter = ({currState, setfilterState}: FilterProps) => {
+const Filter = ({setfilterState}: FilterProps) => {
     return(
         <Container>
             <Sort>
                 Sort By
-                <Icon iconPath={DropIcon}/>
+                <img src={DropIcon}/>
             </Sort>
-            <Icon iconPath={FilterIcon} onClick={() => setfilterState(true)} alt="Filter Icon"/>
+            <img src={FilterIcon} onClick={() => setfilterState(true)} alt="Filter Icon"/>
         </Container>
     );
 }

@@ -1,6 +1,5 @@
 import { NavbarContainer, IconsContainer, Nav, Logo} from './NavbarStyle';
 import Search from '../Search/Search';
-import Icon from '../Icon/Icon';
 import LogoIcon from '../../assets/Group 1086418.svg';
 import settings from '../../assets/settings.svg';
 import notifications from '../../assets/notifications.svg';
@@ -26,9 +25,9 @@ const Navbar = ({recentSearches, filterType, setFilterState}: NavbarProps) => {
                 />
             </Nav>
             <IconsContainer>
-                <Icon iconPath={settings}/> 
-                <Icon iconPath={notifications}/>
-                <Icon iconPath={avatar}/> 
+                <img src={settings}/> 
+                <img src={notifications}/>
+                <img src={avatar}/> 
             </IconsContainer>
         </NavbarContainer>
     );

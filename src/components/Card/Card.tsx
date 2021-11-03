@@ -12,6 +12,7 @@ import Button from '../Button/Button';
 import Tag from '../Tag/Tag';
 import {ButtonProps} from '../Button/Button';
 import ArrowIcon from '../../assets/Arrow - Right.svg';
+import React from 'react';
 
 export type CardText = {
     date: string;
@@ -51,7 +52,7 @@ const Card = ({imagePath, tags, cardData}: CardProp) => {
                     <Button 
                         buttonText={primaryButton.buttonText}
                         icon={primaryButton.icon}
-                        onClickFunc={() => console.log(cardData.title)} 
+                        onClick={() => console.log(cardData.title)} 
                     />
                 </ButtonContainer>
             </CardContent>

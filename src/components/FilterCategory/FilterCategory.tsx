@@ -1,4 +1,5 @@
 import {Category, Name, Option} from './FilterCategoryStyle';
+import React from 'react';
 
 export interface Category {
     categoryName: string;
@@ -7,9 +8,9 @@ export interface Category {
 
 const FilterCategory = ({categoryName, categoryOption}: Category) => {
     return(
-        <Category>
+        <Category onClick={() => console.log("Category name: ", categoryName, categoryOption)}>
             <Name>{categoryName}</Name>
-            <Option onClick={() => console.log("Category name: ", categoryName, categoryOption)}>{categoryOption}</Option>
+            <Option>{categoryOption}</Option>
         </Category>
     );
 }
