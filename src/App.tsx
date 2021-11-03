@@ -1,13 +1,16 @@
 import './App.css';
 import MainPage from './fetchers/MainPage/MainPage';
 import WelcomePage from './fetchers/WelcomePage/WelcomPage';
-
-const device = 'Tablet';
+import { BrowserRouter as Router, Route, Switch,} from 'react-router-dom';
 
 function App() {
   return (
-    <MainPage device={device}/>
-//     <WelcomePage />
+    <Router>
+      <Switch>
+        <Route path="/home" component={MainPage} />
+        <Route path="/" component={WelcomePage}/>
+      </Switch>
+    </Router>
   );
 }
 

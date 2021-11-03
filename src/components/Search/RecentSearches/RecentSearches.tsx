@@ -5,19 +5,20 @@ import {SearchResults,
 import Clear,{ClearProps} from '../../Clear/Clear';
 import exitIcon from '../../../assets/exit.svg';
 import Icon from '../../Icon/Icon';
+import React from 'react';
 
-export interface Searches {
+export interface RecentSearchesProps {
     recentSearches: string[];
-    clearButton: ClearProps;
+    clearBackground?: ClearProps;
 }
 
-const RecentSearches = ({recentSearches, clearButton}: Searches) =>{
+const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) =>{
     return(
         <SearchResults>
             <RecentSearchesContainer>
                 RECENT SEARCHES
                 <Clear 
-                    gotBackground={clearButton.gotBackground}
+                    gotBackground={clearBackground && clearBackground.gotBackground}
                     onClick={() => console.log('Clear all searches')}
                 />
             </RecentSearchesContainer>
