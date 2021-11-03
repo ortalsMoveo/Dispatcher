@@ -9,7 +9,7 @@ export const filterOptions = ["Top Headlines", "EveryThing"];
 
 
 
-export const HeadLinesFilters:FilterProps[] = [
+export const HeadLinesFilters: FilterProps[] = [
     {
         filterText: "Country",
         listItems: [],

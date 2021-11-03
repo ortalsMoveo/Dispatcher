@@ -1,5 +1,5 @@
 import styled from  'styled-components';
-import {darkBlue, gray, Gray90, BlueBuzz, white, DarkGray} from '../../globalStyle';
+import {darkBlue, gray, Gray90, white, DarkGray} from '../../globalStyle';
 
 const style = {
     background: `${DarkGray}`,
@@ -8,16 +8,17 @@ const style = {
 }
 export const Container = styled.div`
     background: ${Gray90};
+    @media(max-width: 768px){
+        display: flex;
+        width: 770px;
+    }
 `;
 
 export const PageContent = styled.div`
     width: 80%;
     margin: 0% 10%;   
 `;
-export const Tablet = styled.div`
-    display: flex;
-    width: 770px;
-`;
+
 export const Content = styled.div`
     padding:  0px 21px;
 `;
