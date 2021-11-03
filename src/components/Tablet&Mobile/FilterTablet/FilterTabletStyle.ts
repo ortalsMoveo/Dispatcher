@@ -9,7 +9,6 @@ export const Container = styled.div`
     height: 1024px;
     justify-content: space-between ;
     font-family: Roboto;
-    /* max-width: 768px; */
 `;
 
 export const FilterContent = styled.div`

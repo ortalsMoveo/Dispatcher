@@ -27,7 +27,7 @@ const MainPage: React.FC = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
 
   const [filterTabletOn, setFilterTabletOn] = useState(true);
-  const { width } = useWindowDimensions();
+  const DesktopSize = useWindowDimensions();
   
   //fetch data from server
   // const [dataCards, setDataCards] = useState([])
@@ -54,7 +54,7 @@ const MainPage: React.FC = () => {
     return(
       <Container>
         <TabletPageContent showFilter={filterTabletOn}>
-          {/* <Navbar search={navbarProps}/> */}
+          <Navbar recentSearches={recentSearches} filterType={filterType} setFilterState={setFilterType}/>
           <TabletFilter/>
           <Content>
             <Title>Top Headlines in Israel</Title>
@@ -72,7 +72,7 @@ const MainPage: React.FC = () => {
 
 
 
-  if(width > Desktop.minWidth){
+  if(DesktopSize){
     return renderDesktop();
   }
   return renderTablet();
