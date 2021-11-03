@@ -27,10 +27,11 @@ export const TabletPageContent = styled.div<{showFilter: boolean}>`
     ${props => props.showFilter ? style : null}
 `;
 
-export const FilterSidebar = styled.div`
+export const FilterSidebar = styled.div<{showFilter: boolean}>`
     background: ${white};
     z-index: 1;
     width: 368px;
+    ${props => !props.showFilter ? 'display: none' : null}
 `;
 
 export const Title = styled.h3`

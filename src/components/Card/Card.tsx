@@ -50,7 +50,8 @@ const Card = ({imagePath, tags, cardData}: CardProp) => {
                 <ButtonContainer>
                     <Button 
                         buttonText={primaryButton.buttonText}
-                        icon={primaryButton.icon} 
+                        icon={primaryButton.icon}
+                        onClickFunc={() => console.log(cardData.title)} 
                     />
                 </ButtonContainer>
             </CardContent>

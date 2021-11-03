@@ -26,6 +26,7 @@ const recentSearches = ["crypto", "soccer", "soccer"];
 const MainPage: React.FC = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
 
+
   const [filterTabletOn, setFilterTabletOn] = useState(true);
   const DesktopSize = useWindowDimensions();
   
@@ -33,6 +34,12 @@ const MainPage: React.FC = () => {
   // const [dataCards, setDataCards] = useState([])
   // const [dataGraphs, setDataGraphs] = useState([]);
 
+  const closeSidebar = () =>{
+    if(filterTabletOn){
+      setFilterTabletOn(false);
+    }
+  }
+  
   const renderDesktop = () => {
     return(
       <Container>
@@ -67,7 +74,7 @@ const MainPage: React.FC = () => {
             </CardsListTablet>
           </Content>
         </TabletPageContent>
-        <FilterSidebar>
+        <FilterSidebar showFilter={filterTabletOn}>
           <Sidebar />
         </FilterSidebar>
       </Container>

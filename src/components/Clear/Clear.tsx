@@ -2,12 +2,18 @@ import { ClearButton } from './Style';
 import React from 'react';
 
 export interface ClearProps {
-    gotBackground?: boolean;
+   gotBackground?: boolean;
+   onClick?: () => void;
 }
 
-const Clear = ({gotBackground=false}: ClearProps) => {
+const Clear = ({gotBackground=false, onClick}: ClearProps) => {
     return(
-        <ClearButton backgroundColor={gotBackground}>CLEAR</ClearButton>
+        <ClearButton 
+            backgroundColor={gotBackground}
+            onClick={onClick}
+        >
+            CLEAR
+        </ClearButton>
     );
 }
 

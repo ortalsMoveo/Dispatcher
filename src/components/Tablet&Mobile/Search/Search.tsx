@@ -11,10 +11,20 @@ const Search = ({icon}: SearchProps) => {
     return(
         <Container>
             <SearchContainer>
-                <Icon iconPath={backIcon}/>
+                <Icon 
+                    iconPath={backIcon}
+                    onClick={() => console.log('GO back')}
+                    alt="backIcon"
+                />
                 <Input placeholder="Search"/>
             </SearchContainer>
-            {icon && <Icon iconPath={exitIcon} />}
+            {icon && 
+                <Icon 
+                    iconPath={exitIcon} 
+                    onClick={() => console.log('Delete search')}
+                    alt="exitIcon"
+                />
+            }
         </Container>
     );
 }

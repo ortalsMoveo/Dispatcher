@@ -9,7 +9,7 @@ const FilterCategory = ({categoryName, categoryOption}: Category) => {
     return(
         <Category>
             <Name>{categoryName}</Name>
-            <Option>{categoryOption}</Option>
+            <Option onClick={() => console.log("Category name: ", categoryName, categoryOption)}>{categoryOption}</Option>
         </Category>
     );
 }
