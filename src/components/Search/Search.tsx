@@ -41,7 +41,7 @@ const Search = ( {recentSearches, filterType, setFilterState}: SearchProps) => {
                         filterText={filterType}
                         listItems={filter}
                         setFilterState={setFilterState}
-                        /> 
+                    /> 
                 </FilterContainer>
             </SearchBox>
             {(recentResults) && 

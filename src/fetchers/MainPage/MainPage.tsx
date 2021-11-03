@@ -36,16 +36,20 @@ const MainPage: React.FC = () => {
   const renderDesktop = () => {
     return(
       <Container>
-        <Navbar recentSearches={recentSearches} filterType={filterType} setFilterState={setFilterType}/>
-            <PageContent>
-              <FilterContainer filterType={filterType}/>
-              <SeparateLine></SeparateLine>
-              <Title>Top Headlines in Israel</Title>
-              <ContentLists>
-                <CardsList cardsList={DataCards}/>
-                <GraphsList graphList={Graphs} />
-              </ContentLists>
-            </PageContent>
+        <Navbar 
+          recentSearches={recentSearches} 
+          filterType={filterType} 
+          setFilterState={setFilterType}
+        />
+        <PageContent>
+          <FilterContainer filterType={filterType}/>
+          <SeparateLine></SeparateLine>
+          <Title>Top Headlines in Israel</Title>
+          <ContentLists>
+            <CardsList cardsList={DataCards}/>
+            <GraphsList graphList={Graphs} />
+          </ContentLists>
+        </PageContent>
       </Container>
     );
   };

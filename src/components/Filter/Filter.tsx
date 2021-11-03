@@ -10,7 +10,7 @@ export interface FilterProps {
     filterText: string;
     listItems: string[];
     date?: boolean;
-    setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>
+    setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>> // TODO need to change the state filter
 }
 
 const Filter = ({filterText, listItems, date=false, setFilterState}: FilterProps) => {
@@ -28,16 +28,15 @@ const Filter = ({filterText, listItems, date=false, setFilterState}: FilterProps
     return(
         <DropDownContainer>
             <DropDownHeader 
-                onClick={() => setOpen(!open)}
-            >
+                onClick={() => setOpen(!open)}>
                 {filterText}<Icon iconPath={icon} />
             </DropDownHeader>
             {open && (
-            <DropDownListContainer>
-                {listItems && listItems.map((item, i) => (
-                    <ListItems key={i} onClick={() => onClickHandle(item)}>{item}</ListItems>
-                ))}
-            </DropDownListContainer>
+                <DropDownListContainer>
+                    {listItems && listItems.map((item, i) => (
+                        <ListItems key={i} onClick={() => onClickHandle(item)}>{item}</ListItems>
+                    ))}
+                </DropDownListContainer>
             )}
         </DropDownContainer>
     );
