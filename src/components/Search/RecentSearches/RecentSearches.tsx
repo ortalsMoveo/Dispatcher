@@ -4,6 +4,7 @@ import {SearchResults,
     RecentItem} from './RecentSearchesStyle';
 import Clear,{ClearProps} from '../../Clear/Clear';
 import exitIcon from '../../../assets/exit.svg';
+import Icon from '../../Icon/Icon';
 
 export interface Searches {
     recentSearches: string[];
@@ -15,13 +16,20 @@ const RecentSearches = ({recentSearches, clearButton}: Searches) =>{
         <SearchResults>
             <RecentSearchesContainer>
                 RECENT SEARCHES
-                <Clear gotBackground={clearButton.gotBackground}/>
+                <Clear 
+                    gotBackground={clearButton.gotBackground}
+                    onClick={() => console.log('Clear all searches')}
+                />
             </RecentSearchesContainer>
-            {recentSearches?.map((item) => {
+            {recentSearches?.map((item, i) => {
                 return(
-                    <RecentItem>
+                    <RecentItem key={i}>
                         {item}
-                        <img src={exitIcon} style={{ width: '10px'}}/>
+                        <Icon 
+                            iconPath={exitIcon} 
+                            onClick={() => console.log('Clear search')}
+                            alt="exitIcon"
+                        />
                     </RecentItem>
                 )})
             }

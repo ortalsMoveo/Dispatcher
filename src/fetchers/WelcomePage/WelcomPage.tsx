@@ -1,8 +1,12 @@
 import { Container, PageContent,Title, TextPage, SeparateLine, ButtonPosition } from './style';
 import LogoLogin from '../../components/LoginLogo/LoginLogo';
 import Button from '../../components/Button/Button';
+import { Redirect } from 'react-router';
 
 const WelcomePage = () => {
+    const onClickHandler = () => {
+        console.log('Login to home page');
+    }
     return(
         <Container>
             <LogoLogin />
@@ -17,6 +21,7 @@ const WelcomePage = () => {
                         buttonText="continue"
                         icon={true}
                         fullWidth={true}
+                        onClickFunc={onClickHandler}
                     /> 
                 </ButtonPosition>
             </PageContent>

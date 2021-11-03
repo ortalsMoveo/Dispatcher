@@ -29,10 +29,17 @@ interface MainPage {
 
 const MainPage = ({device}: MainPage) => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
-  const [filterTabletOn, setFilterTabletOn] = useState(true);
+  const [filterTabletOn, setFilterTabletOn] = useState(false);
 
   let desktop = null;
   let tablet = null;
+
+  const closeSidebar = () =>{
+    if(filterTabletOn){
+      setFilterTabletOn(false);
+    }
+  }
+
   if(device === 'Desktop'){
     desktop = (
       <div>
@@ -52,9 +59,9 @@ const MainPage = ({device}: MainPage) => {
   else{
     tablet = (
       <Tablet>
-        <TabletPageContent showFilter={filterTabletOn}>
+        <TabletPageContent showFilter={filterTabletOn} onClick={closeSidebar}>
           <Navbar search={navbarProps}/>
-          <TabletFilter/>
+          <TabletFilter currState={filterTabletOn} setfilterState={setFilterTabletOn}/>
           <Content>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
@@ -62,7 +69,7 @@ const MainPage = ({device}: MainPage) => {
             </CardsListTablet>
           </Content>
         </TabletPageContent>
-        <FilterSidebar>
+        <FilterSidebar showFilter={filterTabletOn}>
           <Sidebar />
         </FilterSidebar>
       </Tablet>

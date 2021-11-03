@@ -26,8 +26,10 @@ const Filter = ({filterText, listItems, date=false}: FilterProps) => {
             </DropDownHeader>
             {open && (
             <DropDownListContainer>
-                {listItems && listItems.map((item) => (
-                    <ListItems>{item}</ListItems>
+                {listItems && listItems.map((item, i) => (
+                    <ListItems key={i} onClick={() => console.log('onClick ',item)}>
+                        {item}
+                    </ListItems>
 
                 ))}
             </DropDownListContainer>

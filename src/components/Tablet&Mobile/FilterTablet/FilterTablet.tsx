@@ -36,10 +36,9 @@ const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
                     </span>
                 }
                 <SeparateLine></SeparateLine>
-                {list?.map((item) => (
-                    <div>
+                {list?.map((item, i) => (
+                    <div key={i}>
                         <FilterCategory 
-                            key={item.categoryName}
                             categoryName={item.categoryName}
                             categoryOption={item.categoryOption}
                         />
@@ -51,6 +50,7 @@ const FilterTablet = ({title, icon,subFilter, list, button}: FilterProps) => {
                 <Button 
                     buttonText={button.buttonText}
                     icon={false}
+                    onClickFunc={() => console.log(button.buttonText)}
                 />
             </ButtonPosition>
 
