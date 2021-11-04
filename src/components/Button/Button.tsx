@@ -1,5 +1,6 @@
 import {ButtonStyle, IconStyle} from './ButtonStyle';
 import Arrow from '../../assets/Arrow - Right.svg';
+import React from 'react';
 
 export type ButtonType = "primary" | "secondary" | "text";
 

@@ -7,7 +7,7 @@ import {Container,
   FilterSidebar,
   TabletPageContent,
   Content} from './MainPageStyle';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
@@ -18,16 +18,13 @@ import CardsList from '../../components/Lists/CardsList';
 import GraphsList from '../../components/Lists/GraphList';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import useWindowDimensions from '../../customHooks/useWindowDimensions';
-import {Desktop} from '../../Devices';
 
 const recentSearches = ["crypto", "soccer", "soccer"];
 
 
-const MainPage: React.FC = () => {
+const MainPage = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
-
-
-  const [filterTabletOn, setFilterTabletOn] = useState(true);
+  const [filterMobileOn, setFilterMobileOn] = useState(false);
   const DesktopSize = useWindowDimensions();
   
   //fetch data from server
@@ -35,8 +32,8 @@ const MainPage: React.FC = () => {
   // const [dataGraphs, setDataGraphs] = useState([]);
 
   const closeSidebar = () =>{
-    if(filterTabletOn){
-      setFilterTabletOn(false);
+    if(filterMobileOn){
+      setFilterMobileOn(false);
     }
   }
   
@@ -64,24 +61,22 @@ const MainPage: React.FC = () => {
   const renderTablet = () => {
     return(
       <Container>
-        <TabletPageContent showFilter={filterTabletOn}>
+        <TabletPageContent showFilter={filterMobileOn} onClick={closeSidebar}>
           <Navbar recentSearches={recentSearches} filterType={filterType} setFilterState={setFilterType}/>
-          <TabletFilter/>
-          <Content>
+          <TabletFilter setfilterState={setFilterMobileOn}/>
+          <Content >
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
               <CardsList cardsList={DataCards} />
             </CardsListTablet>
           </Content>
         </TabletPageContent>
-        <FilterSidebar showFilter={filterTabletOn}>
+        <FilterSidebar showFilter={filterMobileOn}>
           <Sidebar />
         </FilterSidebar>
       </Container>
     );
   };
-
-
 
   if(DesktopSize){
     return renderDesktop();

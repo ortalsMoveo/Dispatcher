@@ -1,5 +1,4 @@
 import { DropDownContainer, DropDownHeader, DropDownListContainer, ListItems } from "./Style";
-import Icon from '../Icon/Icon';
 import React,{useState, Dispatch} from 'react';
 import DropIcon from '../../assets/dropdown.svg';
 import DateIcon from '../../assets/date.svg';
@@ -29,7 +28,7 @@ const Filter = ({filterText, listItems, date=false, setFilterState}: FilterProps
         <DropDownContainer>
             <DropDownHeader 
                 onClick={() => setOpen(!open)}>
-                {filterText}<Icon iconPath={icon} />
+                {filterText}<img src={icon} />
             </DropDownHeader>
             {open && (
                 <DropDownListContainer>
