@@ -27,6 +27,9 @@ const MainPage = () => {
   const [filterMobileOn, setFilterMobileOn] = useState(false);
   const DesktopSize = useWindowDimensions();
   
+  // TODO -> change the useWindowDimensions to return the device
+  const sizeScreen = 'tablet'; 
+
   //fetch data from server
   // const [dataCards, setDataCards] = useState([])
   // const [dataGraphs, setDataGraphs] = useState([]);
@@ -62,7 +65,7 @@ const MainPage = () => {
     return(
       <Container>
         <TabletPageContent showFilter={filterMobileOn} onClick={closeSidebar}>
-          <Navbar recentSearches={recentSearches} filterType={filterType} setFilterState={setFilterType}/>
+          <Navbar recentSearches={recentSearches} size={sizeScreen}/>
           <TabletFilter setfilterState={setFilterMobileOn}/>
           <Content >
             <Title>Top Headlines in Israel</Title>

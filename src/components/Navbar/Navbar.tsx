@@ -9,11 +9,16 @@ import { FILTER_OPTIONS } from '../../FiltersData';
 
 export interface NavbarProps {
     recentSearches: string[];
-    filterType: FILTER_OPTIONS;
-    setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>
+    filterType?: FILTER_OPTIONS;
+    setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>
+    size?: string;
 }
 
-const Navbar = ({recentSearches, filterType, setFilterState}: NavbarProps) => {
+const Navbar = ({
+    recentSearches, 
+    filterType=FILTER_OPTIONS.TOP, 
+    setFilterState=((value) => void(value)),
+    size="desktop"}: NavbarProps) => {
     return(
         <NavbarContainer>
             <Nav>
@@ -22,6 +27,7 @@ const Navbar = ({recentSearches, filterType, setFilterState}: NavbarProps) => {
                     recentSearches={recentSearches}
                     filterType={filterType}
                     setFilterState={setFilterState}
+                    size={size}
                 />
             </Nav>
             <IconsContainer>

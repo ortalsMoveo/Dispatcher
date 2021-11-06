@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {white, lightBlue} from '../../../globalStyle';
+import {white, lightBlue, GhostWhite, gray} from '../../../globalStyle';
 
 export const SearchResults = styled.div`
     width: 100%;
@@ -12,6 +12,11 @@ export const SearchResults = styled.div`
     margin: 15px 0px;
     height: 132px;
     z-index: 1;
+    @media (max-width: 767px){
+        background: ${GhostWhite};
+        width: 100%;
+        padding: 5px;
+    }
 `;
 
 export const RecentSearchesContainer = styled.div`
@@ -33,3 +38,9 @@ export const RecentItem = styled.div`
     justify-content: space-between;
     padding: 5px;
 `
+
+export const SeparateLine = styled.div`
+    opacity: 0.5;
+    border: 1px solid ${gray};
+    height: 0px;
+`;

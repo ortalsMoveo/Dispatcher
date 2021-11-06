@@ -12,7 +12,7 @@ const SearchScreen = ({searchProps, recentSearches}: SearchScreenProps) => {
     return (
         <Container>
             <Search icon={searchProps.icon}/>
-             <RecentSearches recentSearches={recentSearches}/>
+            <RecentSearches recentSearches={recentSearches}/>
         </Container>
     );
 }
