@@ -30,3 +30,9 @@ export const Logo = styled.img`
     /* width: 51px;
     height: 50px; */
 `;
+
+export const MobileSearch = styled.img`
+    @media (min-width: 481px){
+        display: none;
+    }
+`;
