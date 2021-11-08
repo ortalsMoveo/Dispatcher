@@ -7,7 +7,7 @@ import {Container,
   FilterSidebar,
   TabletPageContent,
   Content} from './MainPageStyle';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/Navbar/Navbar";
 import DataCards from '../../Articles.json';
 import Graphs from '../../Graphs.json';
@@ -18,9 +18,9 @@ import CardsList from '../../components/Lists/CardsList';
 import GraphsList from '../../components/Lists/GraphList';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import useWindowDimensions from '../../customHooks/useWindowDimensions';
-
+import {getRequest} from '../../NetworkManager';
 const recentSearches = ["crypto", "soccer", "soccer"];
-
+const url = "https://newsapi.org/v2/";
 
 const MainPage = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
@@ -30,6 +30,11 @@ const MainPage = () => {
   //fetch data from server
   // const [dataCards, setDataCards] = useState([])
   // const [dataGraphs, setDataGraphs] = useState([]);
+
+  useEffect(() => {
+    const cardsData = getRequest({url, filterType});
+    console.log(cardsData);
+  }, [filterType]);
 
   const closeSidebar = () =>{
     if(filterMobileOn){
