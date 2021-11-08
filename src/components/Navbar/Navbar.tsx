@@ -18,8 +18,7 @@ export interface NavbarProps {
 const Navbar = ({recentSearches, filterType, setFilterState}: NavbarProps) => {
     const { logout, user } = useAuth0();
     const { isAuthenticated } = useAuth0();
-    console.log("###",isAuthenticated);
-    console.log(user);
+   
     return(
         <NavbarContainer>
             <Nav>
