@@ -11,13 +11,18 @@ import SearchIcon from '../../assets/search.svg';
 export interface NavbarProps {
     recentSearches: string[];
     filterType?: FILTER_OPTIONS;
-    setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>
+    setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+    mobileSearch?: () => void;
 }
 
 const Navbar = ({
     recentSearches, 
     filterType=FILTER_OPTIONS.TOP, 
-    setFilterState=((value) => void(value)),}: NavbarProps) => {
+    setFilterState=((value) => void(value)), mobileSearch}: NavbarProps) => {
+
+    const onClickHandler = () => {
+        console.log('Click to open search component');
+    }
     return(
         <NavbarContainer>
             <Nav>
@@ -30,7 +35,7 @@ const Navbar = ({
                 
             </Nav>
             <IconsContainer>
-                <MobileSearch src={SearchIcon} onClick={() => console.log('Click to open search component')}/> 
+                <MobileSearch src={SearchIcon} onClick={onClickHandler}/> 
                 <img src={settings}/> 
                 <img src={notifications}/>
                 <img src={avatar}/> 

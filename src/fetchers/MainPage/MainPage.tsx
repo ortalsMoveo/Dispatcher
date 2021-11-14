@@ -25,6 +25,7 @@ const recentSearches = ["crypto", "soccer", "soccer"];
 const MainPage = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
   const [filterMobileOn, setFilterMobileOn] = useState(false);
+
   const DesktopSize = useWindowDimensions();
   
   //fetch data from server
@@ -37,6 +38,9 @@ const MainPage = () => {
     }
   }
   
+  const mobileSearchScreen = () => {
+    console.log("Need to update the state");
+  }
   const renderDesktop = () => {
     return(
       <Container>
@@ -62,7 +66,7 @@ const MainPage = () => {
     return(
       <Container>
         <TabletPageContent showFilter={filterMobileOn} onClick={closeSidebar}>
-          <Navbar recentSearches={recentSearches} />
+          <Navbar recentSearches={recentSearches} mobileSearch={mobileSearchScreen}/>
           <TabletFilter setfilterState={setFilterMobileOn}/>
           <Content >
             <Title>Top Headlines in Israel</Title>
