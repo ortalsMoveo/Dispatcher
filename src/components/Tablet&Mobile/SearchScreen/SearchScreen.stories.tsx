@@ -1,26 +1,29 @@
-import SearchScreen from './SearchScreen';
+import SearchScreen from "./SearchScreen";
 import { Meta, Story } from "@storybook/react";
-import RecentSearches,{RecentSearchesProps} from '../../Search/RecentSearches/RecentSearches';
-import React from 'react';
+import RecentSearches, {
+  RecentSearchesProps,
+} from "../../Search/RecentSearches/RecentSearches";
+import React from "react";
 
 export default {
-    component: SearchScreen,
-    title: "Components/SmallScreens/SearchScreen",
-  } as Meta;
- 
-  const downArrow = '../../Icons/back.svg' 
-  const icon = '../../Icons/exit.svg' 
+  component: SearchScreen,
+  title: "Components/SmallScreens/SearchScreen",
+} as Meta;
+
+const downArrow = "../../Icons/back.svg";
+const icon = "../../Icons/exit.svg";
 
 const searchProps = {
-    searchIcon : downArrow,
-    icon: icon
-} 
- 
+  searchIcon: downArrow,
+  icon: icon,
+};
+
 const recentReaches = ["crypto", "soccer", "soccer"];
 
 // Here we define the content we want to render
-const Template: Story = () => <SearchScreen searchProps={searchProps} recentSearches={recentReaches}/>;
+const Template: Story = () => (
+  <SearchScreen searchProps={searchProps} recentSearches={recentReaches} />
+);
 
 // Here we define variants
 export const Primary = Template.bind({});
-

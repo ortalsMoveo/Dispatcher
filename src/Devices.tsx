@@ -1,12 +1,12 @@
 export const mobiles = {
-    minWidth: 0,
-    maxWidth: 480
+  minWidth: 0,
+  maxWidth: 480,
 };
 
 export const Tablet = {
-    minWidth: 481,
-    maxWidth: 768
+  minWidth: 481,
+  maxWidth: 768,
 };
 export const Desktop = {
-    minWidth: 769
+  minWidth: 769,
 };
