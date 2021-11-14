@@ -1,15 +1,14 @@
 import {SearchResults,
     RecentSearchesContainer,
-    RecentHead,
     RecentItem, 
     SeparateLine} from './RecentSearchesStyle';
-import Clear,{ClearProps} from '../../Clear/Clear';
+import Clear from '../../Clear/Clear';
 import exitIcon from '../../../assets/exit.svg';
 import React from 'react';
 
 export interface RecentSearchesProps {
     recentSearches: string[];
-    clearBackground?: ClearProps;
+    clearBackground?: boolean;
 }
 
 const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) =>{
@@ -18,7 +17,7 @@ const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) 
             <RecentSearchesContainer>
                 RECENT SEARCHES
                 <Clear 
-                    gotBackground={clearBackground && clearBackground.gotBackground}
+                    gotBackground={clearBackground && clearBackground}
                     onClick={() => console.log('Clear all searches')}
                 />
             </RecentSearchesContainer>

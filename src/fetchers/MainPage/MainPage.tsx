@@ -18,14 +18,14 @@ import CardsList from '../../components/Lists/CardsList';
 import GraphsList from '../../components/Lists/GraphList';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import useWindowDimensions from '../../customHooks/useWindowDimensions';
-
+import MobileSearchScreen from '../../components/Tablet&Mobile/SearchScreen/SearchScreen';
 const recentSearches = ["crypto", "soccer", "soccer"];
 
 
 const MainPage = () => {
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
   const [filterMobileOn, setFilterMobileOn] = useState(false);
-
+  const [mobileSearch, setMobileSearch] = useState(false);
   const DesktopSize = useWindowDimensions();
   
   //fetch data from server
@@ -38,8 +38,9 @@ const MainPage = () => {
     }
   }
   
-  const mobileSearchScreen = () => {
-    console.log("Need to update the state");
+  if(mobileSearch) {
+    console.log('mobile screen is on!');
+    console.log(mobileSearch)
   }
   const renderDesktop = () => {
     return(
@@ -65,8 +66,14 @@ const MainPage = () => {
   const renderTablet = () => {
     return(
       <Container>
+        {mobileSearch ?
+          <MobileSearchScreen
+           recentSearches={recentSearches}
+           setMobileSearch={setMobileSearch}/> : 
+  
+        <>
         <TabletPageContent showFilter={filterMobileOn} onClick={closeSidebar}>
-          <Navbar recentSearches={recentSearches} mobileSearch={mobileSearchScreen}/>
+          <Navbar recentSearches={recentSearches} setMobileSearch={setMobileSearch}/>
           <TabletFilter setfilterState={setFilterMobileOn}/>
           <Content >
             <Title>Top Headlines in Israel</Title>
@@ -78,6 +85,8 @@ const MainPage = () => {
         <FilterSidebar showFilter={filterMobileOn}>
           <Sidebar />
         </FilterSidebar>
+        </>
+  }
       </Container>
     );
   };
