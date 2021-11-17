@@ -11,7 +11,6 @@ import {
 } from "./MainPageStyle";
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import DataCards from "../../Articles.json";
 import Graphs from "../../Graphs.json";
 import TabletFilter from "../../components/Tablet&Mobile/FilterComponent/Filter";
 import { FILTER_OPTIONS } from "../../FiltersData";
@@ -20,39 +19,79 @@ import CardsList from "../../components/Lists/CardsList";
 import GraphsList from "../../components/Lists/GraphList";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import useWindowDimensions from "../../customHooks/useWindowDimensions";
-// import {getRequest} from "../../NetworkManager";
-import axios from "axios";
+import { getData } from "../../NetworkManager";
+import NoSearchResults from "../../components/NoResults/NoSearchResults";
 
 const recentSearches = ["crypto", "soccer", "soccer"];
 
+export interface TopHeadlines {
+  country: null | string;
+  category: null | string;
+  sources: null | string;
+}
+export interface Everything {
+  from: null | string;
+  to: null | string;
+  language: null | string;
+  sortBy: null | string;
+  sources: null | string;
+}
+export interface CurrentFilters {
+  q: null | string;
+  topHeadlinesFilters: TopHeadlines;
+  everythingFilters: Everything;
+  pageSize: number | null;
+  page: number | null;
+}
+
 const MainPage = () => {
+  const DesktopSize = useWindowDimensions();
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
   const [filterMobileOn, setFilterMobileOn] = useState(false);
-  const DesktopSize = useWindowDimensions();
+  const [currentFilter, setCurrentFilter] = useState<CurrentFilters>({
+    q: null, // Check if user anter query. if not render not data found
+    pageSize: null,
+    page: null,
+    topHeadlinesFilters: {
+      country: "us",
+      category: null,
+      sources: null,
+    },
+    everythingFilters: {
+      from: null,
+      to: null,
+      language: null,
+      sortBy: null,
+      sources: null,
+    },
+  });
 
+  const [noMatch, setNoMatch] = useState(false);
+  const [noQuery, setNoQuery] = useState(false);
   //fetch data from server
-  // const [dataCards, setDataCards] = useState([])
+  const [dataCards, setDataCards] = useState([]);
   // const [dataGraphs, setDataGraphs] = useState([]);
 
-  const getData = async () => {
-    const { data } = await axios({
-      method: "GET",
-      url: `https://newsapi.org/v2/everything`,
-      params: {
-        q: "Apple",
-        from: "2021-11-14",
-        sortBy: "popularity",
-        apiKey: "544fffe00dc04e939fa1c75e7f91ba49",
-      },
-    });
-
-    console.log(data);
-  };
-
   useEffect(() => {
-    // const cardsData = getRequest({url, filterType});    // console.log(cardsData);
-    getData();
-  }, [filterType]);
+    if (!(filterType === "Everything" && currentFilter.q === null)) {
+      console.log("getin to if");
+      const fetchData = async () => {
+        const res = await getData(currentFilter, filterType);
+        setDataCards(res);
+        if (res.length === 0) {
+          console.log("No match to search query");
+          setNoMatch(!noMatch);
+        }
+        if (noQuery) {
+          setNoQuery(false);
+        }
+      };
+      fetchData();
+    } else {
+      setNoQuery(true);
+    }
+    console.log(currentFilter);
+  }, [filterType, currentFilter]);
 
   const closeSidebar = () => {
     if (filterMobileOn) {
@@ -67,13 +106,25 @@ const MainPage = () => {
           recentSearches={recentSearches}
           filterType={filterType}
           setFilterState={setFilterType}
+          currentFilter={currentFilter}
+          setCurrentFilter={setCurrentFilter}
         />
         <PageContent>
-          <FilterContainer filterType={filterType} />
+          <FilterContainer
+            filterType={filterType}
+            currentFilter={currentFilter}
+            setCurrentFilter={setCurrentFilter}
+          />
           <SeparateLine></SeparateLine>
-          <Title>Top Headlines in Israel</Title>
+          {!noQuery && dataCards.length > 0 && (
+            <Title>Top Headlines in Israel</Title>
+          )}
           <ContentLists>
-            <CardsList cardsList={DataCards} />
+            {!noQuery && dataCards.length > 0 ? (
+              <CardsList cardsList={dataCards} />
+            ) : (
+              <NoSearchResults noQuery={noQuery} />
+            )}
             <GraphsList graphList={Graphs} />
           </ContentLists>
         </PageContent>
@@ -89,17 +140,23 @@ const MainPage = () => {
             recentSearches={recentSearches}
             filterType={filterType}
             setFilterState={setFilterType}
+            currentFilter={currentFilter}
+            setCurrentFilter={setCurrentFilter}
           />
           <TabletFilter setfilterState={setFilterMobileOn} />
           <Content>
             <Title>Top Headlines in Israel</Title>
             <CardsListTablet>
-              <CardsList cardsList={DataCards} />
+              <CardsList cardsList={dataCards} />
             </CardsListTablet>
           </Content>
         </TabletPageContent>
         <FilterSidebar showFilter={filterMobileOn}>
-          <Sidebar />
+          <Sidebar
+            filterType={filterType}
+            currentFilter={currentFilter}
+            setCurrentFilter={setCurrentFilter}
+          />
         </FilterSidebar>
       </Container>
     );

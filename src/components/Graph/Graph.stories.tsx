@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 const searchResults: SearchResults = {
-  logoPath: "../../chart.svg",
-  text: "No data to display",
+  noQuery: false,
 };
 const graph = {
   title: "Sources",

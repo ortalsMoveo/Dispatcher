@@ -12,14 +12,7 @@ const Graph = ({ title, data, noDataToDisplay }: GraphProps) => {
     <GraphContainer>
       <Title>{title}</Title>
       <LineRow></LineRow>
-      <DataContainer>
-        {noDataToDisplay && (
-          <NoSearchResults
-            logoPath={noDataToDisplay.logoPath}
-            text={noDataToDisplay.text}
-          />
-        )}
-      </DataContainer>
+      <DataContainer>{<NoSearchResults />}</DataContainer>
     </GraphContainer>
   );
 };

@@ -10,12 +10,7 @@ const GraphList = ({ graphList }: GraphsListProps) => {
   return (
     <GraphsContainer>
       {graphList?.map((item) => (
-        <Graph
-          key={item.title}
-          title={item.title}
-          data={item.data}
-          noDataToDisplay={item.noDataToDisplay}
-        />
+        <Graph key={item.title} title={item.title} data={item.data} />
       ))}
     </GraphsContainer>
   );
