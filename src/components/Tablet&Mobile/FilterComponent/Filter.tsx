@@ -12,7 +12,7 @@ const Filter = ({ setfilterState }: FilterProps) => {
     <Container>
       <Sort>
         Sort By
-        <img src={DropIcon} />
+        <img src={DropIcon} alt="dropDownIcon" />
       </Sort>
       <img
         src={FilterIcon}

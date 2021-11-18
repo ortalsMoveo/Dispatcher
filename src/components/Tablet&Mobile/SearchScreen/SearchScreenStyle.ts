@@ -1,8 +1,7 @@
-import styled from  'styled-components';
-import { GhostWhite } from '../../../globalStyle';
+import styled from "styled-components";
+import { GhostWhite } from "../../../globalStyle";
 
 export const Container = styled.div`
-    background: ${GhostWhite};
-    width: 100%;
+  background: ${GhostWhite};
+  width: 100%;
 `;
-    
