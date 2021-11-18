@@ -107,8 +107,8 @@ const Sidebar = ({
       list={currentFilterList}
       button={button}
       subFilter={subFilter}
-      onChangeFilter={updateCurrentFilter}
-      UpdateListFilters={UpdateListFilters}
+      // onChangeFilter={updateCurrentFilter}
+      // UpdateListFilters={UpdateListFilters}
     />
   );
 };

@@ -1,6 +1,7 @@
 import FilterTablet, { FilterProps } from "./FilterTablet";
 import { Meta, Story } from "@storybook/react";
 import { ButtonProps } from "../../Button/Button";
+import { FilterData } from "../../../FiltersData";
 
 export default {
   component: FilterTablet,
@@ -20,7 +21,40 @@ const cat3 = {
   categoryOption: "All",
 };
 
-const listItems = [cat1, cat2, cat3];
+const list: FilterData[] = [
+  {
+    filterText: "Country",
+    listItems: [
+      "Country",
+      "United Kingdom",
+      "United States",
+      "Israel",
+      "Italy",
+      "Mexioco",
+      "Portugal",
+      "Czechia",
+      "Belgium",
+    ],
+  },
+  {
+    filterText: "Category",
+    listItems: [
+      "Category",
+      "business",
+      "entertainment",
+      "general",
+      "health",
+      "science",
+      "sports",
+      "technology",
+    ],
+  },
+  {
+    filterText: "Sources",
+    listItems: [],
+  },
+];
+
 const subFilterList = [
   { categoryName: "CBS" },
   { categoryName: "NBC" },
@@ -40,7 +74,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   title: "SOURCES",
   icon: "../../Icons/Arrow - Right.svg",
-  list: subFilterList,
+  list: list,
   button: primaryButton,
   subFilter: true,
 };

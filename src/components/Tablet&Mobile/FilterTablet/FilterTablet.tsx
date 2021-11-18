@@ -11,11 +11,12 @@ import {
 import FilterCategory, { Category } from "../../FilterCategory/FilterCategory";
 import Button, { ButtonProps } from "../../Button/Button";
 import React from "react";
+import { FilterData } from "../../../FiltersData";
 
 export interface FilterProps {
   title: string;
   icon?: string;
-  list: Category[];
+  list: FilterData[];
   button: ButtonProps;
   subFilter: boolean;
 }
@@ -44,7 +45,7 @@ const FilterTablet = ({
           </span>
         )}
         <SeparateLine></SeparateLine>
-        {list?.map((item, i) => (
+        {/* {list?.map((item, i) => (
           <div key={i}>
             <FilterCategory
               categoryName={item.categoryName}
@@ -52,7 +53,7 @@ const FilterTablet = ({
             />
             <SeparateLine></SeparateLine>
           </div>
-        ))}
+        ))} */}
       </FilterContent>
       <ButtonPosition>
         <Button
