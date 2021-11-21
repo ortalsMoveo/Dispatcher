@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {darkBlue} from '../../globalStyle';
+import {darkBlue, blue, white} from '../../globalStyle';
 
 export const NavbarContainer = styled.div`
     background: ${darkBlue};
@@ -20,19 +20,38 @@ export const Nav = styled.div`
 
 export const IconsContainer = styled.div`
     display: flex;
-    padding: 14px;
+    
+`;
+
+export const Icons = styled.div`
+    display: flex;
+    padding: 15px 0px;
     margin: 10px;
-    height: 26px;
     gap: 15px;
+    box-sizing: border-box;
 `;
 
 export const Logo = styled.img`
-    /* width: 51px;
-    height: 50px; */
+    width: 71px;
+    height: 70px;
+    box-sizing: border-box; 
+
 `;
 
 export const MobileSearch = styled.img`
     @media (min-width: 481px){
         display: none;
     }
+`;
+
+export const Avatar = styled.div`
+    background: ${blue};
+    border-radius: 30px;
+    color: ${white};
+    text-align: center;
+    width:50px;
+    height: 50px;
+    padding: 13px;
+    margin: 13px 6px;
+    box-sizing: border-box; 
 `;
