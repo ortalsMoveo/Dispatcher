@@ -1,3 +1,4 @@
+
 import RecentSearches from '../../Search/RecentSearches/RecentSearches';
 import Search from '../Search/Search';
 import {Container} from './SearchScreenStyle';
@@ -17,5 +18,13 @@ const SearchScreen = ({recentSearches, setMobileSearch}: SearchScreenProps) => {
     );
 }
 
+const SearchScreen = ({ searchProps, recentSearches }: SearchScreenProps) => {
+  return (
+    <Container>
+      <Search icon={searchProps.icon} />
+      <RecentSearches recentSearches={recentSearches} />
+    </Container>
+  );
+};
 
 export default SearchScreen;

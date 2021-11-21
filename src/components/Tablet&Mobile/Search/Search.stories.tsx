@@ -1,10 +1,11 @@
-import Search,{SearchProps} from './Search';
+import Search, { SearchProps } from "./Search";
 import { Meta, Story } from "@storybook/react";
 
 export default {
-    component: Search,
-    title: "Components/SmallScreens/Search",
-  } as Meta;
+  component: Search,
+  title: "Components/SmallScreens/Search",
+} as Meta;
+
 
 const downArrow = '../../Icons/back.svg' 
 const icon = '../../Icons/exit.svg' 
@@ -17,6 +18,7 @@ const Template: Story<SearchProps> = (args) => <Search {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
+
 Primary.args ={
   setMobileSearch: setState
 }

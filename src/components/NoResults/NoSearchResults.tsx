@@ -1,17 +1,20 @@
-import { SearchResults, LogoSearch} from "./Style";
+import { SearchResults, LogoSearch } from "./Style";
+import logoPath from "../../assets/chart.svg";
 
-export interface SearchResults{
-    logoPath: string;
-    text?: string;
+const notFoundMatch = "We couldn't find any matches for your query";
+
+export interface SearchResults {
+  noQuery?: boolean;
+  resultsText?: string;
 }
 
-const NoSearchResults = ({logoPath, text}: SearchResults) => {
-    return(
-        <SearchResults>
-            <LogoSearch src={logoPath}/>
-            <p>{text}</p>
-        </SearchResults>
-    );
-}
+const NoSearchResults = ({ noQuery = false, resultsText }: SearchResults) => {
+  return (
+    <SearchResults>
+      <LogoSearch src={logoPath} />
+      <p>{noQuery ? resultsText : notFoundMatch}</p>
+    </SearchResults>
+  );
+};
 
 export default NoSearchResults;

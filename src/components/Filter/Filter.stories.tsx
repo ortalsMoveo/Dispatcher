@@ -1,25 +1,34 @@
-import Filter,{FilterProps} from './Filter';
+import Filter, { FilterProps } from "./Filter";
 import { Meta, Story } from "@storybook/react";
 
 export default {
-    component: Filter,
-    title: "Components/Filter",
-  } as Meta;
+  component: Filter,
+  title: "Components/Filter",
+} as Meta;
 
-
-  const filter = {
-    filterText: "Sources",
-    listItems: ['Mako', 'Ynet', 'Walla', 'BBC'],
-    date: false
-  }
+const filter = {
+  filterText: "Sources",
+  listItems: [
+    {
+      name: "Aftenposten",
+    },
+    {
+      name: "ANSA",
+    },
+    {
+      name: "Axios",
+    },
+  ],
+  date: false,
+};
 // Here we define the content we want to render
-const Template: Story<FilterProps> = (args) => <Filter {...args}/>;
+const Template: Story<FilterProps> = (args) => <Filter {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
 
 Primary.args = {
-    filterText: filter.filterText,
-    listItems: filter.listItems, 
-    date: filter.date
-}
+  filterText: filter.filterText,
+  listItems: filter.listItems,
+  date: filter.date,
+};
