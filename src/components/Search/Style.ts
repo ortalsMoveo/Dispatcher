@@ -42,7 +42,7 @@ export const SearchInput = styled.input`
 
 export const FilterContainer = styled.div`
   display: flex;
-  z-index: 1;
+  z-index: 2;
   @media (max-width: 769px) {
     display: none;
   }

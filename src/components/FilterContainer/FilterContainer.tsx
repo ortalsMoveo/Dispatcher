@@ -28,7 +28,6 @@ const FilterContainer = ({
   const [to, setTo] = useState("");
 
   const updateCurrentFilter = (key: string, value: string | null) => {
-    console.log("key:", key, "Value", value);
     const prevState = currentFilter;
     if (key === "from") {
       value ? setFrom(value) : setFrom("");
@@ -97,6 +96,7 @@ const FilterContainer = ({
           date={item.date}
           onChangeFilter={updateCurrentFilter}
           currentFilter={currentFilter}
+          filterType={filterType}
         />
       ))}
     </Container>

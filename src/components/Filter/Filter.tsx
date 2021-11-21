@@ -13,22 +13,16 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
-import { HeadLines } from "../Card/CardStyle";
 
-const filterStyle = {
-  fontWeight: "500",
-  fontSize: "14px",
-  lineHeight: "22px",
-  boxShadow: "none",
-};
 export interface FilterProps {
   filterText: string;
   listItems: FilterValue[];
   date?: boolean;
   currentFilter?: CurrentFilters;
-  setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>; // TODO need to change the state filter
+  setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   navbarFilter?: boolean;
   onChangeFilter?: (filterHeader: string, item: string | null) => void;
+  filterType?: FILTER_OPTIONS;
 }
 
 const Filter: React.FC<FilterProps> = (props) => {
@@ -44,6 +38,7 @@ const Filter: React.FC<FilterProps> = (props) => {
   const [endDate, setEndDate] = useState(null);
   const [disableFilter, setDisableFilter] = useState(false);
   const navbarFilterStyle = props.navbarFilter ? true : false;
+
   const onChange = (dates: any) => {
     const [start, end] = dates;
     if (start) {
@@ -81,9 +76,11 @@ const Filter: React.FC<FilterProps> = (props) => {
   };
 
   const onClickDropDown = () => {
-    console.log(props.filterText);
     const headLinesFilter = ["Country", "Category", "Sources"];
-    if (headLinesFilter.includes(props.filterText)) {
+    if (
+      props.filterType === "Top Headlines" &&
+      headLinesFilter.includes(props.filterText)
+    ) {
       if (
         (props.currentFilter?.topHeadlinesFilters.category ||
           props.currentFilter?.topHeadlinesFilters.country) &&
@@ -103,6 +100,41 @@ const Filter: React.FC<FilterProps> = (props) => {
       setOpen(!open);
     }
   };
+
+  useEffect(() => {
+    const headLinesFilter = ["Country", "Category", "Sources"];
+    if (
+      props.filterType === "Top Headlines" &&
+      headLinesFilter.includes(props.filterText)
+    ) {
+      console.log(props.filterType);
+      if (
+        (props.currentFilter?.topHeadlinesFilters.category ||
+          props.currentFilter?.topHeadlinesFilters.country) &&
+        props.filterText === "Sources"
+      ) {
+        setDisableFilter(true);
+        if (open) {
+          setOpen(!open);
+        }
+      } else if (
+        props.currentFilter?.topHeadlinesFilters.sources &&
+        (props.filterText === "Country" || props.filterText === "Category")
+      ) {
+        setDisableFilter(true);
+        if (open) {
+          setOpen(!open);
+        }
+      } else {
+        setDisableFilter(false);
+      }
+    } else {
+      if (disableFilter) {
+        setDisableFilter(false);
+      }
+    }
+  }, [open, props.currentFilter, props.filterType]);
+
   return (
     <DropDownContainer>
       <DropDownHeader
@@ -113,12 +145,6 @@ const Filter: React.FC<FilterProps> = (props) => {
         {filterHeader}
         <img src={icon} alt="DropDownIcon" />
       </DropDownHeader>
-      {disableFilter ? (
-        <DisableFilter disable={disableFilter}>
-          In order to filter by this category you must remove the rest of the
-          filters
-        </DisableFilter>
-      ) : null}
       {open && (
         <DropDownListContainer>
           {props.date ? (

@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import { lightBlue, white } from "../../globalStyle";
 
-const navbarFilterStyle = {
-  fontWeight: "500",
-  fontSize: "14px",
-  lineHeight: "22px",
-  boxShadow: "none",
-};
 export const DropDownContainer = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Roboto");
 
@@ -31,6 +25,8 @@ export const DropDownHeader = styled.div<{
   gap: 30px;
   width: 160px;
   font-weight: ${(props) => (props.navbarFilter ? "500" : "none")};
+  opacity: ${(props) => (props.disable ? "50%" : "none")};
+  cursor: ${(props) => (props.disable ? "not-allowed" : "default")};
 `;
 
 export const DropDownListContainer = styled.div`

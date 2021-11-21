@@ -31,18 +31,27 @@ const Search = ({
   const [recentResults, setRecentResults] = useState(false);
   const filterOptions =
     filterType === FILTER_OPTIONS.TOP
-      ? { id: "everything", name: FILTER_OPTIONS.EVERYTHING }
-      : { id: "top", name: FILTER_OPTIONS.TOP };
-  const filter = [filterOptions];
+      ? [
+          { id: "everything", name: FILTER_OPTIONS.EVERYTHING },
+          { id: "top", name: FILTER_OPTIONS.TOP },
+        ]
+      : [
+          { id: "top", name: FILTER_OPTIONS.TOP },
+          { id: "everything", name: FILTER_OPTIONS.EVERYTHING },
+        ];
+  const filter = filterOptions;
 
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearchTerm = useDebounce(searchQuery, 500);
 
   useEffect(
     () => {
+      const prevState = currentFilter;
       if (debouncedSearchTerm) {
-        const prevState = currentFilter;
         setCurrentFilter({ ...prevState, q: debouncedSearchTerm });
+        console.log(debouncedSearchTerm);
+      } else {
+        setCurrentFilter({ ...prevState, q: null });
         console.log(debouncedSearchTerm);
       }
     },

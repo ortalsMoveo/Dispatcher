@@ -84,6 +84,7 @@ const MainPage = () => {
       setNoQuery(true);
     } else if (!(filterType === "Everything" && currentFilter.q === null)) {
       const fetchData = async () => {
+        console.log("get in the request api");
         const res = await getData(currentFilter, filterType);
         setDataCards(res);
         if (res.length === 0) {
