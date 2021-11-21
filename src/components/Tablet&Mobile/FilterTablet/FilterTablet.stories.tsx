@@ -25,33 +25,86 @@ const list: FilterData[] = [
   {
     filterText: "Country",
     listItems: [
-      "Country",
-      "United Kingdom",
-      "United States",
-      "Israel",
-      "Italy",
-      "Mexioco",
-      "Portugal",
-      "Czechia",
-      "Belgium",
+      {
+        id: "",
+        name: "Country",
+      },
+      {
+        id: "uk",
+        name: "United Kingdom",
+      },
+      {
+        id: "us",
+        name: "United States",
+      },
+      {
+        id: "il",
+        name: "Israel",
+      },
     ],
   },
   {
     filterText: "Category",
     listItems: [
-      "Category",
-      "business",
-      "entertainment",
-      "general",
-      "health",
-      "science",
-      "sports",
-      "technology",
+      {
+        id: "",
+        name: "Category",
+      },
+      {
+        id: "business",
+        name: "Business",
+      },
+      {
+        id: "entertainment",
+        name: "Entertainment",
+      },
+      {
+        id: "general",
+        name: "General",
+      },
+      {
+        id: "health",
+        name: "Health",
+      },
+      {
+        id: "science",
+        name: "Science",
+      },
+      {
+        id: "sports",
+        name: "Sports",
+      },
+      {
+        id: "technology",
+        name: "Technology",
+      },
     ],
   },
   {
     filterText: "Sources",
-    listItems: [],
+    listItems: [
+      {
+        name: "Aftenposten",
+      },
+      {
+        name: "ANSA",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Bild",
+      },
+      {
+        name: "Bloomberg",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Axios",
+      },
+    ],
   },
 ];
 

@@ -8,7 +8,17 @@ export default {
 
 const filter = {
   filterText: "Sources",
-  listItems: ["Mako", "Ynet", "Walla", "BBC"],
+  listItems: [
+    {
+      name: "Aftenposten",
+    },
+    {
+      name: "ANSA",
+    },
+    {
+      name: "Axios",
+    },
+  ],
   date: false,
 };
 // Here we define the content we want to render

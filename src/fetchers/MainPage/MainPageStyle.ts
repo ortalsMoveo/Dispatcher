@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { darkBlue, gray, Gray90, white, DarkGray } from "../../globalStyle";
+import {
+  darkBlue,
+  gray,
+  Gray90,
+  white,
+  DarkGray,
+  GhostWhite,
+} from "../../globalStyle";
 
 const style = {
   background: `${DarkGray}`,
@@ -7,7 +14,7 @@ const style = {
   width: "402px",
 };
 export const Container = styled.div`
-  background: ${Gray90};
+  background: ${GhostWhite};
   @media (max-width: 768px) {
     display: flex;
     width: 770px;

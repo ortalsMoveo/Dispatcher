@@ -11,9 +11,9 @@ interface CardsListProps {
 const CardsList = ({ cardsList }: CardsListProps) => {
   return (
     <CardsContainer>
-      {cardsList?.map((card) => (
+      {cardsList?.map((card, i) => (
         <Card
-          key={card.title}
+          key={i}
           imagePath={card.urlToImage}
           tags={dataTags}
           cardData={{

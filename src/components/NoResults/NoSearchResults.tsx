@@ -5,13 +5,14 @@ const notFoundMatch = "We couldn't find any matches for your query";
 
 export interface SearchResults {
   noQuery?: boolean;
+  resultsText?: string;
 }
 
-const NoSearchResults = ({ noQuery = false }: SearchResults) => {
+const NoSearchResults = ({ noQuery = false, resultsText }: SearchResults) => {
   return (
     <SearchResults>
       <LogoSearch src={logoPath} />
-      <p>{noQuery ? "Please add an query!" : notFoundMatch}</p>
+      <p>{noQuery ? resultsText : notFoundMatch}</p>
     </SearchResults>
   );
 };

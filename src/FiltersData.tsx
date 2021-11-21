@@ -14,9 +14,13 @@ export enum FILTER_OPTIONS {
 }
 export const filterOptions = ["Top Headlines", "EveryThing"];
 
+export interface FilterValue {
+  id?: string | null;
+  name: string;
+}
 export interface FilterData {
   filterText: string;
-  listItems: string[];
+  listItems: FilterValue[];
   date?: boolean;
 }
 
@@ -24,40 +28,135 @@ export const HeadLinesFilters: FilterData[] = [
   {
     filterText: "Country",
     listItems: [
-      "Country",
-      "United Kingdom",
-      "United States",
-      "Israel",
-      "Italy",
-      "Mexioco",
-      "Portugal",
-      "Czechia",
-      "Belgium",
+      {
+        id: null,
+        name: "Country",
+      },
+      {
+        id: "it",
+        name: "Italy",
+      },
+      {
+        id: "us",
+        name: "United States",
+      },
+      {
+        id: "il",
+        name: "Israel",
+      },
+
+      // "Italy",
+      // "Mexioco",
+      // "Portugal",
+      // "Czechia",
+      // "Belgium",
     ],
   },
   {
     filterText: "Category",
     listItems: [
-      "Category",
-      "business",
-      "entertainment",
-      "general",
-      "health",
-      "science",
-      "sports",
-      "technology",
+      {
+        id: null,
+        name: "Category",
+      },
+      {
+        id: "business",
+        name: "Business",
+      },
+      {
+        id: "entertainment",
+        name: "Entertainment",
+      },
+      {
+        id: "general",
+        name: "General",
+      },
+      {
+        id: "health",
+        name: "Health",
+      },
+      {
+        id: "science",
+        name: "Science",
+      },
+      {
+        id: "sports",
+        name: "Sports",
+      },
+      {
+        id: "technology",
+        name: "Technology",
+      },
     ],
   },
   {
     filterText: "Sources",
-    listItems: array,
+    listItems: [
+      {
+        id: null,
+        name: "Sources",
+      },
+      {
+        name: "Aftenposten",
+      },
+      {
+        name: "ANSA",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Bild",
+      },
+      {
+        name: "Bloomberg",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Axios",
+      },
+      // "Bild",
+      // "Bloomberg",
+      // "Buzzfeed",
+      // "CNN",
+      // "Engadget",
+      // "ESPN",
+      // "Focus",
+      // "Fortune",
+      // "Globo",
+      // "Gruenderszene",
+      // "Handelsblatt",
+      // "IGN",
+      // "Independent",
+      // "Lenta",
+      // "Marca",
+    ],
   },
 ];
 
 export const EverythingFilters: FilterData[] = [
   {
     filterText: "Sort by",
-    listItems: ["Sort by", "relevancy", "popularity", "publishedAt"],
+    listItems: [
+      {
+        id: "",
+        name: "Sort by",
+      },
+      {
+        id: "relevancy",
+        name: "Relevancy",
+      },
+      {
+        id: "popularity",
+        name: "Popularity",
+      },
+      {
+        id: "publishedAt",
+        name: "PublishedAt",
+      },
+    ],
   },
   {
     filterText: "Dates",
@@ -66,22 +165,57 @@ export const EverythingFilters: FilterData[] = [
   },
   {
     filterText: "Sources",
-    listItems: array,
+    listItems: [
+      {
+        name: "Aftenposten",
+      },
+      {
+        name: "ANSA",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Bild",
+      },
+      {
+        name: "Bloomberg",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Axios",
+      },
+    ],
   },
   {
     filterText: "Language",
     listItems: [
-      "Language",
-      "ar",
-      "de",
-      "en",
-      "es",
-      "fr",
-      "he",
-      "it",
-      "nl",
-      "no",
-      "pt",
+      {
+        id: "",
+        name: "Language",
+      },
+      {
+        id: "ar",
+        name: "Arabic",
+      },
+      {
+        id: "de",
+        name: "German",
+      },
+      {
+        id: "en",
+        name: "English",
+      },
+
+      // "es",
+      // "fr",
+      // "he",
+      // "it",
+      // "nl",
+      // "no",
+      // "pt",
     ],
   },
 ];

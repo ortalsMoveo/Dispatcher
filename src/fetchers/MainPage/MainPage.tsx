@@ -53,7 +53,7 @@ const MainPage = () => {
     pageSize: null,
     page: null,
     topHeadlinesFilters: {
-      country: "us",
+      country: "il",
       category: null,
       sources: null,
     },
@@ -71,10 +71,18 @@ const MainPage = () => {
   //fetch data from server
   const [dataCards, setDataCards] = useState([]);
   // const [dataGraphs, setDataGraphs] = useState([]);
+  const [resultsText, setResultsText] = useState("");
 
   useEffect(() => {
-    if (!(filterType === "Everything" && currentFilter.q === null)) {
-      console.log("getin to if");
+    if (
+      !currentFilter.topHeadlinesFilters.sources &&
+      !currentFilter.topHeadlinesFilters.country &&
+      !currentFilter.topHeadlinesFilters.category &&
+      !currentFilter.q
+    ) {
+      setResultsText("Please select Filter or add an query!");
+      setNoQuery(true);
+    } else if (!(filterType === "Everything" && currentFilter.q === null)) {
       const fetchData = async () => {
         const res = await getData(currentFilter, filterType);
         setDataCards(res);
@@ -88,6 +96,7 @@ const MainPage = () => {
       };
       fetchData();
     } else {
+      setResultsText("Please add an query!");
       setNoQuery(true);
     }
     console.log(currentFilter);
@@ -123,7 +132,7 @@ const MainPage = () => {
             {!noQuery && dataCards.length > 0 ? (
               <CardsList cardsList={dataCards} />
             ) : (
-              <NoSearchResults noQuery={noQuery} />
+              <NoSearchResults noQuery={noQuery} resultsText={resultsText} />
             )}
             <GraphsList graphList={Graphs} />
           </ContentLists>

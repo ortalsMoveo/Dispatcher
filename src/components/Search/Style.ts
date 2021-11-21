@@ -19,25 +19,30 @@ export const SearchBox = styled.div`
 `;
 export const SearchContainer = styled.div`
   display: flex;
-  align-items: flex-start;
+  /* align-items: flex-start;
   justify-content: space-evenly;
   margin: auto 8px;
   width: 60%;
-  max-width: 230px;
+  max-width: 230px; */
 `;
 
 export const SearchInput = styled.input`
-  width: 70%;
-  max-width: 200px;
+  /* width: 70%;
+  max-width: 200px; */
   border: none;
-  color: rgba(90, 90, 137, 0.5);
+  color: #5a5a89;
   font-family: Roboto;
   border: none;
+  font-size: 16px;
+  line-height: 22px;
+  :focus {
+    outline: none;
+  }
 `;
 
 export const FilterContainer = styled.div`
   display: flex;
-  margin: auto 10px;
+  z-index: 1;
   @media (max-width: 769px) {
     display: none;
   }

@@ -5,7 +5,7 @@ import {
   HeadLinesFilters,
   EverythingFilters,
 } from "../../FiltersData";
-import React, { Dispatch } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 
 interface Props {
@@ -24,8 +24,21 @@ const FilterContainer = ({
       ? EverythingFilters
       : HeadLinesFilters;
 
-  const updateCurrentFilter = (key: string, value: string) => {
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+
+  const updateCurrentFilter = (key: string, value: string | null) => {
+    console.log("key:", key, "Value", value);
     const prevState = currentFilter;
+    if (key === "from") {
+      value ? setFrom(value) : setFrom("");
+      return;
+    }
+
+    if (key === "to") {
+      value ? setTo(value) : setTo("");
+      return;
+    }
 
     if (filterType === FILTER_OPTIONS.TOP) {
       setCurrentFilter({
@@ -36,15 +49,43 @@ const FilterContainer = ({
         },
       });
     } else {
-      setCurrentFilter({
-        ...prevState,
-        everythingFilters: {
-          ...prevState.everythingFilters,
-          [key.toLowerCase()]: value,
-        },
-      });
+      key === "Sort by"
+        ? setCurrentFilter({
+            ...prevState,
+            everythingFilters: {
+              ...prevState.everythingFilters,
+              sortBy: value,
+            },
+          })
+        : setCurrentFilter({
+            ...prevState,
+            everythingFilters: {
+              ...prevState.everythingFilters,
+              [key.toLowerCase()]: value,
+            },
+          });
     }
   };
+
+  useEffect(() => {
+    const prevState = currentFilter;
+    setCurrentFilter({
+      ...prevState,
+      everythingFilters: {
+        ...prevState.everythingFilters,
+        from: from,
+        to: to,
+      },
+    });
+  }, [from, to]);
+
+  useEffect(() => {
+    const currentFilterType =
+      filterType === "Top Headlines"
+        ? currentFilter.topHeadlinesFilters
+        : currentFilter.everythingFilters;
+    console.log(currentFilterType);
+  }, [currentFilter]);
 
   return (
     <Container>
@@ -55,6 +96,7 @@ const FilterContainer = ({
           listItems={item.listItems}
           date={item.date}
           onChangeFilter={updateCurrentFilter}
+          currentFilter={currentFilter}
         />
       ))}
     </Container>

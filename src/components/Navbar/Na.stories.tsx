@@ -29,7 +29,7 @@ const currentFilterState = {
   pageSize: null,
   page: null,
   topHeadlinesFilters: {
-    country: "us",
+    country: null,
     category: null,
     sources: null,
   },

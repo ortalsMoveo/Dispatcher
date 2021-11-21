@@ -31,8 +31,8 @@ const Search = ({
   const [recentResults, setRecentResults] = useState(false);
   const filterOptions =
     filterType === FILTER_OPTIONS.TOP
-      ? FILTER_OPTIONS.EVERYTHING
-      : FILTER_OPTIONS.TOP;
+      ? { id: "everything", name: FILTER_OPTIONS.EVERYTHING }
+      : { id: "top", name: FILTER_OPTIONS.TOP };
   const filter = [filterOptions];
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,7 +52,11 @@ const Search = ({
     <Container>
       <SearchBox>
         <SearchContainer>
-          <img src={SearchIcon} alt="searchIcon" />
+          <img
+            src={SearchIcon}
+            alt="searchIcon"
+            style={{ width: "30px", height: "50px", padding: "0px 7px" }}
+          />
           <SearchInput
             placeholder="Search"
             onClick={() => setRecentResults(!recentResults)}
