@@ -11,6 +11,7 @@ import {
 } from "./MainPageStyle";
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+
 import Graphs from "../../Graphs.json";
 import TabletFilter from "../../components/Tablet&Mobile/FilterComponent/Filter";
 import { FILTER_OPTIONS } from "../../FiltersData";
@@ -19,6 +20,8 @@ import CardsList from "../../components/Lists/CardsList";
 import GraphsList from "../../components/Lists/GraphList";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import useWindowDimensions from "../../customHooks/useWindowDimensions";
+import MobileSearchScreen from "../../components/Tablet&Mobile/SearchScreen/SearchScreen";
+
 import { getData } from "../../NetworkManager";
 import NoSearchResults from "../../components/NoResults/NoSearchResults";
 
@@ -48,6 +51,8 @@ const MainPage = () => {
   const DesktopSize = useWindowDimensions();
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
   const [filterMobileOn, setFilterMobileOn] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(false);
+
   const [currentFilter, setCurrentFilter] = useState<CurrentFilters>({
     q: null, // Check if user anter query. if not render not data found
     pageSize: null,
@@ -68,6 +73,7 @@ const MainPage = () => {
 
   const [noMatch, setNoMatch] = useState(false);
   const [noQuery, setNoQuery] = useState(false);
+
   //fetch data from server
   const [dataCards, setDataCards] = useState([]);
   // const [dataGraphs, setDataGraphs] = useState([]);
@@ -103,6 +109,7 @@ const MainPage = () => {
     console.log(currentFilter);
   }, [filterType, currentFilter]);
 
+
   const closeSidebar = () => {
     if (filterMobileOn) {
       setFilterMobileOn(false);
@@ -125,6 +132,7 @@ const MainPage = () => {
             currentFilter={currentFilter}
             setCurrentFilter={setCurrentFilter}
           />
+
           <SeparateLine></SeparateLine>
           {!noQuery && dataCards.length > 0 && (
             <Title>Top Headlines in Israel</Title>
@@ -135,6 +143,7 @@ const MainPage = () => {
             ) : (
               <NoSearchResults noQuery={noQuery} resultsText={resultsText} />
             )}
+
             <GraphsList graphList={Graphs} />
           </ContentLists>
         </PageContent>
@@ -145,6 +154,13 @@ const MainPage = () => {
   const renderTablet = () => {
     return (
       <Container>
+        {mobileSearch ? (
+          <MobileSearchScreen
+            recentSearches={recentSearches}
+            setMobileSearch={setMobileSearch}
+          />
+        ) : (
+          <>
         <TabletPageContent showFilter={filterMobileOn} onClick={closeSidebar}>
           <Navbar
             recentSearches={recentSearches}
@@ -152,6 +168,7 @@ const MainPage = () => {
             setFilterState={setFilterType}
             currentFilter={currentFilter}
             setCurrentFilter={setCurrentFilter}
+            setMobileSearch={setMobileSearch}
           />
           <TabletFilter setfilterState={setFilterMobileOn} />
           <Content>
@@ -168,6 +185,9 @@ const MainPage = () => {
             setCurrentFilter={setCurrentFilter}
           />
         </FilterSidebar>
+              </>
+        )}
+
       </Container>
     );
   };

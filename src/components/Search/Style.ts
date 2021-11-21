@@ -2,20 +2,28 @@ import styled from "styled-components";
 import { white, gray } from "../../globalStyle";
 
 export const Container = styled.div`
-  background: ${white};
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
-  margin: 5px;
-`;
 
-export const SearchBox = styled.div`
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0px;
-  width: 423px;
+    background: ${white};
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+    @media (max-width: 480px){
+       display: none;
+
+    }
+`;
+    
+    export const SearchBox = styled.div`
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    width: 423px;
+    @media (max-width: 480px){
+       
+    }
 `;
 export const SearchContainer = styled.div`
   display: flex;

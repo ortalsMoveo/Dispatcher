@@ -5,6 +5,7 @@ import {
   Logo,
   Avatar,
   Icons,
+  MobileSearch,
 } from "./NavbarStyle";
 import Search from "../Search/Search";
 import LogoIcon from "../../assets/Group 1086418.svg";
@@ -21,6 +22,7 @@ export interface NavbarProps {
   setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   currentFilter: CurrentFilters;
   setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  setMobileSearch?: Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Navbar = ({
@@ -29,9 +31,16 @@ const Navbar = ({
   setFilterState,
   currentFilter,
   setCurrentFilter,
+  setMobileSearch,
 }: NavbarProps) => {
   const { logout, user } = useAuth0();
   const { isAuthenticated } = useAuth0();
+  const onClickHandler = () => {
+      if(setMobileSearch){
+          setMobileSearch(true);
+      }
+
+  }
   return (
     <NavbarContainer>
       <Nav>
@@ -45,10 +54,11 @@ const Navbar = ({
         />
       </Nav>
       <IconsContainer>
-        <Icons>
-          <img src={settings} alt="settings" />
-          <img src={notifications} alt="notifications" />
-        </Icons>
+        <MobileSearch src={SearchIcon} onClick={onClickHandler}/> 
+          <Icons>
+              <img src={settings}/> 
+              <img src={notifications}/>
+          </Icons>
         <Avatar onClick={() => logout({ returnTo: window.location.origin })}>
           {user?.name?.charAt(0)}
           {user?.family_name?.charAt(0)}

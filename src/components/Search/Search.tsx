@@ -82,9 +82,14 @@ const Search = ({
           />
         </FilterContainer>
       </SearchBox>
-      {}
+      {(recentResults) && 
+                <RecentSearches 
+                    recentSearches={recentSearches} 
+                /> 
+            }
     </Container>
   );
 };
+
 
 export default Search;

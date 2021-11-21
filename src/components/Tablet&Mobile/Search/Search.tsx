@@ -2,10 +2,34 @@ import { Container, SearchContainer, Input } from "./SearchStyle";
 import backIcon from "../../../assets/back.svg";
 import exitIcon from "../../../assets/exit.svg";
 import { SearchResults } from "../../NoResults/NoSearchResults";
-import React from "react";
+import React,{Dispatch, useState} from "react";
 
 export interface SearchProps {
-  icon?: string;
+
+    setMobileSearch: Dispatch<React.SetStateAction<boolean>>;
+}
+const Search = ({setMobileSearch}: SearchProps) => {
+    const [userInput, setUserInput] = useState(false);
+
+    return(
+        <Container>
+            <SearchContainer>
+                <img 
+                    src={backIcon}
+                    onClick={() => setMobileSearch(false)}
+                    alt="backIcon"
+                />
+                <Input placeholder="Search" onChange={() => setUserInput(true)}/>
+            </SearchContainer>
+            {userInput && 
+                <img 
+                    src={exitIcon} 
+                    onClick={() => console.log('Delete search')}
+                    alt="exitIcon"
+                />
+            }
+        </Container>
+    );
 }
 const Search = ({ icon }: SearchProps) => {
   return (

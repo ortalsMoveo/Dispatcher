@@ -6,13 +6,19 @@ export default {
   title: "Components/SmallScreens/Search",
 } as Meta;
 
-const downArrow = "../../Icons/back.svg";
-const icon = "../../Icons/exit.svg";
+
+const downArrow = '../../Icons/back.svg' 
+const icon = '../../Icons/exit.svg' 
+const setState = () => {
+  return false;
+}
+
 // Here we define the content we want to render
 const Template: Story<SearchProps> = (args) => <Search {...args} />;
 
 // Here we define variants
 export const Primary = Template.bind({});
-Primary.args = {
-  icon: icon,
-};
+
+Primary.args ={
+  setMobileSearch: setState
+}
