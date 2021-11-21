@@ -8,6 +8,10 @@ export const Container = styled.div`
     flex-direction: column;
     padding: 5px;
     margin: 5px;
+    @media (max-width: 480px){
+       display: none;
+
+    }
 `;
     
     export const SearchBox = styled.div`
@@ -16,7 +20,9 @@ export const Container = styled.div`
     justify-content: space-between;
     padding: 0px;
     width: 423px;
-    
+    @media (max-width: 480px){
+       
+    }
 `;
 export const SearchContainer = styled.div`
     display: flex;

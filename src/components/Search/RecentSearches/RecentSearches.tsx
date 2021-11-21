@@ -1,14 +1,14 @@
 import {SearchResults,
     RecentSearchesContainer,
-    RecentHead,
-    RecentItem} from './RecentSearchesStyle';
-import Clear,{ClearProps} from '../../Clear/Clear';
+    RecentItem, 
+    SeparateLine} from './RecentSearchesStyle';
+import Clear from '../../Clear/Clear';
 import exitIcon from '../../../assets/exit.svg';
 import React from 'react';
 
 export interface RecentSearchesProps {
     recentSearches: string[];
-    clearBackground?: ClearProps;
+    clearBackground?: boolean;
 }
 
 const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) =>{
@@ -17,20 +17,23 @@ const RecentSearches = ({recentSearches, clearBackground}: RecentSearchesProps) 
             <RecentSearchesContainer>
                 RECENT SEARCHES
                 <Clear 
-                    gotBackground={clearBackground && clearBackground.gotBackground}
+                    gotBackground={clearBackground && clearBackground}
                     onClick={() => console.log('Clear all searches')}
                 />
             </RecentSearchesContainer>
             {recentSearches?.map((item, i) => {
                 return(
-                    <RecentItem key={i}>
-                        {item}
-                        <img 
-                            src={exitIcon} 
-                            onClick={() => console.log('Clear search')}
-                            alt="exitIcon"
-                        />
-                    </RecentItem>
+                    <div key={i}>
+                        <RecentItem>
+                            {item}
+                            <img 
+                                src={exitIcon} 
+                                onClick={() => console.log('Clear search')}
+                                alt="exitIcon"
+                            />
+                        </RecentItem>
+                        <SeparateLine></SeparateLine>
+                    </div>
                 )})
             }
         </SearchResults>

@@ -38,6 +38,12 @@ export const Logo = styled.img`
 
 `;
 
+export const MobileSearch = styled.img`
+    @media (min-width: 481px){
+        display: none;
+    }
+`;
+
 export const Avatar = styled.div`
     background: ${blue};
     border-radius: 30px;

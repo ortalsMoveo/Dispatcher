@@ -1,18 +1,18 @@
 import RecentSearches from '../../Search/RecentSearches/RecentSearches';
-import Search,{SearchProps} from '../Search/Search';
+import Search from '../Search/Search';
 import {Container} from './SearchScreenStyle';
-import React from 'react';
+import React,{Dispatch} from 'react';
 
-interface SearchScreenProps  {
-    searchProps: SearchProps;
+export interface SearchScreenProps  {
     recentSearches: string[];
+    setMobileSearch: Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SearchScreen = ({searchProps, recentSearches}: SearchScreenProps) => {
+const SearchScreen = ({recentSearches, setMobileSearch}: SearchScreenProps) => {
     return (
         <Container>
-            <Search icon={searchProps.icon}/>
-             <RecentSearches recentSearches={recentSearches}/>
+            <Search setMobileSearch={setMobileSearch}/>
+            <RecentSearches recentSearches={recentSearches} clearBackground={true}/>
         </Container>
     );
 }

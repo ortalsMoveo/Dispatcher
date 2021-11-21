@@ -25,10 +25,8 @@ const Search = ( {recentSearches, filterType, setFilterState}: SearchProps) => {
     const filterOptions = (filterType === FILTER_OPTIONS.TOP) ? FILTER_OPTIONS.EVERYTHING : FILTER_OPTIONS.TOP;
     const filter = [filterOptions];
 
-    
-
     return(
-        <Container >
+        <Container > 
             <SearchBox>
                 <SearchContainer>
                     <img src={SearchIcon}/>
