@@ -10,16 +10,16 @@ import {
   ButtonContainer,
 } from "./CardStyle";
 import Button from "../Button/Button";
-import Tag from "../Tag/Tag";
 import { ButtonProps } from "../Button/Button";
-import ArrowIcon from "../../assets/Arrow - Right.svg";
-import React from "react";
+import React, { useState } from "react";
+import imageNotLoad from "../../assets/image-not-found.svg";
 
 export type CardText = {
   date: string;
   title: string;
   sourcePath: string;
   text: string;
+  url: string;
 };
 const primaryButton: ButtonProps = {
   buttonText: "NAVIGATE TO DISPATCH",
@@ -27,24 +27,27 @@ const primaryButton: ButtonProps = {
   fullWidth: true,
 };
 
-interface CardProp {
+export interface CardProp {
   imagePath: string;
-  tags: string[];
   cardData: CardText;
 }
 
-const Card = ({ imagePath, tags, cardData }: CardProp) => {
+const Card = ({ imagePath, cardData }: CardProp) => {
+  const openInNewTab = (url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
+  const handleImgError = (e: any) => {
+    e.target.src = imageNotLoad;
+  };
+
   return (
     <CardContainer>
-      <ImgCard src={imagePath} />
+      <ImgCard src={imagePath} onError={handleImgError} />
       <CardContent>
         <HeadContentCard>
           <HeadLines>{cardData.date}</HeadLines>
-          <TagList>
-            {tags.map((item) => (
-              <Tag key={item} textTag={item} />
-            ))}
-          </TagList>
         </HeadContentCard>
         <CardTitle>{cardData.title}</CardTitle>
         <HeadLines>{cardData.sourcePath}</HeadLines>
@@ -53,7 +56,7 @@ const Card = ({ imagePath, tags, cardData }: CardProp) => {
           <Button
             buttonText={primaryButton.buttonText}
             icon={primaryButton.icon}
-            onClick={() => console.log(cardData.title)}
+            onClick={() => openInNewTab(cardData.url)}
           />
         </ButtonContainer>
       </CardContent>

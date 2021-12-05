@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { blue } from "../../globalStyle";
 
-export const ButtonStyle = styled.button<{ fullWidth: boolean }>`
-  border-radius: 20px;
-  padding: 8px 16px;
+export const ButtonStyle = styled.button<{
+  fullWidth: boolean;
+  welcomeButton: boolean;
+}>`
+  border-radius: ${(props) => (props.welcomeButton ? "10px" : "22px")};
+  padding: 13px 25px;
   font: Roboto;
   border: none;
+  font-weight: 500;
+  font-size: 18px;
+
   :hover {
     ${(props) =>
       props.name === "text" ? `background: rgba(217, 219, 233, 0.3)` : null};
@@ -19,8 +25,12 @@ export const ButtonStyle = styled.button<{ fullWidth: boolean }>`
       ? "#D9DBE9"
       : "white"};
   width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
+  @media (max-width: 480px) {
+    width: ${(props) => (props.fullWidth ? "100%" : "fit-content")};
+  }
 `;
 
 export const IconStyle = styled.img`
-  padding: 0px 4px;
+  width: 20px;
+  padding-left: 5px;
 `;

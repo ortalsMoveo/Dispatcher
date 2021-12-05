@@ -11,4 +11,9 @@ export const ClearButton = styled.button<{ backgroundColor: boolean }>`
   border: none;
   font-weight: bold;
   font-size: 12px;
+  @media (max-width: 480px) {
+    font-size: 16px;
+    padding: 10px;
+    margin: 0px 29px;
+  }
 `;

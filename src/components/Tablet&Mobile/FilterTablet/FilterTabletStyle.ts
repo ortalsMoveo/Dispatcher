@@ -5,24 +5,30 @@ export const Container = styled.div`
   background: ${white};
   display: flex;
   flex-direction: column;
-  height: 1024px;
   justify-content: space-between;
   font-family: Roboto;
+  gap: 10%;
+  height: 100%;
 `;
 
-export const FilterContent = styled.div``;
+export const FilterContent = styled.div`
+  height: 30%;
+  @media (min-width: 481px) {
+    height: 20%;
+  }
+`;
 export const FilterTitle = styled.div`
   color: ${lightBlue};
   font-family: Roboto;
   font-weight: 500;
-  font-size: 16px;
-  padding: 20px 10px;
+  font-size: 18px;
+  padding: 30px 10px;
   display: flex;
 `;
 export const FilterSearch = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 5px 10px;
+  padding: 10px 10px;
   color: ${lightBlue};
   font-family: Roboto;
   font-size: 14px;
@@ -33,16 +39,19 @@ export const FilterSearch = styled.div`
 `;
 
 export const AllSearches = styled.span`
-  padding: 5px;
-  font-size: 14px;
+  padding: 10px;
+  font-size: 16px;
 `;
 
 export const ButtonPosition = styled.div`
   background: ${GhostWhite};
   order: inherit;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   justify-content: center;
+  @media (min-width: 481px) {
+    margin-top: 0%;
+  }
 `;
 
 export const SeparateLine = styled.div`
@@ -51,5 +60,14 @@ export const SeparateLine = styled.div`
   height: 0px;
 `;
 export const IconStyle = styled.img`
+  width: 6%;
   padding: 0px 4px;
+  padding-right: 10px;
+`;
+
+export const CurrentFilter = styled.div<{ disable: boolean }>`
+  opacity: ${(props) => (props.disable ? "50%" : "none")};
+  cursor: ${(props) => (props.disable ? "not-allowed" : "default")};
+  width: 100%;
+  display: flex;
 `;

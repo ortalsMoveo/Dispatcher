@@ -12,8 +12,8 @@ const searchResults: SearchResults = {
 };
 const graph = {
   title: "Sources",
-  data: "this is Data Graph!",
-  noDataToDisplay: searchResults,
+  data: [{ name: "Ynet", numInstance: 1 }],
+  noQuery: false,
 };
 
 // Here we define the content we want to render
@@ -21,7 +21,8 @@ const Template: Story = () => (
   <Graph
     title={graph.title}
     data={graph.data}
-    noDataToDisplay={graph.noDataToDisplay}
+    noQuery={false}
+    cardsLength={10}
   />
 );
 

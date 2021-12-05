@@ -83,8 +83,37 @@ const FilterContainer = ({
       filterType === "Top Headlines"
         ? currentFilter.topHeadlinesFilters
         : currentFilter.everythingFilters;
-    console.log(currentFilterType);
   }, [currentFilter]);
+
+  const filterHeader = (filter: string) => {
+    if (currentFilter.topHeadlinesFilters.category === filter.toLowerCase()) {
+      return currentFilter.topHeadlinesFilters.category;
+    } else if (
+      currentFilter.topHeadlinesFilters.country === filter.toLowerCase()
+    ) {
+      return currentFilter.topHeadlinesFilters.country;
+    } else if (
+      currentFilter.topHeadlinesFilters.sources === filter.toLowerCase()
+    ) {
+      return currentFilter.topHeadlinesFilters.sources;
+    } else if (
+      currentFilter.everythingFilters.sources === filter.toLowerCase()
+    ) {
+      return currentFilter.everythingFilters.sources;
+    } else if (currentFilter.everythingFilters.from === filter.toLowerCase()) {
+      return currentFilter.everythingFilters.from;
+    } else if (currentFilter.everythingFilters.to === filter.toLowerCase()) {
+      return currentFilter.everythingFilters.to;
+    } else if (
+      currentFilter.everythingFilters.language === filter.toLowerCase()
+    ) {
+      return currentFilter.everythingFilters.language;
+    } else if (
+      currentFilter.everythingFilters.sortBy === filter.toLowerCase()
+    ) {
+      return currentFilter.everythingFilters.sources;
+    }
+  };
 
   return (
     <Container>
@@ -97,6 +126,7 @@ const FilterContainer = ({
           onChangeFilter={updateCurrentFilter}
           currentFilter={currentFilter}
           filterType={filterType}
+          apiFiltersState={filterHeader(item.filterText!)}
         />
       ))}
     </Container>

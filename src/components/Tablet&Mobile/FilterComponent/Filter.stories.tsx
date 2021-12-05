@@ -1,4 +1,4 @@
-import Filter, { FilterProps } from "./Filter";
+import Filter, { FilterProps } from "./TabletFilter";
 import { Meta, Story } from "@storybook/react";
 
 export default {

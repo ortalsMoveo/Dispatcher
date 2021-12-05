@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+  const { outerWidth: width, outerHeight: height } = window;
   return {
     width,
     height,
@@ -21,6 +21,5 @@ export default function useWindowDimensions() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return windowDimensions.width > 768;
 }

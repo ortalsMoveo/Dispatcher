@@ -1,25 +1,12 @@
 import FilterTablet, { FilterProps } from "./FilterTablet";
 import { Meta, Story } from "@storybook/react";
 import { ButtonProps } from "../../Button/Button";
-import { FilterData } from "../../../FiltersData";
+import { FilterData, FILTER_OPTIONS } from "../../../FiltersData";
 
 export default {
   component: FilterTablet,
   title: "Components/FilterTablet",
 } as Meta;
-
-const cat1 = {
-  categoryName: "Sources",
-  categoryOption: "All",
-};
-const cat2 = {
-  categoryName: "Language",
-  categoryOption: "All",
-};
-const cat3 = {
-  categoryName: "Dates",
-  categoryOption: "All",
-};
 
 const list: FilterData[] = [
   {
@@ -125,8 +112,7 @@ const Template: Story<FilterProps> = (args) => <FilterTablet {...args} />;
 // Here we define variants
 export const Primary = Template.bind({});
 Primary.args = {
-  title: "SOURCES",
-  icon: "../../Icons/Arrow - Right.svg",
+  filterType: FILTER_OPTIONS.EVERYTHING,
   list: list,
   button: primaryButton,
   subFilter: true,

@@ -4,46 +4,83 @@ import {
   RecentItem,
   SeparateLine,
 } from "./RecentSearchesStyle";
-import Clear, { ClearProps } from "../../Clear/Clear";
+import Clear from "../../Clear/Clear";
 import exitIcon from "../../../assets/exit.svg";
-import React from "react";
+import React, { Dispatch, useState } from "react";
 
 export interface RecentSearchesProps {
   recentSearches: string[];
-    clearBackground?: boolean;
+  clearBackground?: boolean;
+  recentSearchesQuerys: string[];
+  setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
 }
 
 const RecentSearches = ({
   recentSearches,
   clearBackground,
+  recentSearchesQuerys,
+  setRecentSearchesQuerys,
 }: RecentSearchesProps) => {
+  const localStorageData = JSON.parse(localStorage.getItem("RecentSearches")!);
+  const [storage, setStorage] = useState<string[]>(
+    recentSearches.length < localStorageData.length
+      ? localStorageData
+      : recentSearches
+  );
+
+  const claerRecentSearches = () => {
+    setRecentSearchesQuerys([]);
+    localStorage.setItem("RecentSearches", JSON.stringify([]));
+    setStorage([]);
+  };
+
+  const clearItem = (item: string) => {
+    const recentSearch = JSON.parse(localStorage.getItem("RecentSearches")!);
+    for (let i = 0; i < recentSearches.length; i++) {
+      if (recentSearch[i] === item) {
+        recentSearches.splice(i, 1);
+        setRecentSearchesQuerys(recentSearch);
+        localStorage.setItem("RecentSearches", JSON.stringify(recentSearch));
+        break;
+      }
+    }
+  };
+
   return (
-    <SearchResults>
-      <RecentSearchesContainer>
-        RECENT SEARCHES
-        <Clear
-          gotBackground={clearBackground && clearBackground}
-          onClick={() => console.log("Clear all searches")}
-        />
-      </RecentSearchesContainer>
-      {recentSearches?.map((item, i) => {
-        return (
-         <div key={i}> 
-          <RecentItem>
-            {item}
-            <img
-              src={exitIcon}
-              onClick={() => console.log("Clear search")}
-              alt="exitIcon"
+    <div>
+      {storage.length! > 0 && (
+        <SearchResults>
+          <RecentSearchesContainer>
+            RECENT SEARCHES
+            <Clear
+              gotBackground={clearBackground && clearBackground}
+              onClick={claerRecentSearches}
             />
-          </RecentItem>
-          <SeparateLine></SeparateLine>
-         </div>
-        );
-      })}
-    </SearchResults>
+          </RecentSearchesContainer>
+          {storage?.map((item, i) => {
+            return (
+              <div key={i}>
+                <RecentItem>
+                  {item}
+                  {/* <img
+                    src={exitIcon}
+                    onClick={() => clearItem(item)}
+                    alt="exitIcon"
+                    style={{
+                      width: "15px",
+                      padding: "10px 0px",
+                      margin: "0px 10px",
+                    }}
+                  /> */}
+                </RecentItem>
+                <SeparateLine></SeparateLine>
+              </div>
+            );
+          })}
+        </SearchResults>
+      )}
+    </div>
   );
 };
-
 
 export default RecentSearches;

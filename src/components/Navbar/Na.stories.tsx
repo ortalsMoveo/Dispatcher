@@ -27,7 +27,7 @@ const currentStateHandler = () => {
 const currentFilterState = {
   q: null, // Check if user anter query. if not render not data found
   pageSize: null,
-  page: null,
+  page: 1,
   topHeadlinesFilters: {
     country: null,
     category: null,
@@ -41,6 +41,8 @@ const currentFilterState = {
     sources: null,
   },
 };
+const recentSearchesQuerys = ["123"];
+const setRecentSearchesQuerys = () => {};
 // Here we define the content we want to render
 const Template: Story = () => (
   <Navbar
@@ -49,6 +51,8 @@ const Template: Story = () => (
     setFilterState={stateHandler}
     currentFilter={currentFilterState}
     setCurrentFilter={currentStateHandler}
+    recentSearchesQuerys={recentSearchesQuerys}
+    setRecentSearchesQuerys={setRecentSearchesQuerys}
   />
 );
 

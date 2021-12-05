@@ -1,114 +1,168 @@
 import { ButtonProps } from "../Button/Button";
 import FilterTablet from "../Tablet&Mobile/FilterTablet/FilterTablet";
-import { useState } from "react";
-import React, { Dispatch } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 import {
   FILTER_OPTIONS,
-  HeadLinesFilters,
-  EverythingFilters,
-  subFilterList,
-  subFilterList2,
+  HeadLinesFiltersSmallDeviches,
+  EverythingFiltersSmallDeviches,
+  FilterData,
 } from "../../FiltersData";
+import { DisableFilter } from "../Filter/Style";
+
 const button: ButtonProps = {
   buttonText: "VIEW RESULTS",
+  fullWidth: false,
 };
-
 export interface SidebarFilters {
-  filterTitle: string;
-  searchIn: string;
   topHeadlinesFilters: {
-    country: string;
-    category: string;
-    sources: string;
+    country: string | null;
+    category: string | null;
+    sources: string | null;
   };
   everythingFilters: {
-    date: string;
-    language: string;
-    sources: string;
+    from: string | null;
+    to: string | null;
+    language: string | null;
+    sources: string | null;
+    sortBy: string | null;
   };
 }
 
 interface SidebarProps {
   filterType: FILTER_OPTIONS;
+  setFilterType: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   currentFilter: CurrentFilters;
   setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  setSidebarState: Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Sidebar = ({
   filterType,
+  setFilterType,
   currentFilter,
   setCurrentFilter,
+  setSidebarState,
 }: SidebarProps) => {
   const [sidebarFilters, setSidebarFilters] = useState<SidebarFilters>({
-    filterTitle: "FILTER",
-    searchIn: "Everything",
     topHeadlinesFilters: {
-      country: "All",
-      category: "All",
-      sources: "All",
+      country: "il",
+      category: null,
+      sources: null,
     },
     everythingFilters: {
-      date: "All",
-      language: "All",
-      sources: "All",
+      from: null,
+      to: null,
+      language: null,
+      sources: null,
+      sortBy: null,
     },
   });
-  const [filterTitle, setFilterTitle] = useState("FILTER");
   const [currentFilterList, setCurrentFilterList] = useState(
-    filterType === FILTER_OPTIONS.TOP ? HeadLinesFilters : EverythingFilters
+    filterType === FILTER_OPTIONS.TOP
+      ? HeadLinesFiltersSmallDeviches
+      : EverythingFiltersSmallDeviches
   );
   const [subFilter, setSubFilter] = useState(false);
+  const [disableFilters, setDisableFilters] = useState<any>(["Sources"]);
+  const [currFilterType, setCurrFilterType] =
+    useState<FILTER_OPTIONS>(filterType);
 
-  const updateCurrentFilter = (key: string, value: string) => {
-    console.log("geeting in to update curr filter : sidebar");
-    //   const prevState = currentFilter;
+  useEffect(() => {
+    if (currFilterType === FILTER_OPTIONS.TOP) {
+      setCurrentFilterList(HeadLinesFiltersSmallDeviches);
+      const prevState = sidebarFilters;
+      setSidebarFilters({
+        ...prevState,
+        everythingFilters: {
+          from: null,
+          to: null,
+          language: null,
+          sources: null,
+          sortBy: null,
+        },
+      });
 
-    //   if (filterType === FILTER_OPTIONS.TOP) {
-    //     setCurrentFilter({
-    //       ...prevState,
-    //       topHeadlinesFilters: {
-    //         ...prevState.topHeadlinesFilters,
-    //         [key.toLowerCase()]: value,
-    //       },
-    //     });
-    //   } else {
-    //     setCurrentFilter({
-    //       ...prevState,
-    //       everythingFilters: {
-    //         ...prevState.everythingFilters,
-    //         [key.toLowerCase()]: value,
-    //       },
-    //     });
-    //   }
+      EverythingFiltersSmallDeviches.map((item: any) => {
+        if (item.filter?.value! !== "All") {
+          const name = item.filter.name;
+          item.filter = { name: name, value: "All" };
+        }
+      });
+    } else {
+      setCurrentFilterList(EverythingFiltersSmallDeviches);
+      const prevState = sidebarFilters;
+      setSidebarFilters({
+        ...prevState,
+        topHeadlinesFilters: {
+          country: "il",
+          category: null,
+          sources: null,
+        },
+      });
+      HeadLinesFiltersSmallDeviches.map((item: any) => {
+        if (item.filter.name === "Country") {
+          item.filter = { name: "Country", value: "Israel" };
+        } else if (item.filter?.value! !== "All") {
+          const name = item.filter.name;
+          item.filter = { name: name, value: "All" };
+        }
+      });
+    }
+  }, [currFilterType]);
+
+  const topHeadlinesFilters =
+    !sidebarFilters.topHeadlinesFilters.category &&
+    !sidebarFilters.topHeadlinesFilters.country;
+
+  useEffect(() => {
+    if (filterType === "Top Headlines") {
+      let arr = null;
+      if (
+        sidebarFilters.topHeadlinesFilters.category ||
+        sidebarFilters.topHeadlinesFilters.country
+      ) {
+        arr = ["Sources"];
+        setDisableFilters(arr);
+      } else if (sidebarFilters.topHeadlinesFilters.sources) {
+        arr = ["Country", "Category"];
+        setDisableFilters(arr);
+      }
+    }
+  }, [sidebarFilters, filterType, topHeadlinesFilters]);
+
+  const submitFilters = async (currFilterType: any) => {
+    setSubFilter(false);
+    setSidebarState(false);
+    setFilterType(currFilterType);
+
+    const prevState = currentFilter;
+
+    if (currFilterType === FILTER_OPTIONS.TOP) {
+      setCurrentFilter({
+        ...prevState,
+        q: null,
+        topHeadlinesFilters: sidebarFilters.topHeadlinesFilters,
+      });
+    } else {
+      setCurrentFilter({
+        ...prevState,
+        everythingFilters: sidebarFilters.everythingFilters,
+      });
+    }
   };
-  const UpdateListFilters = (value: string) => {
-    // const currTypeFilter =
-    //   filterType === FILTER_OPTIONS.TOP ? HeadLinesFilters : EverythingFilters;
-    // console.log(currTypeFilter);
-    // for (const key in currTypeFilter) {
-    //   // console.log("the key:", key);
-    //   let list = null;
-    //   if (currTypeFilter[key].filterText === value) {
-    //     list = currTypeFilter[key].listItems;
-    //     setCurrentFilterList({ list });
-    //   }
-    // }
-    // setCurrentFilterList(subFilterList2);
-    // setHeadline(value); // fix it!
-    // setSubFilter(!subFilter);
 
-    console.log("update currentFilterList", value);
-  };
-  // TODO -> add cb(current filter) that update currentFilterList
   return (
     <FilterTablet
-      title={filterTitle}
+      filterType={currFilterType}
+      setFilterType={setCurrFilterType}
       list={currentFilterList}
       button={button}
       subFilter={subFilter}
-      // onChangeFilter={updateCurrentFilter}
-      // UpdateListFilters={UpdateListFilters}
+      sidebarFilters={sidebarFilters}
+      setSidebarFilters={setSidebarFilters}
+      disable={disableFilters}
+      onSubmit={submitFilters}
     />
   );
 };

@@ -1,18 +1,43 @@
 import NoSearchResults, { SearchResults } from "../NoResults/NoSearchResults";
-import { GraphContainer, Title, LineRow, DataContainer } from "./GraphStyle";
-
+import {
+  GraphContainer,
+  Title,
+  LineRow,
+  DataContainer,
+  Head,
+} from "./GraphStyle";
+import DoughnutChart from "./Graphes/Doughnut";
+import LineChart from "./Graphes/Line/LineChart";
+import { FilterValue } from "../Lists/GraphList";
 export interface GraphProps {
   title: string;
-  data?: string;
-  noDataToDisplay?: SearchResults;
+  data: FilterValue[];
+  noQuery: boolean;
+  cardsLength: number;
 }
 
-const Graph = ({ title, data, noDataToDisplay }: GraphProps) => {
+const Graph = ({ title, data, noQuery, cardsLength }: GraphProps) => {
   return (
     <GraphContainer>
-      <Title>{title}</Title>
-      <LineRow></LineRow>
-      <DataContainer>{<NoSearchResults />}</DataContainer>
+      <Head>
+        <Title>{title}</Title>
+        <LineRow></LineRow>
+      </Head>
+      <DataContainer
+        barChart={title === "Tags" ? true : false}
+        doughnutChart={title === "Sources" ? true : false}
+      >
+        {!(data && data.length > 0) || noQuery ? (
+          <NoSearchResults isGraph={true} />
+        ) : (
+          <>
+            {title === "Sources" && (
+              <DoughnutChart sourcesData={data} cardsLength={cardsLength} />
+            )}
+            {title === "Dates" && <LineChart dateData={data} />}
+          </>
+        )}
+      </DataContainer>
     </GraphContainer>
   );
 };

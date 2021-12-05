@@ -10,6 +10,7 @@ export interface ButtonProps {
   icon?: boolean;
   fullWidth?: boolean;
   onClick?: () => void; // TODO ->  remove ?
+  welcomeButton?: boolean;
 }
 
 const Button = ({
@@ -18,9 +19,15 @@ const Button = ({
   icon = false,
   fullWidth = false,
   onClick,
+  welcomeButton,
 }: ButtonProps) => {
   return (
-    <ButtonStyle name={buttonType} fullWidth={fullWidth} onClick={onClick}>
+    <ButtonStyle
+      name={buttonType}
+      fullWidth={fullWidth}
+      onClick={onClick}
+      welcomeButton={welcomeButton!}
+    >
       {buttonText}
       {icon && <IconStyle src={Arrow} />}
     </ButtonStyle>

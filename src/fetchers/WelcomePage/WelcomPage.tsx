@@ -28,7 +28,7 @@ const WelcomePage = () => {
           <SeparateLine></SeparateLine>
           <Button
             buttonType="primary"
-            buttonText="continue"
+            buttonText="CONTINUE"
             icon={true}
             fullWidth={true}
             onClick={() =>
@@ -36,6 +36,7 @@ const WelcomePage = () => {
                 redirectUri: redirectUri,
               })
             }
+            welcomeButton={true}
           />
         </ButtonPosition>
       </PageContent>

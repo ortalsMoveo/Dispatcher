@@ -19,7 +19,11 @@ export interface FilterValue {
   name: string;
 }
 export interface FilterData {
-  filterText: string;
+  filterText?: string;
+  filter?: {
+    name: string;
+    value: string;
+  };
   listItems: FilterValue[];
   date?: boolean;
 }
@@ -30,7 +34,7 @@ export const HeadLinesFilters: FilterData[] = [
     listItems: [
       {
         id: null,
-        name: "Country",
+        name: "All Countries",
       },
       {
         id: "it",
@@ -44,12 +48,18 @@ export const HeadLinesFilters: FilterData[] = [
         id: "il",
         name: "Israel",
       },
-
-      // "Italy",
-      // "Mexioco",
-      // "Portugal",
-      // "Czechia",
-      // "Belgium",
+      {
+        id: "mx",
+        name: "Mexioco",
+      },
+      {
+        id: "pt",
+        name: "Portugal",
+      },
+      {
+        id: "cz",
+        name: "Czechia",
+      },
     ],
   },
   {
@@ -57,7 +67,7 @@ export const HeadLinesFilters: FilterData[] = [
     listItems: [
       {
         id: null,
-        name: "Category",
+        name: "All Categories",
       },
       {
         id: "business",
@@ -94,7 +104,7 @@ export const HeadLinesFilters: FilterData[] = [
     listItems: [
       {
         id: null,
-        name: "Sources",
+        name: "All Sources",
       },
       {
         name: "Aftenposten",
@@ -112,26 +122,26 @@ export const HeadLinesFilters: FilterData[] = [
         name: "Bloomberg",
       },
       {
-        name: "Axios",
+        name: "Marca",
       },
       {
-        name: "Axios",
+        name: "Engadget",
       },
-      // "Bild",
-      // "Bloomberg",
-      // "Buzzfeed",
-      // "CNN",
-      // "Engadget",
-      // "ESPN",
-      // "Focus",
-      // "Fortune",
-      // "Globo",
-      // "Gruenderszene",
-      // "Handelsblatt",
-      // "IGN",
-      // "Independent",
-      // "Lenta",
-      // "Marca",
+      {
+        name: "Buzzfeed",
+      },
+      {
+        name: "CNN",
+      },
+      {
+        name: "ESPN",
+      },
+      {
+        name: "Focus",
+      },
+      {
+        name: "Globo",
+      },
     ],
   },
 ];
@@ -142,7 +152,7 @@ export const EverythingFilters: FilterData[] = [
     listItems: [
       {
         id: "",
-        name: "Sort by",
+        name: "All Sorts",
       },
       {
         id: "relevancy",
@@ -167,6 +177,10 @@ export const EverythingFilters: FilterData[] = [
     filterText: "Sources",
     listItems: [
       {
+        id: null,
+        name: "All Sources",
+      },
+      {
         name: "Aftenposten",
       },
       {
@@ -182,10 +196,16 @@ export const EverythingFilters: FilterData[] = [
         name: "Bloomberg",
       },
       {
-        name: "Axios",
+        name: "Marca",
       },
       {
-        name: "Axios",
+        name: "Engadget",
+      },
+      {
+        name: "Buzzfeed",
+      },
+      {
+        name: "CNN",
       },
     ],
   },
@@ -194,7 +214,11 @@ export const EverythingFilters: FilterData[] = [
     listItems: [
       {
         id: "",
-        name: "Language",
+        name: "All Languages",
+      },
+      {
+        id: "fr",
+        name: "French",
       },
       {
         id: "ar",
@@ -208,10 +232,10 @@ export const EverythingFilters: FilterData[] = [
         id: "en",
         name: "English",
       },
-
-      // "es",
-      // "fr",
-      // "he",
+      {
+        id: "he",
+        name: "Hebrew",
+      },
       // "it",
       // "nl",
       // "no",
@@ -219,13 +243,236 @@ export const EverythingFilters: FilterData[] = [
     ],
   },
 ];
-// "Language",
-//       "English",
-//       "Spanish",
-//       "Arabic",
-//       "Russian",
-//       "Portuguese",
-//       "Hebrew",
+
+export const HeadLinesFiltersSmallDeviches: FilterData[] = [
+  {
+    filter: {
+      name: "Country",
+      value: "Israel",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        id: "it",
+        name: "Italy",
+      },
+      {
+        id: "us",
+        name: "United States",
+      },
+      {
+        id: "il",
+        name: "Israel",
+      },
+      {
+        id: "mx",
+        name: "Mexioco",
+      },
+      {
+        id: "pt",
+        name: "Portugal",
+      },
+      {
+        id: "cz",
+        name: "Czechia",
+      },
+
+      // "Mexioco",
+      // "Portugal",
+      // "Czechia",
+      // "Belgium",
+    ],
+  },
+  {
+    filter: {
+      name: "Category",
+      value: "All",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        id: "business",
+        name: "Business",
+      },
+      {
+        id: "entertainment",
+        name: "Entertainment",
+      },
+      {
+        id: "general",
+        name: "General",
+      },
+      {
+        id: "health",
+        name: "Health",
+      },
+      {
+        id: "science",
+        name: "Science",
+      },
+      {
+        id: "sports",
+        name: "Sports",
+      },
+      {
+        id: "technology",
+        name: "Technology",
+      },
+    ],
+  },
+  {
+    filter: {
+      name: "Sources",
+      value: "All",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        name: "Aftenposten",
+      },
+      {
+        name: "ANSA",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Bild",
+      },
+      {
+        name: "Bloomberg",
+      },
+      {
+        name: "Marca",
+      },
+      {
+        name: "Engadget",
+      },
+      {
+        name: "Buzzfeed",
+      },
+      {
+        name: "CNN",
+      },
+    ],
+  },
+];
+
+export const EverythingFiltersSmallDeviches: FilterData[] = [
+  {
+    filter: {
+      name: "Sort by",
+      value: "All",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        id: "relevancy",
+        name: "Relevancy",
+      },
+      {
+        id: "popularity",
+        name: "Popularity",
+      },
+      {
+        id: "publishedAt",
+        name: "PublishedAt",
+      },
+    ],
+  },
+  {
+    filter: {
+      name: "Dates",
+      value: "All",
+    },
+    listItems: [],
+    date: true,
+  },
+  {
+    filter: {
+      name: "Sources",
+      value: "All",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        name: "Aftenposten",
+      },
+      {
+        name: "ANSA",
+      },
+      {
+        name: "Axios",
+      },
+      {
+        name: "Bild",
+      },
+      {
+        name: "Bloomberg",
+      },
+      {
+        name: "Marca",
+      },
+      {
+        name: "Engadget",
+      },
+      {
+        name: "Buzzfeed",
+      },
+      {
+        name: "CNN",
+      },
+    ],
+  },
+  {
+    filter: {
+      name: "Language",
+      value: "All",
+    },
+    listItems: [
+      {
+        id: "All",
+        name: "All",
+      },
+      {
+        id: "ar",
+        name: "Arabic",
+      },
+      {
+        id: "de",
+        name: "German",
+      },
+      {
+        id: "en",
+        name: "English",
+      },
+      {
+        id: "he",
+        name: "Hebrew",
+      },
+      {
+        id: "fr",
+        name: "french",
+      },
+    ],
+  },
+];
+
 export const subFilterList = [
   { categoryName: "Sources", categoryOption: "All" },
   { categoryName: "Language", categoryOption: "All" },

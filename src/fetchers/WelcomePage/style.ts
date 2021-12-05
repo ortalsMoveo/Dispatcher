@@ -3,16 +3,17 @@ import { lightBlue, gray, GhostWhite } from "../../globalStyle";
 
 export const Container = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   font-family: Roboto;
   background: ${GhostWhite};
   @media (max-width: 768px) {
     flex-direction: column;
-    height: 1024px;
+    height: 100%;
   }
-  @media (max-width: 376px) {
+  @media (max-width: 480px) {
     flex-direction: column;
-    height: 667px;
+    height: 100%;
   } ;
 `;
 
@@ -22,23 +23,22 @@ export const PageContent = styled.div`
   width: 40%;
   color: ${lightBlue};
   @media (max-width: 768px) {
-    width: 90%;
-    padding: 10px 20px;
+    width: 98%;
+    padding: 20px 10px;
     text-align: center;
-    height: 699px;
   }
-  @media (max-width: 376px) {
+  @media (max-width: 480px) {
     width: 90%;
+    height: 70%;
     text-align: center;
-    height: 417px;
     padding: 0px;
-    margin: 10px 20px;
+    margin: 20px 20px;
   } ;
 `;
 
 export const Title = styled.div`
   margin: 24px 0px;
-  font-weight: 300;
+  font-weight: 30;
   font-size: 48px;
   letter-spacing: 0.25px;
   color: ${lightBlue};
@@ -46,33 +46,39 @@ export const Title = styled.div`
     font-size: 42px;
     margin: 10px 0px;
   }
-  @media (max-width: 376px) {
+  @media (max-width: 480px) {
     font-size: 32px;
     line-height: 22px;
+    padding: 10px 0px;
   } ;
 `;
 
 export const TextPage = styled.div`
   font-weight: 200;
   font-size: 36px;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.85px;
   margin: 24px 0px;
+  line-height: 45px;
   padding-bottom: 20px;
   @media (max-width: 768px) {
-    font-size: 32px;
+    font-size: 30px;
     margin: 20px;
-    padding-bottom: 350px;
+    padding: 10px;
+    padding-bottom: 43%;
   }
-  @media (max-width: 376px) {
-    font-size: 22px;
+  @media (max-width: 480px) {
+    height: 50%;
+    font-size: 19px;
     margin: 0px;
-    padding-bottom: 185px;
+    padding-bottom: 41%;
   } ;
 `;
 
 export const ButtonPosition = styled.div`
-  @media (max-width: 770px) {
+  height: 20%;
+  @media (max-width: 768px) {
     padding: 10px;
+    /* margin-bottom: 40px; */
   } ;
 `;
 export const SeparateLine = styled.div`

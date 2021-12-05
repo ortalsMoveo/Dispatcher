@@ -8,7 +8,7 @@ import {
   MobileSearch,
 } from "./NavbarStyle";
 import Search from "../Search/Search";
-import LogoIcon from "../../assets/Group 1086418.svg";
+import LogoIcon from "../../assets/Group.svg";
 import settings from "../../assets/settings.svg";
 import notifications from "../../assets/notifications.svg";
 import React, { Dispatch } from "react";
@@ -16,6 +16,7 @@ import { FILTER_OPTIONS } from "../../FiltersData";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 
+import SearchIcon from "../../assets/search.svg";
 export interface NavbarProps {
   recentSearches: string[];
   filterType: FILTER_OPTIONS;
@@ -23,6 +24,8 @@ export interface NavbarProps {
   currentFilter: CurrentFilters;
   setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
   setMobileSearch?: Dispatch<React.SetStateAction<boolean>>;
+  recentSearchesQuerys: string[];
+  setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
 }
 
 const Navbar = ({
@@ -32,33 +35,32 @@ const Navbar = ({
   currentFilter,
   setCurrentFilter,
   setMobileSearch,
+  recentSearchesQuerys,
+  setRecentSearchesQuerys,
 }: NavbarProps) => {
   const { logout, user } = useAuth0();
-  const { isAuthenticated } = useAuth0();
   const onClickHandler = () => {
-      if(setMobileSearch){
-          setMobileSearch(true);
-      }
-
-  }
+    if (setMobileSearch) {
+      setMobileSearch(true);
+    }
+  };
   return (
     <NavbarContainer>
       <Nav>
-        <Logo src={LogoIcon}></Logo>
+        <Logo src={LogoIcon} />
         <Search
           recentSearches={recentSearches}
           filterType={filterType}
           setFilterState={setFilterState}
           currentFilter={currentFilter}
           setCurrentFilter={setCurrentFilter}
+          recentSearchesQuerys={recentSearchesQuerys}
+          setRecentSearchesQuerys={setRecentSearchesQuerys}
         />
       </Nav>
       <IconsContainer>
-        <MobileSearch src={SearchIcon} onClick={onClickHandler}/> 
-          <Icons>
-              <img src={settings}/> 
-              <img src={notifications}/>
-          </Icons>
+        <MobileSearch src={SearchIcon} onClick={onClickHandler} />
+
         <Avatar onClick={() => logout({ returnTo: window.location.origin })}>
           {user?.name?.charAt(0)}
           {user?.family_name?.charAt(0)}

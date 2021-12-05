@@ -13,24 +13,24 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
-
+import exit from "../../../src/assets/exit.svg";
 export interface FilterProps {
-  filterText: string;
+  filterText: string | undefined;
   listItems: FilterValue[];
   date?: boolean;
   currentFilter?: CurrentFilters;
+  setCurrentFilter?: Dispatch<React.SetStateAction<CurrentFilters>>;
   setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   navbarFilter?: boolean;
   onChangeFilter?: (filterHeader: string, item: string | null) => void;
   filterType?: FILTER_OPTIONS;
+  apiFiltersState?: string | null | undefined;
 }
 
 const Filter: React.FC<FilterProps> = (props) => {
   const [open, setOpen] = useState(false);
-  let icon = DropIcon;
-  if (props.date) {
-    icon = DateIcon;
-  }
+  const [icon, setIcon] = useState(props.date ? DateIcon : DropIcon);
+
   const [filterHeader, setFilterHeader] = useState(
     props.filterText === "Country" ? "Israel" : props.filterText
   );
@@ -48,11 +48,28 @@ const Filter: React.FC<FilterProps> = (props) => {
     if (end) {
       props.onChangeFilter &&
         props.onChangeFilter("to", moment(end).format("YYYY-MM-DD"));
+      setFilterHeader(
+        moment(start).format("DD/MM - ") + moment(end).format("DD/MM")
+      );
     } else {
       props.onChangeFilter && props.onChangeFilter("to", null);
+      setFilterHeader(moment(start).format("DD/MM"));
     }
+    setIcon(exit);
     setStartDate(start);
     setEndDate(end);
+  };
+
+  const clearFilterDate = () => {
+    if (icon !== exit) {
+      return;
+    }
+    setFilterHeader("Dates");
+    setIcon(DateIcon);
+    setStartDate(new Date());
+    setEndDate(null);
+    props.onChangeFilter && props.onChangeFilter("from", null);
+    props.onChangeFilter && props.onChangeFilter("to", null);
   };
 
   const onClickNavberFilter = (item: string) => {
@@ -62,7 +79,25 @@ const Filter: React.FC<FilterProps> = (props) => {
           ? FILTER_OPTIONS.TOP
           : FILTER_OPTIONS.EVERYTHING
       );
+    props.setCurrentFilter!({
+      q: null,
+      pageSize: 10,
+      page: 1,
+      topHeadlinesFilters: {
+        country: "il",
+        category: null,
+        sources: null,
+      },
+      everythingFilters: {
+        from: null,
+        to: null,
+        language: null,
+        sortBy: null,
+        sources: null,
+      },
+    });
     setFilterHeader(item);
+    setOpen(!open);
   };
 
   const onClickFilter = (
@@ -70,16 +105,25 @@ const Filter: React.FC<FilterProps> = (props) => {
     itemId: string | null,
     itemName: string
   ) => {
-    console.log("itemId", itemId);
-    setFilterHeader(itemName);
+    const clearFilters = [
+      "All Countries",
+      "All Categories",
+      "All Sources",
+      "All Sorts",
+      "All Languages",
+    ];
+    setFilterHeader(
+      clearFilters.includes(itemName) ? props.filterText : itemName
+    );
     props.onChangeFilter && props.onChangeFilter(filterHeader, itemId);
+    setOpen(!open);
   };
 
   const onClickDropDown = () => {
     const headLinesFilter = ["Country", "Category", "Sources"];
     if (
       props.filterType === "Top Headlines" &&
-      headLinesFilter.includes(props.filterText)
+      headLinesFilter.includes(props.filterText!)
     ) {
       if (
         (props.currentFilter?.topHeadlinesFilters.category ||
@@ -105,9 +149,8 @@ const Filter: React.FC<FilterProps> = (props) => {
     const headLinesFilter = ["Country", "Category", "Sources"];
     if (
       props.filterType === "Top Headlines" &&
-      headLinesFilter.includes(props.filterText)
+      headLinesFilter.includes(props.filterText!)
     ) {
-      console.log(props.filterType);
       if (
         (props.currentFilter?.topHeadlinesFilters.category ||
           props.currentFilter?.topHeadlinesFilters.country) &&
@@ -143,10 +186,13 @@ const Filter: React.FC<FilterProps> = (props) => {
         navbarFilter={navbarFilterStyle}
       >
         {filterHeader}
-        <img src={icon} alt="DropDownIcon" />
+        <img src={icon} alt="DropDownIcon" onClick={clearFilterDate} />
       </DropDownHeader>
       {open && (
-        <DropDownListContainer>
+        <DropDownListContainer
+          navbarFilter={navbarFilterStyle}
+          date={props.date!}
+        >
           {props.date ? (
             <DatePicker
               dateFormat="yyyy/MM/dd"
@@ -167,7 +213,7 @@ const Filter: React.FC<FilterProps> = (props) => {
                     ? () => onClickNavberFilter(item.name)
                     : () =>
                         onClickFilter(
-                          props.filterText,
+                          props.filterText!,
                           item.id !== undefined ? item.id : item.name,
                           item.name
                         )

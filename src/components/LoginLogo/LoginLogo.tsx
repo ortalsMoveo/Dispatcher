@@ -1,5 +1,5 @@
 import { LogoContainer, Logo } from "./Style";
-import LogoImg from "../../assets/Group 1086418.svg";
+import LogoImg from "../../assets/Group 1086418 (2).svg";
 
 const LogoLogin = () => {
   return (
