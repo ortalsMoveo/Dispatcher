@@ -11,7 +11,7 @@ import {
   Loader,
   BackgroudContainer,
 } from "./MainPageStyle";
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 
 import Graphs from "../../Graphs.json";
@@ -26,6 +26,10 @@ import MobileSearchScreen from "../../components/Tablet&Mobile/SearchScreen/Sear
 
 import { getData } from "../../NetworkManager";
 import NoSearchResults from "../../components/NoResults/NoSearchResults";
+
+import { RootState } from "../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updatePage } from "../../store/filtersState";
 
 const recentSearches = ["crypto", "soccer", "bitcoin"]; // Todo -> const setstrate + get in &out to lkocal
 
@@ -66,7 +70,9 @@ export interface CardObj {
 
 const MainPage = () => {
   const DesktopSize = useWindowDimensions();
+
   const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+
   const [filterMobileOn, setFilterMobileOn] = useState<boolean>(false);
   const [mobileSearch, setMobileSearch] = useState(false);
   const [firstRender, setFirstRender] = useState(true);
@@ -101,6 +107,9 @@ const MainPage = () => {
     []
   );
   const [totalResults, seTtotalResults] = useState(1);
+
+  const page = useSelector((state: RootState) => state.filters.page);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (recentSearchesQuerys.length === 0) {
@@ -182,11 +191,13 @@ const MainPage = () => {
       setHasMoreData(false);
       return;
     }
-    let num = currentFilter.page;
+    // let num = currentFilter.page;
+    let num = page;
     const numPage = num + 1;
-    const prevState = currentFilter;
+    // const prevState = currentFilter;
     const fetchData = async () => {
-      setCurrentFilter({ ...prevState, page: numPage });
+      // setCurrentFilter({ ...prevState, page: numPage });
+      dispatch(updatePage(numPage));
       const res = await getData(currentFilter, filterType, numPage);
       setDataCards([...dataCards, ...res[1]]);
       setLoading(false);

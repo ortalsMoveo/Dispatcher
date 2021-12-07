@@ -11,9 +11,11 @@ import RecentSearches from "./RecentSearches/RecentSearches";
 import React, { useState, Dispatch, useEffect } from "react";
 import SearchIcon from "../../assets/search.svg";
 import { FILTER_OPTIONS } from "../../FiltersData";
-import { useDebounce } from "../../customHooks/useDebounce";
 import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 import exitIcon from "../../assets/exit.svg";
+
+import { useSelector, useDispatch } from "react-redux";
+import { updateQ } from "../../store/filtersState";
 export interface SearchProps {
   recentSearches: string[];
   filterType: FILTER_OPTIONS;
@@ -35,6 +37,7 @@ const Search = ({
 }: SearchProps) => {
   const [inputClicked, setInputClicked] = useState(false);
   const [currentFilterType, setCurrentFilterType] = useState(filterType);
+  const dispatch = useDispatch();
 
   const filterOptions =
     filterType === FILTER_OPTIONS.TOP
@@ -64,11 +67,13 @@ const Search = ({
       const currRecentSearches = [...recentSearchesQuerys, searchQuery];
       setRecentSearchesQuerys(currRecentSearches);
     }
-    const prevState = currentFilter;
+    // const prevState = currentFilter;
     if (searchQuery !== "") {
-      setCurrentFilter({ ...prevState, q: searchQuery });
+      dispatch(updateQ(searchQuery));
+      // setCurrentFilter({ ...prevState, q: searchQuery });
     } else {
-      setCurrentFilter({ ...prevState, q: null });
+      dispatch(updateQ(null));
+      // setCurrentFilter({ ...prevState, q: null });
     }
     const prevSearches = JSON.parse(localStorage.getItem("RecentSearches")!);
     localStorage.setItem(
@@ -80,8 +85,9 @@ const Search = ({
 
   const clearQueryHandle = () => {
     setSearchQuery("");
-    const prevState = currentFilter;
-    setCurrentFilter({ ...prevState, q: null });
+    // const prevState = currentFilter;
+    // setCurrentFilter({ ...prevState, q: null });
+    dispatch(updateQ(null));
   };
 
   return (
