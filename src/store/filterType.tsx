@@ -10,6 +10,7 @@ const filterTypeSlice = createSlice({
   reducers: {
     updateFilterType: (state, action) => {
       state.filterType = action.payload;
+      console.log(state.filterType);
     },
   },
 });

@@ -1,28 +1,36 @@
 import { Container, SearchContainer, Input } from "./SearchStyle";
 import backIcon from "../../../assets/back.svg";
 import exitIcon from "../../../assets/exit.svg";
-import { SearchResults } from "../../NoResults/NoSearchResults";
 import React, { Dispatch, useState, useEffect } from "react";
-import { useDebounce } from "../../../customHooks/useDebounce";
-import { CurrentFilters } from "../../../fetchers/MainPage/MainPage";
 import SearchIcon from "../../../assets/search.svg";
+import { useDispatch } from "react-redux";
+import { updateQ } from "../../../store/filtersState";
+import { RootState } from "../../../store/index";
+import { useSelector } from "react-redux";
+import { updateRecentSearches } from "../../../store/recentSearchesState";
 
 export interface SearchProps {
   setMobileSearch: Dispatch<React.SetStateAction<boolean>>;
-  currentFilter: CurrentFilters;
-  setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // currentFilter: CurrentFilters;
+  // setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
   hasResults: boolean;
-  recentSearchesQuerys: string[];
-  setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
+  // recentSearchesQuerys: string[];
+  // setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
 }
 const Search = ({
   setMobileSearch,
-  currentFilter,
-  setCurrentFilter,
+  // currentFilter,
+  // setCurrentFilter,
   hasResults,
-  recentSearchesQuerys,
-  setRecentSearchesQuerys,
-}: SearchProps) => {
+}: // recentSearchesQuerys,
+// setRecentSearchesQuerys,
+SearchProps) => {
+  const recentSearchesQuerys = useSelector(
+    (state: RootState) => state.recentSearchesState.recentSearches
+  );
+
+  const dispatch = useDispatch();
+
   const [userInput, setUserInput] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -34,22 +42,28 @@ const Search = ({
   const [inputVal, setInputVal] = useState(false);
 
   useEffect(() => {
-    const prevState = currentFilter;
+    dispatch(updateQ(null));
 
-    setCurrentFilter({ ...prevState, q: null });
+    // const prevState = currentFilter;
+    // setCurrentFilter({ ...prevState, q: null });
   }, []);
 
   const onSubmitSearchInput = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!recentSearchesQuerys.includes(searchQuery)) {
       const currRecentSearches = [...recentSearchesQuerys, searchQuery];
-      setRecentSearchesQuerys(currRecentSearches);
+      dispatch(updateRecentSearches(currRecentSearches));
+
+      // setRecentSearchesQuerys(currRecentSearches);
     }
-    const prevState = currentFilter;
+    // const prevState = currentFilter;
     if (searchQuery !== "") {
-      setCurrentFilter({ ...prevState, q: searchQuery });
+      dispatch(updateQ(searchQuery));
+      // setCurrentFilter({ ...prevState, q: searchQuery });
     } else {
-      setCurrentFilter({ ...prevState, q: null });
+      dispatch(updateQ(null));
+
+      // setCurrentFilter({ ...prevState, q: null });
       setUserInput(false);
     }
     setIcon(SearchIcon);

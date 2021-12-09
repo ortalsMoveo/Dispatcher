@@ -30,28 +30,28 @@ import NoSearchResults from "../../components/NoResults/NoSearchResults";
 import { RootState } from "../../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePage } from "../../store/filtersState";
+import { updateFiltersState } from "../../store/filtersState";
+import { updateRecentSearches } from "../../store/recentSearchesState";
 
-const recentSearches = ["crypto", "soccer", "bitcoin"]; // Todo -> const setstrate + get in &out to lkocal
-
-export interface TopHeadlines {
-  country: null | string;
-  category: null | string;
-  sources: null | string;
-}
-export interface Everything {
-  from: null | string;
-  to: null | string;
-  language: null | string;
-  sortBy: null | string;
-  sources: null | string;
-}
-export interface CurrentFilters {
-  q: null | string;
-  topHeadlinesFilters: TopHeadlines;
-  everythingFilters: Everything;
-  pageSize: number | null;
-  page: number;
-}
+// export interface TopHeadlines {
+//   country: null | string;
+//   category: null | string;
+//   sources: null | string;
+// }
+// export interface Everything {
+//   from: null | string;
+//   to: null | string;
+//   language: null | string;
+//   sortBy: null | string;
+//   sources: null | string;
+// }
+// export interface CurrentFilters {
+//   q: null | string;
+//   topHeadlinesFilters: TopHeadlines;
+//   everythingFilters: Everything;
+//   pageSize: number | null;
+//   page: number;
+// }
 let renders = 0;
 
 export interface CardObj {
@@ -69,32 +69,44 @@ export interface CardObj {
 }
 
 const MainPage = () => {
+  const currentFilterState = useSelector((state: RootState) => state.filters);
+  console.log("currentFilterState", currentFilterState);
   const DesktopSize = useWindowDimensions();
 
-  const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+  // const [filterType, setFilterType] = useState(FILTER_OPTIONS.TOP);
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+
+  const recentSearchesQuerys = useSelector(
+    (state: RootState) => state.recentSearchesState.recentSearches
+  );
+
+  const page = useSelector((state: RootState) => state.filters.page);
+  const dispatch = useDispatch();
 
   const [filterMobileOn, setFilterMobileOn] = useState<boolean>(false);
   const [mobileSearch, setMobileSearch] = useState(false);
   const [firstRender, setFirstRender] = useState(true);
   const [hasMoreData, setHasMoreData] = useState(true);
 
-  const [currentFilter, setCurrentFilter] = useState<CurrentFilters>({
-    q: null,
-    pageSize: 10,
-    page: 1,
-    topHeadlinesFilters: {
-      country: "il",
-      category: null,
-      sources: null,
-    },
-    everythingFilters: {
-      from: null,
-      to: null,
-      language: null,
-      sortBy: null,
-      sources: null,
-    },
-  });
+  // const [currentFilter, setCurrentFilter] = useState<CurrentFilters>({
+  //   q: null,
+  //   pageSize: 10,
+  //   page: 1,
+  //   topHeadlinesFilters: {
+  //     country: "il",
+  //     category: null,
+  //     sources: null,
+  //   },
+  //   everythingFilters: {
+  //     from: null,
+  //     to: null,
+  //     language: null,
+  //     sortBy: null,
+  //     sources: null,
+  //   },
+  // });
   const [firstDisplay, setFirstDisplay] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [noMatch, setNoMatch] = useState(false);
@@ -103,13 +115,10 @@ const MainPage = () => {
 
   const [dataCards, setDataCards] = useState<CardObj[]>([]);
   const [resultsText, setResultsText] = useState("");
-  const [recentSearchesQuerys, setRecentSearchesQuerys] = useState<string[]>(
-    []
-  );
+  // const [recentSearchesQuerys, setRecentSearchesQuerys] = useState<string[]>(
+  //   []
+  // );
   const [totalResults, seTtotalResults] = useState(1);
-
-  const page = useSelector((state: RootState) => state.filters.page);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (recentSearchesQuerys.length === 0) {
@@ -127,31 +136,32 @@ const MainPage = () => {
 
   useEffect(() => {
     if (
-      !currentFilter.topHeadlinesFilters.sources &&
-      !currentFilter.topHeadlinesFilters.country &&
-      !currentFilter.topHeadlinesFilters.category &&
-      !currentFilter.q
+      !currentFilterState.topHeadlinesFilters.sources &&
+      !currentFilterState.topHeadlinesFilters.country &&
+      !currentFilterState.topHeadlinesFilters.category &&
+      !currentFilterState.q
     ) {
       setResultsText("Please select Filter or add an query!");
       setNoQuery(true);
     } else if (
-      !(filterType === "Everything" && currentFilter.q === null) ||
+      !(filterType === "Everything" && currentFilterState.q === null) ||
       (filterType === "Everything" &&
-        currentFilter.everythingFilters.sources !== null)
+        currentFilterState.everythingFilters.sources !== null)
     ) {
       setLoading(true);
 
       const fetchData = async () => {
-        let currPage = currentFilter.page;
+        let currPage = currentFilterState.page;
         if (currPage > 1) {
-          const prevState = currentFilter;
-          setCurrentFilter({ ...prevState, page: 1 });
+          dispatch(updatePage(1));
+          // const prevState = currentFilterState;
+          // setCurrentFilter({ ...prevState, page: 1 });
           setHasMoreData(true);
         }
         setFirstDisplay(false);
         const res = await (currPage > 1
-          ? getData(currentFilter, filterType, 1)
-          : getData(currentFilter, filterType));
+          ? getData(currentFilterState, filterType, 1)
+          : getData(currentFilterState, filterType));
         setDataCards(res[1]);
         setLoading(false);
         if (res[1].length === 0) {
@@ -173,9 +183,9 @@ const MainPage = () => {
     }
   }, [
     filterType,
-    currentFilter.everythingFilters,
-    currentFilter.topHeadlinesFilters,
-    currentFilter.q,
+    currentFilterState.everythingFilters,
+    currentFilterState.topHeadlinesFilters,
+    currentFilterState.q,
   ]);
 
   const closeSidebar = () => {
@@ -198,7 +208,7 @@ const MainPage = () => {
     const fetchData = async () => {
       // setCurrentFilter({ ...prevState, page: numPage });
       dispatch(updatePage(numPage));
-      const res = await getData(currentFilter, filterType, numPage);
+      const res = await getData(currentFilterState, filterType, numPage);
       setDataCards([...dataCards, ...res[1]]);
       setLoading(false);
       if (res[1].length === 0) {
@@ -218,19 +228,24 @@ const MainPage = () => {
   }, [noQuery, dataCards]);
 
   useEffect(() => {
-    const prevState = currentFilter;
+    // const prevState = currentFilterState;
     if (filterType === FILTER_OPTIONS.TOP) {
-      setCurrentFilter({
-        ...prevState,
-        topHeadlinesFilters: {
-          ...prevState.topHeadlinesFilters,
-          country: "il",
-        },
-      });
+      dispatch(
+        updateFiltersState({ type: "top", key: "country", value: "il" })
+      );
+      // setCurrentFilter({
+      //   ...prevState,
+      //   topHeadlinesFilters: {
+      //     ...prevState.topHeadlinesFilters,
+      //     country: "il",
+      //   },
+      // });
+
+      // ***********check this else statement!*******
     } else {
-      setCurrentFilter({
-        ...prevState,
-      });
+      // setCurrentFilter({
+      //   ...prevState,
+      // });
     }
   }, [filterType]);
 
@@ -238,21 +253,20 @@ const MainPage = () => {
     return (
       <Container isLoading={isLoading}>
         <Navbar
-          recentSearches={recentSearches}
-          filterType={filterType}
-          setFilterState={setFilterType}
-          currentFilter={currentFilter}
-          setCurrentFilter={setCurrentFilter}
-          recentSearchesQuerys={recentSearchesQuerys}
-          setRecentSearchesQuerys={setRecentSearchesQuerys}
+        // filterType={filterType}
+        // setFilterState={setFilterType}
+        // currentFilter={currentFilter}
+        // setCurrentFilter={setCurrentFilter}
+        // recentSearchesQuerys={recentSearchesQuerys} // need to enter to store
+        // setRecentSearchesQuerys={setRecentSearchesQuerys}
         />
         <PageContent isLoading={isLoading} dispalyText={dispalyText}>
-          <FilterContainer // out from this componrnt
-            filterType={filterType}
-            currentFilter={currentFilter}
-            setCurrentFilter={setCurrentFilter}
+          <FilterContainer
+          // filterType={filterType}
+          // currentFilter={currentFilter}
+          // setCurrentFilter={setCurrentFilter}
           />
-          <SeparateLine></SeparateLine>
+          <SeparateLine />
           {isLoading ? (
             <Loader />
           ) : (
@@ -299,28 +313,27 @@ const MainPage = () => {
         )}
         <FilterSidebar showFilter={filterMobileOn}>
           <Sidebar
-            filterType={filterType}
-            setFilterType={setFilterType}
-            currentFilter={currentFilter}
-            setCurrentFilter={setCurrentFilter}
+            // filterType={filterType}
+            // setFilterType={setFilterType}
+            // currentFilter={currentFilter}
+            // setCurrentFilter={setCurrentFilter}
             setSidebarState={setFilterMobileOn}
           />
         </FilterSidebar>
         <Container isLoading={isLoading}>
           {mobileSearch ? (
             <MobileSearchScreen
-              recentSearches={recentSearches}
               setMobileSearch={setMobileSearch}
-              currentFilter={currentFilter}
-              setCurrentFilter={setCurrentFilter}
+              // currentFilter={currentFilter}
+              // setCurrentFilter={setCurrentFilter}
               cardsList={dataCards}
               setfilterState={setFilterMobileOn}
               fetchMoreData={fetchMoreData}
               hasMoreData={hasMoreData}
-              recentSearchesQuerys={recentSearchesQuerys}
-              setRecentSearchesQuerys={setRecentSearchesQuerys}
-              filterType={filterType}
-              setFilterState={setFilterType}
+              // recentSearchesQuerys={recentSearchesQuerys}
+              // setRecentSearchesQuerys={setRecentSearchesQuerys}
+              // filterType={filterType}
+              // setFilterState={setFilterType}
             />
           ) : (
             <>
@@ -330,22 +343,21 @@ const MainPage = () => {
                 dispalyText={dispalyText}
               >
                 <Navbar
-                  recentSearches={recentSearches}
-                  filterType={filterType}
-                  setFilterState={setFilterType}
-                  currentFilter={currentFilter}
-                  setCurrentFilter={setCurrentFilter}
+                  // filterType={filterType}
+                  // setFilterState={setFilterType}
+                  // currentFilter={currentFilter}
+                  // setCurrentFilter={setCurrentFilter}
                   setMobileSearch={setMobileSearch}
-                  recentSearchesQuerys={recentSearchesQuerys}
-                  setRecentSearchesQuerys={setRecentSearchesQuerys}
+                  // recentSearchesQuerys={recentSearchesQuerys}
+                  // setRecentSearchesQuerys={setRecentSearchesQuerys}
                 />
                 <TabletFilter
                   setfilterState={setFilterMobileOn}
-                  currentFilter={currentFilter}
-                  setCurrentFilter={setCurrentFilter}
+                  // currentFilter={currentFilter}
+                  // setCurrentFilter={setCurrentFilter}
                   mobileSearch={true}
-                  filterType={filterType}
-                  setFilterState={setFilterType}
+                  // filterType={filterType}
+                  // setFilterState={setFilterType}
                 />
                 <Content>
                   {isLoading ? (

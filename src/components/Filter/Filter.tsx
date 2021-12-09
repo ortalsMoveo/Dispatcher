@@ -12,22 +12,34 @@ import { FilterValue, FILTER_OPTIONS } from "../../FiltersData";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 import exit from "../../../src/assets/exit.svg";
+
+import { RootState } from "../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateFilterType } from "../../store/filterType";
+import { updateFiltersState } from "../../store/filtersState";
+
 export interface FilterProps {
   filterText: string | undefined;
   listItems: FilterValue[];
   date?: boolean;
-  currentFilter?: CurrentFilters;
-  setCurrentFilter?: Dispatch<React.SetStateAction<CurrentFilters>>;
-  setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+  // currentFilter?: CurrentFilters;
+  // setCurrentFilter?: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // setFilterState?: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   navbarFilter?: boolean;
-  onChangeFilter?: (filterHeader: string, item: string | null) => void;
+  onChangeFilter?: (
+    filterHeader: string,
+    item: string | null,
+    currFilter?: string | undefined
+  ) => void;
   filterType?: FILTER_OPTIONS;
   apiFiltersState?: string | null | undefined;
 }
 
 const Filter: React.FC<FilterProps> = (props) => {
+  const currentFilterState = useSelector((state: RootState) => state.filters);
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState(props.date ? DateIcon : DropIcon);
 
@@ -73,29 +85,38 @@ const Filter: React.FC<FilterProps> = (props) => {
   };
 
   const onClickNavberFilter = (item: string) => {
-    props.setFilterState &&
-      props.setFilterState(
+    dispatch(
+      updateFilterType(
         item === "Top Headlines"
           ? FILTER_OPTIONS.TOP
           : FILTER_OPTIONS.EVERYTHING
-      );
-    props.setCurrentFilter!({
-      q: null,
-      pageSize: 10,
-      page: 1,
-      topHeadlinesFilters: {
-        country: "il",
-        category: null,
-        sources: null,
-      },
-      everythingFilters: {
-        from: null,
-        to: null,
-        language: null,
-        sortBy: null,
-        sources: null,
-      },
-    });
+      )
+    );
+    // props.setFilterState &&
+    //   props.setFilterState(
+    //     item === "Top Headlines"
+    //       ? FILTER_OPTIONS.TOP
+    //       : FILTER_OPTIONS.EVERYTHING
+    //   );
+
+    dispatch(updateFiltersState({ type: "obj" }));
+    // props.setCurrentFilter!({
+    //   q: null,
+    //   pageSize: 10,
+    //   page: 1,
+    //   topHeadlinesFilters: {
+    //     country: "il",
+    //     category: null,
+    //     sources: null,
+    //   },
+    //   everythingFilters: {
+    //     from: null,
+    //     to: null,
+    //     language: null,
+    //     sortBy: null,
+    //     sources: null,
+    //   },
+    // });
     setFilterHeader(item);
     setOpen(!open);
   };
@@ -115,7 +136,8 @@ const Filter: React.FC<FilterProps> = (props) => {
     setFilterHeader(
       clearFilters.includes(itemName) ? props.filterText : itemName
     );
-    props.onChangeFilter && props.onChangeFilter(filterHeader, itemId);
+    props.onChangeFilter &&
+      props.onChangeFilter(filterHeader, itemId, props.filterText);
     setOpen(!open);
   };
 
@@ -126,13 +148,13 @@ const Filter: React.FC<FilterProps> = (props) => {
       headLinesFilter.includes(props.filterText!)
     ) {
       if (
-        (props.currentFilter?.topHeadlinesFilters.category ||
-          props.currentFilter?.topHeadlinesFilters.country) &&
+        (currentFilterState?.topHeadlinesFilters.category ||
+          currentFilterState?.topHeadlinesFilters.country) &&
         props.filterText === "Sources"
       ) {
         setDisableFilter(true);
       } else if (
-        props.currentFilter?.topHeadlinesFilters.sources &&
+        currentFilterState?.topHeadlinesFilters.sources &&
         (props.filterText === "Country" || props.filterText === "Category")
       ) {
         setDisableFilter(true);
@@ -152,8 +174,8 @@ const Filter: React.FC<FilterProps> = (props) => {
       headLinesFilter.includes(props.filterText!)
     ) {
       if (
-        (props.currentFilter?.topHeadlinesFilters.category ||
-          props.currentFilter?.topHeadlinesFilters.country) &&
+        (currentFilterState?.topHeadlinesFilters.category ||
+          currentFilterState?.topHeadlinesFilters.country) &&
         props.filterText === "Sources"
       ) {
         setDisableFilter(true);
@@ -161,7 +183,7 @@ const Filter: React.FC<FilterProps> = (props) => {
           setOpen(!open);
         }
       } else if (
-        props.currentFilter?.topHeadlinesFilters.sources &&
+        currentFilterState?.topHeadlinesFilters.sources &&
         (props.filterText === "Country" || props.filterText === "Category")
       ) {
         setDisableFilter(true);
@@ -176,7 +198,7 @@ const Filter: React.FC<FilterProps> = (props) => {
         setDisableFilter(false);
       }
     }
-  }, [open, props.currentFilter, props.filterType]);
+  }, [open, currentFilterState, props.filterType]);
 
   return (
     <DropDownContainer>

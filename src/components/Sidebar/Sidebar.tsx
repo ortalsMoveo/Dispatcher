@@ -1,14 +1,15 @@
 import { ButtonProps } from "../Button/Button";
 import FilterTablet from "../Tablet&Mobile/FilterTablet/FilterTablet";
 import React, { Dispatch, useEffect, useState } from "react";
-import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 import {
   FILTER_OPTIONS,
   HeadLinesFiltersSmallDeviches,
   EverythingFiltersSmallDeviches,
-  FilterData,
 } from "../../FiltersData";
-import { DisableFilter } from "../Filter/Style";
+import { RootState } from "../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateFilterType } from "../../store/filterType";
+import { updateFiltersState } from "../../store/filtersState";
 
 const button: ButtonProps = {
   buttonText: "VIEW RESULTS",
@@ -30,20 +31,26 @@ export interface SidebarFilters {
 }
 
 interface SidebarProps {
-  filterType: FILTER_OPTIONS;
-  setFilterType: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
-  currentFilter: CurrentFilters;
-  setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // filterType: FILTER_OPTIONS;
+  // setFilterType: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+  // currentFilter: CurrentFilters;
+  // setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
   setSidebarState: Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Sidebar = ({
-  filterType,
-  setFilterType,
-  currentFilter,
-  setCurrentFilter,
+  // filterType,
+  // setFilterType,
+  // currentFilter,
+  // setCurrentFilter,
   setSidebarState,
 }: SidebarProps) => {
+  const currentFilterState = useSelector((state: RootState) => state.filters);
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+  const dispatch = useDispatch();
+
   const [sidebarFilters, setSidebarFilters] = useState<SidebarFilters>({
     topHeadlinesFilters: {
       country: "il",
@@ -134,28 +141,44 @@ const Sidebar = ({
   const submitFilters = async (currFilterType: any) => {
     setSubFilter(false);
     setSidebarState(false);
-    setFilterType(currFilterType);
+    // setFilterType(currFilterType);
+    dispatch(updateFilterType(currFilterType));
 
-    const prevState = currentFilter;
+    // const prevState = currentFilter;
 
     if (currFilterType === FILTER_OPTIONS.TOP) {
-      setCurrentFilter({
-        ...prevState,
-        q: null,
-        topHeadlinesFilters: sidebarFilters.topHeadlinesFilters,
-      });
+      // what about q?
+      dispatch(
+        updateFiltersState({
+          type: "top",
+          fullTopObj: true,
+          topValues: sidebarFilters.topHeadlinesFilters,
+        })
+      );
+      // setCurrentFilter({
+      //   ...prevState,
+      //   q: null,
+      //   topHeadlinesFilters: sidebarFilters.topHeadlinesFilters,
+      // });
     } else {
-      setCurrentFilter({
-        ...prevState,
-        everythingFilters: sidebarFilters.everythingFilters,
-      });
+      dispatch(
+        updateFiltersState({
+          type: "every",
+          fullTopObj: true,
+          everyValues: sidebarFilters.everythingFilters,
+        })
+      );
+      // setCurrentFilter({
+      //   ...prevState,
+      //   everythingFilters: sidebarFilters.everythingFilters,
+      // });
     }
   };
 
   return (
     <FilterTablet
-      filterType={currFilterType}
-      setFilterType={setCurrFilterType}
+      // filterType={currFilterType}
+      // setFilterType={setCurrFilterType}
       list={currentFilterList}
       button={button}
       subFilter={subFilter}

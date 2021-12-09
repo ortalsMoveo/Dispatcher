@@ -2,7 +2,6 @@ import Navbar from "./Navbar";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { FILTER_OPTIONS } from "../../FiltersData";
-import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 export default {
   component: Navbar,
   title: "Components/Navbar",
@@ -46,13 +45,13 @@ const setRecentSearchesQuerys = () => {};
 // Here we define the content we want to render
 const Template: Story = () => (
   <Navbar
-    recentSearches={navbarProps.recentSearches}
-    filterType={FILTER_OPTIONS.EVERYTHING}
-    setFilterState={stateHandler}
-    currentFilter={currentFilterState}
-    setCurrentFilter={currentStateHandler}
-    recentSearchesQuerys={recentSearchesQuerys}
-    setRecentSearchesQuerys={setRecentSearchesQuerys}
+  // recentSearches={navbarProps.recentSearches}
+  // filterType={FILTER_OPTIONS.EVERYTHING}
+  // setFilterState={stateHandler}
+  // currentFilter={currentFilterState}
+  // setCurrentFilter={currentStateHandler}
+  // recentSearchesQuerys={recentSearchesQuerys}
+  // setRecentSearchesQuerys={setRecentSearchesQuerys}
   />
 );
 

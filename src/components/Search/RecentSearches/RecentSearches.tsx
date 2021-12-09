@@ -5,22 +5,29 @@ import {
   SeparateLine,
 } from "./RecentSearchesStyle";
 import Clear from "../../Clear/Clear";
-import exitIcon from "../../../assets/exit.svg";
 import React, { Dispatch, useState } from "react";
+import { RootState } from "../../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateRecentSearches } from "../../../store/recentSearchesState";
 
 export interface RecentSearchesProps {
   recentSearches: string[];
   clearBackground?: boolean;
-  recentSearchesQuerys: string[];
-  setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
+  // recentSearchesQuerys: string[];
+  // setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
 }
 
 const RecentSearches = ({
   recentSearches,
   clearBackground,
-  recentSearchesQuerys,
-  setRecentSearchesQuerys,
-}: RecentSearchesProps) => {
+}: // recentSearchesQuerys,
+// setRecentSearchesQuerys,
+RecentSearchesProps) => {
+  const recentSearchesQuerys = useSelector(
+    (state: RootState) => state.recentSearchesState.recentSearches
+  );
+  const dispatch = useDispatch();
+
   const localStorageData = JSON.parse(localStorage.getItem("RecentSearches")!);
   const [storage, setStorage] = useState<string[]>(
     recentSearches.length < localStorageData.length
@@ -29,7 +36,8 @@ const RecentSearches = ({
   );
 
   const claerRecentSearches = () => {
-    setRecentSearchesQuerys([]);
+    dispatch(updateRecentSearches([]));
+    // setRecentSearchesQuerys([]);
     localStorage.setItem("RecentSearches", JSON.stringify([]));
     setStorage([]);
   };
@@ -39,7 +47,9 @@ const RecentSearches = ({
     for (let i = 0; i < recentSearches.length; i++) {
       if (recentSearch[i] === item) {
         recentSearches.splice(i, 1);
-        setRecentSearchesQuerys(recentSearch);
+        dispatch(updateRecentSearches(recentSearch));
+
+        // setRecentSearchesQuerys(recentSearch);
         localStorage.setItem("RecentSearches", JSON.stringify(recentSearch));
         break;
       }

@@ -112,7 +112,7 @@ const Template: Story<FilterProps> = (args) => <FilterTablet {...args} />;
 // Here we define variants
 export const Primary = Template.bind({});
 Primary.args = {
-  filterType: FILTER_OPTIONS.EVERYTHING,
+  // filterType: FILTER_OPTIONS.EVERYTHING,
   list: list,
   button: primaryButton,
   subFilter: true,

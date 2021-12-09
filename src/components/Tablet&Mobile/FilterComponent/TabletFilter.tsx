@@ -3,27 +3,36 @@ import FilterIcon from "../../../assets/filter.svg";
 import DropIcon from "../../../assets/dropdown.svg";
 import React, { Dispatch, useState } from "react";
 import { EverythingFilters, FILTER_OPTIONS } from "../../../FiltersData";
-import { CurrentFilters } from "../../../fetchers/MainPage/MainPage";
 import Filter from "../../Filter/Filter";
 import onFilter from "../../../assets/onFilter.jpeg";
+import { RootState } from "../../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateFilterType } from "../../../store/filterType";
+import { updateFiltersState } from "../../../store/filtersState";
 
 export interface FilterProps {
   currState?: boolean;
   setfilterState: Dispatch<boolean>;
-  currentFilter: CurrentFilters;
-  setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // currentFilter: CurrentFilters;
+  // setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
   mobileSearch?: boolean;
-  filterType: FILTER_OPTIONS;
-  setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+  // filterType: FILTER_OPTIONS;
+  // setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
 }
 const TabletFilter = ({
   setfilterState,
-  currentFilter,
-  setCurrentFilter,
-  filterType,
+  // currentFilter,
+  // setCurrentFilter,
+  // filterType,
   mobileSearch,
-  setFilterState,
-}: FilterProps) => {
+}: // setFilterState,
+FilterProps) => {
+  const currentFilterState = useSelector((state: RootState) => state.filters);
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+  const dispatch = useDispatch();
+
   const [sortByDropDown, setSortByDropDown] = useState(false);
   const filterOptions =
     filterType === FILTER_OPTIONS.TOP
@@ -39,31 +48,33 @@ const TabletFilter = ({
 
   const onClickFilter = (itemId: string | null, itemName: string) => {
     if (itemName === "Top Headlines") {
-      setFilterState(FILTER_OPTIONS.TOP);
+      // setFilterState(FILTER_OPTIONS.TOP);
+      dispatch(updateFilterType(FILTER_OPTIONS.TOP));
     } else {
-      setFilterState(FILTER_OPTIONS.EVERYTHING);
+      // setFilterState(FILTER_OPTIONS.EVERYTHING);
+      dispatch(updateFilterType(FILTER_OPTIONS.EVERYTHING));
     }
   };
 
   const isFiltered = () => {
     if (filterType === "Top Headlines") {
-      if (currentFilter.topHeadlinesFilters.country) {
+      if (currentFilterState.topHeadlinesFilters.country) {
         return true;
-      } else if (currentFilter.topHeadlinesFilters.category) {
+      } else if (currentFilterState.topHeadlinesFilters.category) {
         return true;
-      } else if (currentFilter.topHeadlinesFilters.sources) {
+      } else if (currentFilterState.topHeadlinesFilters.sources) {
         return true;
       } else {
         return false;
       }
     } else {
-      if (currentFilter.everythingFilters.from) {
+      if (currentFilterState.everythingFilters.from) {
         return true;
-      } else if (currentFilter.everythingFilters.to) {
+      } else if (currentFilterState.everythingFilters.to) {
         return true;
-      } else if (currentFilter.everythingFilters.sources) {
+      } else if (currentFilterState.everythingFilters.sources) {
         return true;
-      } else if (currentFilter.everythingFilters.sortBy) {
+      } else if (currentFilterState.everythingFilters.sortBy) {
         return true;
       } else {
         return false;

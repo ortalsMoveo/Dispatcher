@@ -6,19 +6,26 @@ import {
   EverythingFilters,
 } from "../../FiltersData";
 import React, { Dispatch, useEffect, useState } from "react";
-import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
-
+import { RootState } from "../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateFiltersState } from "../../store/filtersState";
 interface Props {
-  filterType: FILTER_OPTIONS;
-  currentFilter: CurrentFilters;
-  setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // filterType: FILTER_OPTIONS;
+  // currentFilter: CurrentFilters;
+  // setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
 }
 
-const FilterContainer = ({
-  filterType,
-  currentFilter,
-  setCurrentFilter,
-}: Props) => {
+const FilterContainer = ({}: // filterType,
+// currentFilter,
+// setCurrentFilter,
+Props) => {
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+
+  const currentFilterState = useSelector((state: RootState) => state.filters);
+  const dispatch = useDispatch();
+
   const list =
     filterType === FILTER_OPTIONS.EVERYTHING
       ? EverythingFilters
@@ -27,91 +34,114 @@ const FilterContainer = ({
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
-  const updateCurrentFilter = (key: string, value: string | null) => {
-    const prevState = currentFilter;
+  const updateCurrentFilter = (
+    key: string,
+    value: string | null,
+    currFilter: string | undefined
+  ) => {
+    // const prevState = currentFilter;
     if (key === "from") {
       value ? setFrom(value) : setFrom("");
       return;
     }
-
     if (key === "to") {
       value ? setTo(value) : setTo("");
       return;
     }
-
     if (filterType === FILTER_OPTIONS.TOP) {
-      setCurrentFilter({
-        ...prevState,
-        topHeadlinesFilters: {
-          ...prevState.topHeadlinesFilters,
-          [key.toLowerCase()]: value,
-        },
-      });
+      dispatch(
+        updateFiltersState({ type: "top", key: key.toLowerCase(), value })
+      );
+      // dispatch
+      // setCurrentFilter({
+      //   ...prevState,
+      //   topHeadlinesFilters: {
+      //     ...prevState.topHeadlinesFilters,
+      //     [key.toLowerCase()]: value,
+      //   },
+      // });
     } else {
-      key === "Sort by"
-        ? setCurrentFilter({
-            ...prevState,
-            everythingFilters: {
-              ...prevState.everythingFilters,
-              sortBy: value,
-            },
+      currFilter &&
+        dispatch(
+          updateFiltersState({
+            type: "every",
+            currFilter: currFilter.toLowerCase(),
+            key,
+            value,
           })
-        : setCurrentFilter({
-            ...prevState,
-            everythingFilters: {
-              ...prevState.everythingFilters,
-              [key.toLowerCase()]: value,
-            },
-          });
+        );
+      //   key === "Sort by"
+      //     ? setCurrentFilter({
+      //         ...prevState,
+      //         everythingFilters: {
+      //           ...prevState.everythingFilters,
+      //           sortBy: value,
+      //         },
+      //       })
+      //     : setCurrentFilter({
+      //         ...prevState,
+      //         everythingFilters: {
+      //           ...prevState.everythingFilters,
+      //           [key.toLowerCase()]: value,
+      //         },
+      //       });
+      // }
     }
   };
 
   useEffect(() => {
-    const prevState = currentFilter;
-    setCurrentFilter({
-      ...prevState,
-      everythingFilters: {
-        ...prevState.everythingFilters,
-        from: from,
-        to: to,
-      },
-    });
+    dispatch(updateFiltersState({ type: "every", from, to }));
+    // const prevState = currentFilter;
+    // setCurrentFilter({
+    //   ...prevState,
+    //   everythingFilters: {
+    //     ...prevState.everythingFilters,
+    //     from: from,
+    //     to: to,
+    //   },
+    // });
   }, [from, to]);
 
   useEffect(() => {
     const currentFilterType =
       filterType === "Top Headlines"
-        ? currentFilter.topHeadlinesFilters
-        : currentFilter.everythingFilters;
-  }, [currentFilter]);
+        ? currentFilterState.topHeadlinesFilters
+        : currentFilterState.everythingFilters;
+  }, [currentFilterState]);
 
   const filterHeader = (filter: string) => {
-    if (currentFilter.topHeadlinesFilters.category === filter.toLowerCase()) {
-      return currentFilter.topHeadlinesFilters.category;
-    } else if (
-      currentFilter.topHeadlinesFilters.country === filter.toLowerCase()
+    if (
+      currentFilterState.topHeadlinesFilters.category === filter.toLowerCase()
     ) {
-      return currentFilter.topHeadlinesFilters.country;
+      return currentFilterState.topHeadlinesFilters.category;
     } else if (
-      currentFilter.topHeadlinesFilters.sources === filter.toLowerCase()
+      currentFilterState.topHeadlinesFilters.country === filter.toLowerCase()
     ) {
-      return currentFilter.topHeadlinesFilters.sources;
+      return currentFilterState.topHeadlinesFilters.country;
     } else if (
-      currentFilter.everythingFilters.sources === filter.toLowerCase()
+      currentFilterState.topHeadlinesFilters.sources === filter.toLowerCase()
     ) {
-      return currentFilter.everythingFilters.sources;
-    } else if (currentFilter.everythingFilters.from === filter.toLowerCase()) {
-      return currentFilter.everythingFilters.from;
-    } else if (currentFilter.everythingFilters.to === filter.toLowerCase()) {
-      return currentFilter.everythingFilters.to;
+      return currentFilterState.topHeadlinesFilters.sources;
     } else if (
-      currentFilter.everythingFilters.language === filter.toLowerCase()
+      currentFilterState.everythingFilters.sources === filter.toLowerCase()
     ) {
-      return currentFilter.everythingFilters.language;
+      return currentFilterState.everythingFilters.sources;
     } else if (
-      currentFilter.everythingFilters.sortBy === filter.toLowerCase()
+      currentFilterState.everythingFilters.from === filter.toLowerCase()
     ) {
-      return currentFilter.everythingFilters.sources;
+      return currentFilterState.everythingFilters.from;
+    } else if (
+      currentFilterState.everythingFilters.to === filter.toLowerCase()
+    ) {
+      return currentFilterState.everythingFilters.to;
+    } else if (
+      currentFilterState.everythingFilters.language === filter.toLowerCase()
+    ) {
+      return currentFilterState.everythingFilters.language;
+    } else if (
+      currentFilterState.everythingFilters.sortBy === filter.toLowerCase()
+    ) {
+      return currentFilterState.everythingFilters.sources;
     }
   };
 
@@ -124,7 +154,7 @@ const FilterContainer = ({
           listItems={item.listItems}
           date={item.date}
           onChangeFilter={updateCurrentFilter}
-          currentFilter={currentFilter}
+          // currentFilter={currentFilter}
           filterType={filterType}
           apiFiltersState={filterHeader(item.filterText!)}
         />

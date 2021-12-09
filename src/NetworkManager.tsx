@@ -1,10 +1,9 @@
 import axios from "axios";
-import { CurrentFilters } from "./fetchers/MainPage/MainPage";
 import { FILTER_OPTIONS } from "./FiltersData";
 const apiKey = process.env.REACT_APP_API_KEY;
 
 export const getData = async (
-  obj: CurrentFilters,
+  obj: any,
   filterType: FILTER_OPTIONS,
   page?: number
 ) => {

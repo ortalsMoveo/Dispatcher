@@ -18,10 +18,12 @@ import backIcon from "../../../assets/back.svg";
 import { SidebarFilters } from "../../Sidebar/Sidebar";
 import moment from "moment";
 import exit from "../../../../src/assets/exit.svg";
-
+import { RootState } from "../../../store/index";
+import { useSelector, useDispatch } from "react-redux";
+import { updateFilterType } from "../../../store/filterType";
 export interface FilterProps {
-  filterType: FILTER_OPTIONS;
-  setFilterType: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+  // filterType: FILTER_OPTIONS;
+  // setFilterType: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
   list: FilterData[];
   button: ButtonProps;
   subFilter: boolean;
@@ -32,8 +34,8 @@ export interface FilterProps {
 }
 
 const FilterTablet = ({
-  filterType,
-  setFilterType,
+  // filterType,
+  // setFilterType,
   subFilter,
   list,
   button,
@@ -42,6 +44,11 @@ const FilterTablet = ({
   disable,
   onSubmit,
 }: FilterProps) => {
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+  const dispatch = useDispatch();
+
   const [currList, setCurrList] = useState<FilterValue[]>([]);
   const [openSubFilter, setOpenSubFilter] = useState(false);
   const [currFilter, setCurrFilter] = useState("");
@@ -69,11 +76,13 @@ const FilterTablet = ({
 
   const updateFiltersState = (subFilterVal: string, subFilterId: string) => {
     if (subFilterVal === "Top Headlines") {
-      setFilterType(FILTER_OPTIONS.TOP);
+      // setFilterType(FILTER_OPTIONS.TOP);
+      dispatch(updateFilterType(FILTER_OPTIONS.TOP));
       setOpenSubFilter(!openSubFilter);
       return;
     } else if (subFilterVal === "Everything") {
-      setFilterType(FILTER_OPTIONS.EVERYTHING);
+      // setFilterType(FILTER_OPTIONS.EVERYTHING);
+      dispatch(updateFilterType(FILTER_OPTIONS.EVERYTHING));
       setOpenSubFilter(!openSubFilter);
       return;
     }

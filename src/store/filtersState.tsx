@@ -38,6 +38,8 @@ const initialState: CurrentFilters = {
   },
 };
 
+//  type = obj | general | top | every;
+
 const filtersSlice = createSlice({
   name: "filtersState",
   initialState,
@@ -48,20 +50,70 @@ const filtersSlice = createSlice({
     updatePage: (state, action) => {
       state.page = action.payload;
     },
-    updateTopFilters: (state, action) => {
-      if (action.type === "Country") {
-        state.topHeadlinesFilters.country = action.payload;
-      } else if (action.type === "Category") {
-        state.topHeadlinesFilters.category = action.payload;
+    updateFiltersState: (state, action) => {
+      if (action.payload.type === "obj") {
+        return initialState;
+      } else if (action.payload.type === "general") {
+      } else if (action.payload.type === "top") {
+        // update one value at top filters
+        if (action.payload.fullTopObj) {
+          return {
+            ...state,
+            topHeadlinesFilters: action.payload.topValues,
+          };
+        } else {
+          return {
+            ...state,
+            topHeadlinesFilters: {
+              ...state.topHeadlinesFilters,
+              [action.payload.key]: action.payload.value,
+            },
+          };
+        }
       } else {
-        state.topHeadlinesFilters.sources = action.payload;
+        if (action.payload.fullTopObj) {
+          return {
+            ...state,
+            everythingFilters: action.payload.everyValues,
+          };
+        } else {
+          // update one value at every filters
+          if (action.payload.currFilter === "Sort by") {
+            return {
+              ...state,
+              everythingFilters: {
+                ...state.everythingFilters,
+                sortBy: action.payload.value,
+              },
+            };
+          } else if (action.payload.from) {
+            return {
+              ...state,
+              everythingFilters: {
+                ...state.everythingFilters,
+                from: action.payload.from,
+                to: action.payload.to,
+              },
+            };
+          } else {
+            console.log("action.payload.currFilter", action.payload.currFilter);
+            return {
+              ...state,
+              everythingFilters: {
+                ...state.everythingFilters,
+                [action.payload.currFilter]: action.payload.value,
+              },
+            };
+          }
+        }
       }
     },
   },
 });
+// const { type, key, value } = action.payload;,
 
 export const { updateQ } = filtersSlice.actions;
 export const { updatePage } = filtersSlice.actions;
-export const { updateTopFilters } = filtersSlice.actions;
+export const { updateFiltersState } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

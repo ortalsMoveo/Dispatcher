@@ -11,33 +11,40 @@ import RecentSearches from "./RecentSearches/RecentSearches";
 import React, { useState, Dispatch, useEffect } from "react";
 import SearchIcon from "../../assets/search.svg";
 import { FILTER_OPTIONS } from "../../FiltersData";
-import { CurrentFilters } from "../../fetchers/MainPage/MainPage";
 import exitIcon from "../../assets/exit.svg";
 
+import { RootState } from "../../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { updateQ } from "../../store/filtersState";
+import { updateFilterType } from "../../store/filterType";
+import { updateRecentSearches } from "../../store/recentSearchesState";
 export interface SearchProps {
-  recentSearches: string[];
-  filterType: FILTER_OPTIONS;
-  setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
-  currentFilter: CurrentFilters;
-  setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
-  recentSearchesQuerys: string[];
-  setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
+  // filterType: FILTER_OPTIONS;
+  // setFilterState: Dispatch<React.SetStateAction<FILTER_OPTIONS>>;
+  // currentFilter: CurrentFilters;
+  // setCurrentFilter: Dispatch<React.SetStateAction<CurrentFilters>>;
+  // recentSearchesQuerys: string[];
+  // setRecentSearchesQuerys: Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Search = ({
-  recentSearches,
-  filterType,
-  setFilterState,
-  currentFilter,
-  setCurrentFilter,
-  recentSearchesQuerys,
-  setRecentSearchesQuerys,
-}: SearchProps) => {
+const Search = ({}: // filterType,
+// setFilterState,
+// currentFilter,
+// setCurrentFilter,
+// recentSearchesQuerys,
+// setRecentSearchesQuerys,
+SearchProps) => {
+  const filterType = useSelector(
+    (state: RootState) => state.filterType.filterType
+  );
+  const recentSearchesQuerys = useSelector(
+    (state: RootState) => state.recentSearchesState.recentSearches
+  );
+
+  const dispatch = useDispatch();
+
   const [inputClicked, setInputClicked] = useState(false);
   const [currentFilterType, setCurrentFilterType] = useState(filterType);
-  const dispatch = useDispatch();
 
   const filterOptions =
     filterType === FILTER_OPTIONS.TOP
@@ -65,7 +72,8 @@ const Search = ({
     setInputClicked(!inputClicked);
     if (!recentSearchesQuerys.includes(searchQuery)) {
       const currRecentSearches = [...recentSearchesQuerys, searchQuery];
-      setRecentSearchesQuerys(currRecentSearches);
+      dispatch(updateRecentSearches(currRecentSearches));
+      // setRecentSearchesQuerys(currRecentSearches);
     }
     // const prevState = currentFilter;
     if (searchQuery !== "") {
@@ -80,7 +88,9 @@ const Search = ({
       "RecentSearches",
       JSON.stringify([...prevSearches, searchQuery])
     );
-    setRecentSearchesQuerys([...prevSearches, searchQuery]);
+    dispatch(updateRecentSearches([...prevSearches, searchQuery]));
+
+    // setRecentSearchesQuerys([...prevSearches, searchQuery]);
   };
 
   const clearQueryHandle = () => {
@@ -118,22 +128,22 @@ const Search = ({
           )}
         </SearchContainer>
         <FilterContainer onClickInput={inputClicked}>
-          {<SeparateLine></SeparateLine>}
+          {<SeparateLine />}
           <Filter
             filterText={filterType}
             listItems={filter}
-            setFilterState={setFilterState}
+            // setFilterState={setFilterState}
             navbarFilter={true}
-            currentFilter={currentFilter}
-            setCurrentFilter={setCurrentFilter}
+            // currentFilter={currentFilter}
+            // setCurrentFilter={setCurrentFilter}
           />
         </FilterContainer>
       </SearchBox>
       {inputClicked && (
         <RecentSearches
           recentSearches={recentSearchesQuerys}
-          recentSearchesQuerys={recentSearchesQuerys}
-          setRecentSearchesQuerys={setRecentSearchesQuerys}
+          // recentSearchesQuerys={recentSearchesQuerys}
+          // setRecentSearchesQuerys={setRecentSearchesQuerys}
         />
       )}
     </Container>

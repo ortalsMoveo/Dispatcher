@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import filtersState from "./filtersState";
 import filterType from "./filterType";
+import recentSearchesState from "./recentSearchesState";
 
 const store = configureStore({
-  reducer: { filters: filtersState, filterType: filterType },
+  reducer: {
+    filters: filtersState,
+    filterType: filterType,
+    recentSearchesState,
+  },
 });
 
 export default store;
